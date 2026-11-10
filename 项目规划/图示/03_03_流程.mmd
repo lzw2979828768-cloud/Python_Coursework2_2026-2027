@@ -1,0 +1,14 @@
+flowchart TD
+    layout["同一份未掩码布局及保留区"] --> loop["逐个处理mask_id 0到7"]
+    loop --> copy["复制原布局，不修改前一候选或历史快照"]
+    copy --> apply["只在可掩码模块应用相应公式"]
+    apply --> format["生成并写入该ECC和mask对应的格式信息"]
+    format --> score["对完整主体矩阵计算N1/N2/N3/N4"]
+    score --> record["记录四项分数、总分和候选矩阵"]
+    record --> more{"还有候选？"}
+    more -->|是| loop
+    more -->|否| manual{"用户指定了mask？"}
+    manual -->|是| requested["使用指定掩码，展示其分数"]
+    manual -->|否| optimal["选总分最低项；同分取编号最小者"]
+    requested --> result["返回选择结果、最终矩阵和评分轨迹"]
+    optimal --> result

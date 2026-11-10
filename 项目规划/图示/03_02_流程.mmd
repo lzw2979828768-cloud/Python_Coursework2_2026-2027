@@ -1,0 +1,10 @@
+flowchart TD
+    input["输入字节数、版本选项、ECC选项"] --> baseline{"基础模式？"}
+    baseline -->|是| base["只检查V1/L容量"]
+    baseline -->|否| versions["版本候选：用户锁定项，或V1到V2"]
+    versions --> levels["等级候选：用户锁定项，或L到M到Q到H"]
+    levels --> table["按确定顺序检查对应容量和分块表"]
+    table --> found{"存在可容纳组合？"}
+    base --> found
+    found -->|是| selected["返回实际plan；展示容量和所选参数"]
+    found -->|否| reject["容量错误；解释限制，不改写输入或手动选择"]

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1090" viewBox="0 0 1600 1090" role="img"><title>四人职责总览：共同基础开发，每人独立扩展</title><desc>A/B/C/D是角色代号；真实姓名、学号与分支需要首次组会补齐。。完整模块与接口说明见同目录上级Markdown文件。当前为规划，尚未实现。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#52657b"/></marker></defs>
+<text x="38.0" y="62.0" fill="#172b45" font-size="34" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">四人职责总览：共同基础开发，每人独立扩展</text>
+<text x="40.0" y="100.0" fill="#475569" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">A/B/C/D是角色代号；真实姓名、学号与分支需要首次组会补齐。</text>
+<rect x="150" y="140" width="1300" height="105" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="166.0" y="178.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">四人共同验收基础应用：Stage1 V1/L/Mask0 → Stage2 GUI、扫码、保存与Information</text>
+<text x="166.0" y="207.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">每人理解完整基础链路，个人扩展在基础阶段完成并文档化后实施。</text>
+<rect x="40" y="330" width="350" height="390" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="56.0" y="366.0" fill="#172b45" font-size="20" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">A：编码与版本策略</text>
+<text x="56.0" y="393.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">基础：Byte编码、填充和RS</text>
+<text x="56.0" y="421.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">公共：models / service /错误</text>
+<text x="56.0" y="449.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">个人：version_policy.py</text>
+<text x="56.0" y="477.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">V1/V2与L/M/Q/H</text>
+<text x="56.0" y="505.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">容量、分块、自动/手动选择</text>
+<text x="56.0" y="533.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">测试：临界值和多块纠错</text>
+<text x="56.0" y="561.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">最终：技术集成、个人反思</text>
+<polyline points="800.0,245.0 800.0,290.0 215.0,290.0 215.0,330.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="430" y="330" width="350" height="390" rx="14" fill="#e7f5ef" stroke="#237452" stroke-width="2"/>
+<text x="446.0" y="366.0" fill="#172b45" font-size="20" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">B：矩阵与完整掩码</text>
+<text x="446.0" y="393.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">基础：图案、落位、格式位</text>
+<text x="446.0" y="421.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">公共：matrix / format / mask0</text>
+<text x="446.0" y="449.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">个人：mask_selector.py</text>
+<text x="446.0" y="477.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">八掩码、四类惩罚评分</text>
+<text x="446.0" y="505.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">自动最优、手动和同分规则</text>
+<text x="446.0" y="533.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">测试：保留区、评分与选择</text>
+<text x="446.0" y="561.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">最终：正确性复核、个人反思</text>
+<polyline points="800.0,245.0 800.0,290.0 605.0,290.0 605.0,330.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="820" y="330" width="350" height="390" rx="14" fill="#fff3dc" stroke="#9a6300" stroke-width="2"/>
+<text x="836.0" y="366.0" fill="#172b45" font-size="20" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">C：界面与分步骤展示</text>
+<text x="836.0" y="393.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">基础：轨迹结构与说明</text>
+<text x="836.0" y="421.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">共同：GUI / Information</text>
+<text x="836.0" y="449.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">个人：step_visualizer.py</text>
+<text x="836.0" y="477.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">真实步骤、前后导航</text>
+<text x="836.0" y="505.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">中间图保存、失败轨迹</text>
+<text x="836.0" y="533.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">测试：边界、快照与导出</text>
+<text x="836.0" y="561.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">最终：手册/录屏、个人反思</text>
+<polyline points="800.0,245.0 800.0,290.0 995.0,290.0 995.0,330.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1210" y="330" width="350" height="390" rx="14" fill="#f0eafa" stroke="#7050a0" stroke-width="2"/>
+<text x="1226.0" y="366.0" fill="#172b45" font-size="20" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">D：入口、渲染与分析</text>
+<text x="1226.0" y="393.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">基础：CLI、演示文件导出</text>
+<text x="1226.0" y="421.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">共同：渲染/保存、CI环境</text>
+<text x="1226.0" y="449.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">个人：usage_logger.py</text>
+<text x="1226.0" y="477.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">pandas + CSV请求记录</text>
+<text x="1226.0" y="505.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">成功失败分析和图表</text>
+<text x="1226.0" y="533.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">测试：读写、去重与统计</text>
+<text x="1226.0" y="561.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">最终：复现/打包、个人反思</text>
+<polyline points="800.0,245.0 800.0,290.0 1385.0,290.0 1385.0,330.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="230" y="835" width="1140" height="110" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="246.0" y="874.0" fill="#172b45" font-size="23" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">main：一个应用中四项扩展共同运行</text>
+<text x="246.0" y="904.0" fill="#172b45" font-size="21" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">每人独立模块 + 至少3个有效测试 + CI成功证据 + 个人文档；共12个扩展测试起。</text>
+<polyline points="215.0,720.0 215.0,780.0 800.0,780.0 800.0,835.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="605.0,720.0 605.0,780.0 800.0,780.0 800.0,835.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="995.0,720.0 995.0,780.0 800.0,780.0 800.0,835.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1385.0,720.0 1385.0,780.0 800.0,780.0 800.0,835.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="70.0" y="1006.0" fill="#172b45" font-size="21" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">共同责任：最终集成、真实扫码、组反思、作者与引用准确；不把全部文档工作交给某一人替写。</text>
+<text x="40.0" y="1063.0" fill="#64748b" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">建议方案 v1.0 · 2026-11-10 · 4人团队 · 非已实现功能证明</text></svg>

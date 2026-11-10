@@ -1,0 +1,45 @@
+flowchart TB
+    user["用户：文本、选项、保存或查看步骤"]
+    subgraph entry["展示与入口层"]
+        cli["CLI / 基础演示"]
+        gui["GUI 或 Web / 信息说明"]
+        render["Renderer / matplotlib 展示与保存"]
+    end
+    subgraph app["应用服务层"]
+        service["QRService / 校验、编排、统一结果与错误"]
+        models["QRRequest / QRResult / TraceStep / 错误码"]
+    end
+    subgraph core["共享核心：不依赖界面和磁盘"]
+        encode["ByteEncoder / 位流与填充"]
+        ecc["ErrorCorrection / 分块、RS、交织"]
+        matrix["MatrixBuilder / 功能区、保留区、数据落位"]
+        format["FormatInfo + FixedMask0"]
+        tables["V1/V2 规格资源表"]
+    end
+    subgraph ext["四项个人扩展"]
+        a["A：VersionPolicy / 版本与纠错计划"]
+        b["B：MaskSelector / 8掩码与4类评分"]
+        c["C：StepVisualizer / 逐步展示与导出"]
+        d["D：UsageLogger / CSV与统计分析"]
+    end
+    files["本地输出：PNG、步骤图、使用日志、统计图"]
+    user --> cli
+    user --> gui
+    cli -->|QRRequest| service
+    gui -->|QRRequest| service
+    service -.->|共享契约| models
+    service -->|选择计划| a
+    a -->|查容量和分块| tables
+    service --> encode
+    encode -->|数据码字| ecc
+    ecc -->|最终码字和余数位| matrix
+    matrix --> format
+    service -->|未掩码布局| b
+    b -->|每个候选格式信息| format
+    service -->|每次请求的结果| d
+    service -->|结果与轨迹| render
+    gui -->|成功或失败的步骤轨迹| c
+    c -->|指定步骤| render
+    gui -->|查询历史分析| d
+    render -->|导出图片| files
+    d -->|持久化及统计| files

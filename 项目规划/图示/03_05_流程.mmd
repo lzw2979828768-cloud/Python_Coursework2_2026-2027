@@ -1,0 +1,10 @@
+flowchart TD
+    open["用户打开使用分析"] --> read["D：用pandas读取本地CSV"]
+    read --> exists{"文件存在且有记录？"}
+    exists -->|否| empty["显示暂无记录；不因首次使用崩溃"]
+    exists -->|是| schema{"字段和类型有效？"}
+    schema -->|否| invalid["说明格式问题；不覆盖原日志"]
+    schema -->|是| filter["按request_id去重，应用日期和状态筛选"]
+    filter --> stats["生成ECC频数、成功/失败趋势、样本数"]
+    stats --> chart["matplotlib展示；明确筛选、时区与分母"]
+    chart --> export["按用户选择导出统计图"]

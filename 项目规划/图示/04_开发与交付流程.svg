@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1420" height="1640" viewBox="0 0 1420 1640" role="img"><title>开发与交付流程：先验基础，再并行扩展，持续集成</title><desc>官方演示在2026年12月16/17日；最终截止为2027年1月18日中午12:00（学校原文时间）。。完整模块与接口说明见同目录上级Markdown文件。当前为规划，尚未实现。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#52657b"/></marker></defs>
+<text x="38.0" y="62.0" fill="#172b45" font-size="34" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">开发与交付流程：先验基础，再并行扩展，持续集成</text>
+<text x="40.0" y="100.0" fill="#475569" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">官方演示在2026年12月16/17日；最终截止为2027年1月18日中午12:00（学校原文时间）。</text>
+<rect x="365" y="135" width="690" height="105" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="381.0" y="173.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">确认组员、工具、仓库与公共接口</text>
+<text x="381.0" y="202.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">4人个人分支；GUI/lint/Runner范围先核查</text>
+<rect x="365" y="305" width="690" height="105" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="381.0" y="343.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">共同完成Stage1并验收</text>
+<text x="381.0" y="372.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">V1/L/Mask0；五份步骤日志；正确性与失败边界</text>
+<rect x="365" y="475" width="690" height="105" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="381.0" y="513.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">共同完成Stage2并验收</text>
+<text x="381.0" y="542.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">界面、手机扫码、保存、Information；机房复现</text>
+<rect x="365" y="645" width="690" height="105" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="381.0" y="683.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">稳定基础版，安排现场演示与个人扩展</text>
+<text x="381.0" y="712.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">基础完成并文档化后即可开发，不必等现场演示结束</text>
+<polyline points="710.0,240.0 710.0,305.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="710.0,410.0 710.0,475.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="710.0,580.0 710.0,645.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="850" width="290" height="115" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="56.0" y="887.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">A：版本/ECC</text>
+<text x="56.0" y="915.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">本人分支 + 独立模块</text>
+<polyline points="710.0,750.0 710.0,800.0 185.0,800.0 185.0,850.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="390" y="850" width="290" height="115" rx="14" fill="#e7f5ef" stroke="#237452" stroke-width="2"/>
+<text x="406.0" y="887.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">B：掩码评分</text>
+<text x="406.0" y="915.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">本人分支 + 独立模块</text>
+<polyline points="710.0,750.0 710.0,800.0 535.0,800.0 535.0,850.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="740" y="850" width="290" height="115" rx="14" fill="#fff3dc" stroke="#9a6300" stroke-width="2"/>
+<text x="756.0" y="887.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">C：步骤展示</text>
+<text x="756.0" y="915.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">本人分支 + 独立模块</text>
+<polyline points="710.0,750.0 710.0,800.0 885.0,800.0 885.0,850.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1090" y="850" width="290" height="115" rx="14" fill="#f0eafa" stroke="#7050a0" stroke-width="2"/>
+<text x="1106.0" y="887.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">D：使用分析</text>
+<text x="1106.0" y="915.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">本人分支 + 独立模块</text>
+<polyline points="710.0,750.0 710.0,800.0 1235.0,800.0 1235.0,850.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="365" y="1040" width="690" height="105" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="381.0" y="1078.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">每项MR：有效测试、lint、CI与交叉评审</text>
+<text x="381.0" y="1107.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">每人至少3个非平凡测试；未通过则在原分支修复</text>
+<polyline points="185.0,965.0 185.0,1000.0 710.0,1000.0 710.0,1040.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="535.0,965.0 535.0,1000.0 710.0,1000.0 710.0,1040.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="885.0,965.0 885.0,1000.0 710.0,1000.0 710.0,1040.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1235.0,965.0 1235.0,1000.0 710.0,1000.0 710.0,1040.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="365" y="1205" width="690" height="105" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="381.0" y="1243.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">逐项合并main并集成验收</text>
+<text x="381.0" y="1272.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">基础模式回归；4项扩展同应用运行；记录最终证据</text>
+<rect x="365" y="1365" width="690" height="105" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="381.0" y="1403.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">自行撰写评分文档，冻结、复现与打包</text>
+<text x="381.0" y="1432.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">README、小组反思、4份个人反思、CI/证据及字数</text>
+<polyline points="710.0,1145.0 710.0,1205.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="710.0,1310.0 710.0,1365.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="230.0" y="1533.0" fill="#172b45" font-size="23" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">最终：按真实组号上传Gradescope → 核查4人关联 → 保存成功回执</text>
+<text x="70.0" y="1569.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">验收失败：返回对应责任模块修复，不跳过检查、不用允许失败任务伪造CI成功。</text>
+<text x="40.0" y="1613.0" fill="#64748b" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">建议方案 v1.0 · 2026-11-10 · 4人团队 · 非已实现功能证明</text></svg>

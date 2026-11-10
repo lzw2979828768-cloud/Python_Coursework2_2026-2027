@@ -1,0 +1,35 @@
+sequenceDiagram
+    actor U as 用户
+    participant UI as CLI或GUI
+    participant S as QRService
+    participant V as A版本策略
+    participant K as 共享编码与矩阵核心
+    participant M as B掩码策略
+    participant L as D使用日志
+    participant R as Renderer
+    participant T as C步骤展示
+    U->>UI: 提交文本和参数
+    UI->>S: QRRequest（唯一request_id）
+    S->>S: 编码兼容性和参数检查，累积轨迹
+    alt 输入和容量可接受
+        S->>V: 选择或校验版本及ECC
+        V-->>S: EncodingPlan
+        S->>K: 编码、RS、交织、功能区、数据落位
+        K-->>S: 未掩码MatrixLayout和轨迹
+        S->>M: 扩展模式下选择掩码
+        M-->>S: 完整矩阵及评分
+        Note over S,M: 基础模式改用共享FixedMask0，不依赖扩展
+        S->>L: 追加成功记录（扩展集成后）
+        L-->>S: LogStatus
+        S-->>UI: 成功QRResult（含日志状态）
+        UI->>R: 绘制最终矩阵
+        R-->>UI: 黑白二维码图像
+    else 业务错误
+        S->>L: 追加失败记录（扩展集成后）
+        L-->>S: LogStatus
+        S-->>UI: 错误原因和已完成步骤
+    end
+    opt 用户查看步骤
+        UI->>T: 结果中的真实TraceStep序列
+        T-->>UI: 当前步骤、注释、可导出内容
+    end

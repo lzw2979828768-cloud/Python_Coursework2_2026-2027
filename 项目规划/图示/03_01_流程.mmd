@@ -1,0 +1,31 @@
+flowchart TD
+    start["用户在CLI或GUI提交文本及参数"] --> req["分配request_id与带时区时间；保存原始输入"]
+    req --> validate{"参数有效且文本可按ISO-8859-1编码？"}
+    validate -->|否| fail["构造失败结果；保留已完成步骤和错误原因"]
+    validate -->|是| mode{"baseline还是extended？"}
+    mode -->|baseline| fixed["固定V1 / L / Mask0"]
+    mode -->|extended| plan["A：按用户选择及容量表生成EncodingPlan"]
+    fixed --> fit{"所选组合可容纳输入字节？"}
+    plan --> fit
+    fit -->|否| fail
+    fit -->|是| data["模式位、长度位、数据位、终止、对齐、填充"]
+    data --> rs["分数据块；reedsolo生成每块ECC"]
+    rs --> interleave["数据与ECC按规范交织；处理余数位"]
+    interleave --> patterns["构造功能图案、dark module与格式保留区"]
+    patterns --> place["Z形落位；跳过保留区"]
+    place --> mask{"基础还是扩展掩码？"}
+    mask -->|基础| zero["应用Mask0；生成并写入相应格式信息"]
+    mask -->|扩展| best["B：构造候选；评分；自动或手动选掩码"]
+    zero --> ok["成功结果：最终矩阵、参数、轨迹与警告"]
+    best --> ok
+    ok --> log["D扩展接入后：尝试追加一次使用记录"]
+    fail --> log
+    log --> logstate{"日志写入成功或本阶段未启用？"}
+    logstate -->|否| warn["附加日志失败警告；保留原生成成功/失败状态"]
+    logstate -->|是| response["返回统一QRResult"]
+    warn --> response
+    response --> success{"生成成功？"}
+    success -->|是| render["matplotlib绘制；补白色quiet zone"]
+    success -->|否| error["显示原因和已完成步骤，不显示残缺QR为成功"]
+    render --> actions["用户可保存图像、查看步骤或发起新请求"]
+    error --> actions

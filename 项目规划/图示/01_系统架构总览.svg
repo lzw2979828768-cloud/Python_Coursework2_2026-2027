@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1350" viewBox="0 0 1500 1350" role="img"><title>系统架构总览：两个入口，共用核心，四项扩展</title><desc>箭头表示调用或结果数据传递；框内为职责摘要，详细契约见02文档。。完整模块与接口说明见同目录上级Markdown文件。当前为规划，尚未实现。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#52657b"/></marker></defs>
+<text x="38.0" y="62.0" fill="#172b45" font-size="34" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">系统架构总览：两个入口，共用核心，四项扩展</text>
+<text x="40.0" y="100.0" fill="#475569" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">箭头表示调用或结果数据传递；框内为职责摘要，详细契约见02文档。</text>
+<rect x="480" y="125" width="540" height="80" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="496.0" y="163.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">用户输入文本、选项及操作</text>
+<rect x="200" y="260" width="440" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="216.0" y="298.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">CLI入口</text>
+<text x="216.0" y="327.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">动态输入；基础参数；步骤日志导出</text>
+<rect x="860" y="260" width="440" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="876.0" y="298.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">GUI / Web入口</text>
+<text x="876.0" y="327.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">输入、错误提示、Information与操作</text>
+<polyline points="750.0,205.0 750.0,230.0 420.0,230.0 420.0,260.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="750.0,205.0 750.0,230.0 1080.0,230.0 1080.0,260.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="360" y="415" width="780" height="105" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="376.0" y="453.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">QRService：统一生成服务</text>
+<text x="376.0" y="482.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">校验、容量计划、编排、轨迹、成功/失败及日志状态</text>
+<polyline points="420.0,355.0 420.0,385.0 750.0,385.0 750.0,415.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1080.0,355.0 1080.0,385.0 750.0,385.0 750.0,415.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="30" y="625" width="330" height="180" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="46.0" y="662.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">共享编码核心</text>
+<text x="46.0" y="690.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">Byte位流、填充、RS</text>
+<text x="46.0" y="719.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">分块/交织、矩阵落位</text>
+<text x="46.0" y="748.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">功能区/格式信息/固定0</text>
+<polyline points="750.0,520.0 750.0,570.0 195.0,570.0 195.0,625.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="400" y="625" width="330" height="180" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="416.0" y="662.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">A：版本与ECC</text>
+<text x="416.0" y="690.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">V1 / V2，L / M / Q / H</text>
+<text x="416.0" y="719.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">容量与分块规格表</text>
+<text x="416.0" y="748.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">自动/手动选择及提示</text>
+<polyline points="750.0,520.0 750.0,570.0 565.0,570.0 565.0,625.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="770" y="625" width="330" height="180" rx="14" fill="#e7f5ef" stroke="#237452" stroke-width="2"/>
+<text x="786.0" y="662.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">B：完整掩码</text>
+<text x="786.0" y="690.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">8掩码，4类惩罚评分</text>
+<text x="786.0" y="719.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">每候选写入格式信息</text>
+<text x="786.0" y="748.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">自动最优或手动选择</text>
+<polyline points="750.0,520.0 750.0,570.0 935.0,570.0 935.0,625.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1140" y="625" width="330" height="180" rx="14" fill="#f0eafa" stroke="#7050a0" stroke-width="2"/>
+<text x="1156.0" y="662.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">D：使用日志</text>
+<text x="1156.0" y="690.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">每请求记录成功/失败</text>
+<text x="1156.0" y="719.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">pandas + 本地CSV</text>
+<text x="1156.0" y="748.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">日志故障独立反馈</text>
+<polyline points="750.0,520.0 750.0,570.0 1305.0,570.0 1305.0,625.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="120" y="870" width="1260" height="80" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="136.0" y="908.0" fill="#172b45" font-size="22" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">服务汇总 QRResult：最终矩阵、实际参数、评分、步骤轨迹、错误与日志状态</text>
+<polyline points="195.0,805.0 195.0,840.0 750.0,840.0 750.0,870.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="565.0,805.0 565.0,840.0 750.0,840.0 750.0,870.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="935.0,805.0 935.0,840.0 750.0,840.0 750.0,870.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1305.0,805.0 1305.0,840.0 750.0,840.0 750.0,870.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="90" y="1020" width="390" height="130" rx="14" fill="#fff3dc" stroke="#9a6300" stroke-width="2"/>
+<text x="106.0" y="1057.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">C：分步骤可视化</text>
+<text x="106.0" y="1085.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">读取真实快照，前后导航</text>
+<text x="106.0" y="1114.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">保存某一步，失败轨迹也可读</text>
+<rect x="555" y="1020" width="390" height="130" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="571.0" y="1057.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">Renderer：matplotlib</text>
+<text x="571.0" y="1085.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">显示/保存最终QR与步骤图</text>
+<text x="571.0" y="1114.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">白色quiet zone；导出错误反馈</text>
+<rect x="1020" y="1020" width="390" height="130" rx="14" fill="#f0eafa" stroke="#7050a0" stroke-width="2"/>
+<text x="1036.0" y="1057.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">D：分析查询</text>
+<text x="1036.0" y="1085.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">读取累计日志；频数与趋势图</text>
+<text x="1036.0" y="1114.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">明确空值、时区、筛选与分母</text>
+<polyline points="750.0,950.0 750.0,985.0 285.0,985.0 285.0,1020.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="750.0,950.0 750.0,985.0 750.0,985.0 750.0,1020.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="750.0,950.0 750.0,985.0 1215.0,985.0 1215.0,1020.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="90.0" y="1212.0" fill="#172b45" font-size="22" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">本地存储：outputs/ 保存图片与统计图；data/usage/ 保存含文本日志。</text>
+<text x="90.0" y="1250.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">提交证据：仅将非敏感演示结果复制到 evidence/，附场景、日期与代码commit。</text>
+<text x="40.0" y="1323.0" fill="#64748b" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">建议方案 v1.0 · 2026-11-10 · 4人团队 · 非已实现功能证明</text></svg>

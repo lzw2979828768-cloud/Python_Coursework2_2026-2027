@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1780" viewBox="0 0 1440 1780" role="img"><title>二维码生成主流程：校验、编码、掩码、结果与失败</title><desc>基础模式固定V1/L/0；扩展启用四项个人能力；每一步保留可解释轨迹。。完整模块与接口说明见同目录上级Markdown文件。当前为规划，尚未实现。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#52657b"/></marker></defs>
+<text x="38.0" y="62.0" fill="#172b45" font-size="34" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">二维码生成主流程：校验、编码、掩码、结果与失败</text>
+<text x="40.0" y="100.0" fill="#475569" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">基础模式固定V1/L/0；扩展启用四项个人能力；每一步保留可解释轨迹。</text>
+<rect x="460" y="130" width="530" height="95" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="476.0" y="167.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">用户提交请求</text>
+<text x="476.0" y="195.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">唯一request_id；保留文本与参数</text>
+<rect x="460" y="250" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="287.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">判断：字符与参数是否有效？</text>
+<text x="476.0" y="315.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">默认ISO-8859-1；不静默改写输入</text>
+<rect x="460" y="370" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="407.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">选择实际规格计划</text>
+<text x="476.0" y="435.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">基础固定V1/L；扩展由A选择/校验</text>
+<rect x="460" y="490" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="527.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">判断：所选组合能否容纳？</text>
+<text x="476.0" y="555.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">按字节数校验；手选超限不偷偷升级</text>
+<rect x="460" y="610" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="647.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">生成数据码字</text>
+<text x="476.0" y="675.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">模式、长度、数据、终止、对齐和填充</text>
+<rect x="460" y="730" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="767.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">reedsolo纠错与交织</text>
+<text x="476.0" y="795.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">逐块RS；按规范交织；处理余数位</text>
+<rect x="460" y="850" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="887.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">构造矩阵并落位</text>
+<text x="476.0" y="915.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">功能区/保留区；Z形写入；跳过固定区</text>
+<rect x="460" y="970" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="1007.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">应用掩码并写格式信息</text>
+<text x="476.0" y="1035.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">基础Mask0；扩展B按完整候选比较</text>
+<rect x="460" y="1090" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="1127.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">构造成功结果</text>
+<text x="476.0" y="1155.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">最终矩阵、实际参数、评分及步骤轨迹</text>
+<rect x="460" y="1250" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="1287.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">尝试记录本次请求（D扩展集成后）</text>
+<text x="476.0" y="1315.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">成功/失败均记录；日志故障独立报告</text>
+<rect x="460" y="1400" width="530" height="95" rx="14" fill="#e8f1fc" stroke="#245da6" stroke-width="2"/>
+<text x="476.0" y="1437.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">返回统一QRResult</text>
+<text x="476.0" y="1465.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">保留生成状态；包含错误和日志状态</text>
+<rect x="460" y="1550" width="530" height="95" rx="14" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="1587.0" fill="#172b45" font-size="21" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">展示结果与后续操作</text>
+<text x="476.0" y="1615.0" fill="#172b45" font-size="19" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">成功：绘图/保存；失败：原因/已完成步骤</text>
+<polyline points="725.0,225.0 725.0,250.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,345.0 725.0,370.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,465.0 725.0,490.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,585.0 725.0,610.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,705.0 725.0,730.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,825.0 725.0,850.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,945.0 725.0,970.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,1065.0 725.0,1090.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,1185.0 725.0,1250.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,1345.0 725.0,1400.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="725.0,1495.0 725.0,1550.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1090" y="650" width="310" height="160" rx="14" fill="#fcebea" stroke="#a13b34" stroke-width="2"/>
+<text x="1106.0" y="686.0" fill="#172b45" font-size="20" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">失败结果</text>
+<text x="1106.0" y="713.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">不输出残缺QR为成功</text>
+<text x="1106.0" y="741.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">保留完成步骤和原因</text>
+<text x="1106.0" y="769.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">与成功结果汇合记录</text>
+<polyline points="990.0,297.5 1040.0,297.5 1040.0,730.0 1090.0,730.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1005.0" y="285.5" fill="#475569" font-size="17" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">否</text>
+<polyline points="990.0,537.5 1040.0,537.5 1040.0,730.0 1090.0,730.0" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1005.0" y="525.5" fill="#475569" font-size="17" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">否</text>
+<polyline points="1245.0,810.0 1245.0,1200.0 1380.0,1200.0 1380.0,1297.5 990.0,1297.5" fill="none" stroke="#52657b" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="35" y="690" width="350" height="220" rx="14" fill="#fff3dc" stroke="#9a6300" stroke-width="2"/>
+<text x="51.0" y="726.0" fill="#172b45" font-size="20" font-weight="700" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">贯穿全程的步骤轨迹</text>
+<text x="51.0" y="753.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">位串/码字/矩阵/评分</text>
+<text x="51.0" y="781.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">快照不共享可变数组</text>
+<text x="51.0" y="809.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">C读取轨迹进行逐步展示</text>
+<text x="51.0" y="837.0" fill="#172b45" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">五份基础演示文件也用它</text>
+<text x="55.0" y="1676.0" fill="#172b45" font-size="21" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">保存已有图像、步骤切换、打开统计不算新的生成请求。</text>
+<text x="55.0" y="1715.0" fill="#172b45" font-size="20" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">日志或文件写入失败要明确提示，不能静默失败或混淆编码成功状态。</text>
+<text x="40.0" y="1753.0" fill="#64748b" font-size="18" font-weight="400" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">建议方案 v1.0 · 2026-11-10 · 4人团队 · 非已实现功能证明</text></svg>

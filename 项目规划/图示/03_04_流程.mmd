@@ -1,0 +1,13 @@
+flowchart TD
+    result["取得QRResult中的真实步骤序列"] --> any{"有已完成步骤？"}
+    any -->|否| no["显示错误原因，不编造中间画面"]
+    any -->|是| init["初始化到第一个步骤；显示标题、说明、数据"]
+    init --> action{"用户操作？"}
+    action -->|上一步或下一步| bounds["校验索引边界；更新显示，不重新生成QR"]
+    bounds --> action
+    action -->|保存当前步骤| type{"当前载荷是矩阵或可视化图？"}
+    type -->|是| save["Renderer绘制当前快照；保存图像并报告结果"]
+    type -->|否| explain["显示文本/位串；可选文本导出，不冒充二维码图"]
+    save --> action
+    explain --> action
+    action -->|关闭| finish["保留生成结果；关闭或释放图像资源"]
