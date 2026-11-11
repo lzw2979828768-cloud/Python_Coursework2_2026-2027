@@ -4,7 +4,7 @@
   "executable": "D:\\python\\python.exe",
   "platform": "Windows-11-10.0.26300-SP0",
   "base_commit": "79e54b6235ab009ec46a303f9047f802eb05f4e5",
-  "branch": "codex/cli",
+  "branch": "feature/cli",
   "source_dirty": true,
   "scope": "Baseline CLI and explicit text trace export; no image renderer, GUI, physical-phone checks, formal demo_1..5 files or CI acceptance.",
   "checks": {
@@ -185,5 +185,15 @@
     "tests/fixtures/rs_reference_vectors.json": "2a7d74a71961cded87220040b28dfa25ec75bc35884af41b15d7681d7d63a1a8"
   },
   "finished_at": "2026-11-11T22:59:54.628115+08:00",
-  "all_passed": true
+  "all_passed": true,
+  "metadata_revision": {
+    "updated_at": "2026-11-11T23:25:09.601534+08:00",
+    "changed_fields": [
+      "branch"
+    ],
+    "description": "Branch labels now use renamed local branch aliases. This is a metadata-only revision after capture; original capture timestamps, test outputs, results and source hashes are unchanged.",
+    "original_report_commit": "383b76cf9223c96c75ab6f39c43a8fe9ae6119bc",
+    "original_report_path": "docs/validation/cli_python3139_20261111_225943.json",
+    "original_report_sha256": "4255baff93e8fc7cdc5622fab457eec25bc4119dd8b26ecea592877dde1dde40"
+  }
 }

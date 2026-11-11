@@ -3,6 +3,9 @@
 *.md text eol=lf
 *.json text eol=lf
 *.txt text eol=lf
+evidence/manifest.csv text eol=lf
+# Empty bit payloads in original CLI captures have a trailing space.
+evidence/stage_1/demo_*.txt whitespace=-blank-at-eol
 *.yml text eol=lf
 *.yaml text eol=lf
 *.pdf binary

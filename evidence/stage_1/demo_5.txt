@@ -1,0 +1,33 @@
+QR trace report / schema 1.0 / interface 1.0
+Contains original input and reversible encoding data.
+Timestamp: 2026-11-11T15:10:46.972963+00:00
+Source: cli
+Mode: baseline
+Requested settings: {"capture_steps": true, "ecc_level": "L", "mask_id": 0, "options": {}, "version": 1}
+Selection policy: input_rules_v1
+Python: CPython 3.13.9
+NumPy: 2.2.6
+reedsolo: 1.7.0
+Logging status: {"error_code": null, "message": null, "state": "not_enabled"}
+Penalty scores: {}
+
+Request ID: 19c5a356-e4cd-41ed-8c07-932905652cb7
+Input (JSON): "Sugarplum_Fairy_Nightmare"
+Generation: FAILED
+Byte length: 25
+Actual plan: null
+Actual mask: null
+Trace steps: 1
+Logging: not_enabled
+Error code: CAPACITY_EXCEEDED
+Error message: 输入字节数超过所选版本和纠错等级的容量。
+Error details: {"byte_length": 25, "capacity_bytes": 17}
+Final matrix: null
+
+Captured steps: 1
+
+[01] input.iso_8859_1
+Title: 字符编码
+Explanation: 严格 ISO-8859-1 编码完成，未修改原文。
+Payload type: codewords
+Codewords (25 bytes, hex): 53 75 67 61 72 70 6C 75 6D 5F 46 61 69 72 79 5F 4E 69 67 68 74 6D 61 72 65

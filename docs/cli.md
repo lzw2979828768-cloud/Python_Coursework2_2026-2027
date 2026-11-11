@@ -8,6 +8,13 @@ CLI 复用 `QRService.generate_qr()`，固定基础模式 **V1 / L / Mask0 / Byt
 ## 在项目根目录运行
 
 当前已验证的 Python 3.13.9 路径是 `D:\python\python.exe`。
+先在PowerShell切换到项目根目录：
+
+```powershell
+Set-Location -LiteralPath 'F:\文件\python\2026-2027大三上\Coursework2'
+```
+
+首次使用可先运行 `main_cli.py`，在提示后输入 `known` 并回车；也可以直接使用下面的参数命令。
 
 ```powershell
 # 查看选项，不生成二维码
@@ -103,5 +110,6 @@ CLI 测试覆盖真实服务、完整步骤、失败部分轨迹、输入保真�
 本机 Python 3.13.9 已通过33项CLI/报告测试、全量130项测试，详见
 [发布前复验记录](validation/cli_python3139_20261111_225943.json)。
 
-五份正式 `demo_1.txt` 至 `demo_5.txt`、证据清单、GUI、手机扫码和学校 CI 仍需后续完成。
-本轮临时验证导出不替代正式 Stage1 证据。
+五份正式 `demo_1.txt` 至 `demo_5.txt` 和证据清单已完成，见[正式证据入口](../evidence/README.md)。
+运行 `python -X utf8 scripts/stage1_evidence.py` 可核验原文、步骤、矩阵、文件哈希与源码版本。
+当前只输出数值矩阵和步骤报告；二维码图片、PNG保存、GUI、手机扫码和学校CI仍待后续完成。

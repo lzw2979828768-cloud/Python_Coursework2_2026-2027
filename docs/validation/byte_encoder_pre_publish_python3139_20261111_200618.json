@@ -207,7 +207,7 @@
   },
   "numpy_version": "2.2.6",
   "base_commit": "43c54dc18428be553246f322ba7d4475d133dffc",
-  "branch_before_publish": "codex/byte-encoder",
+  "branch_before_publish": "feature/byte-encoder",
   "source_sha256": {
     "qr_app/__init__.py": "15ebd84a25fe5dfc3c8d34e2c863a90a9f669c65a20ec349005809ab0ae053ce",
     "qr_app/core/__init__.py": "293ddd56e55f964b9f44681fa57ebde1aafef6613a6d7a5d84a4971271a0555f",
@@ -234,5 +234,15 @@
   },
   "all_passed": true,
   "finished_at": "2026-11-11T20:06:22.967378+08:00",
-  "review_outcome": "No blocking defect found in encode_data for the supported single Byte-segment plans."
+  "review_outcome": "No blocking defect found in encode_data for the supported single Byte-segment plans.",
+  "metadata_revision": {
+    "updated_at": "2026-11-11T23:25:09.601534+08:00",
+    "changed_fields": [
+      "branch_before_publish"
+    ],
+    "description": "Branch labels now use renamed local branch aliases. This is a metadata-only revision after capture; original capture timestamps, test outputs, results and source hashes are unchanged.",
+    "original_report_commit": "383b76cf9223c96c75ab6f39c43a8fe9ae6119bc",
+    "original_report_path": "docs/validation/byte_encoder_pre_publish_python3139_20261111_200618.json",
+    "original_report_sha256": "24b7642bb178b4005ab682e61d52b6bc94d208595bf42577f46405219a339eba"
+  }
 }

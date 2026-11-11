@@ -4,7 +4,7 @@
   "executable": "D:\\python\\python.exe",
   "scope": "QR data RS encoding and service handoff to the pending matrix stage; not completed QR generation.",
   "base_commit": "7648baf63d0375bf793161323e0a7ede237e69ba",
-  "branch": "codex/error-correction",
+  "branch": "feature/error-correction",
   "checks": {
     "unit_tests": {
       "success": true,
@@ -258,5 +258,15 @@
     "tests/test_tracing.py": "6db1f986218438ee1425a21f6568b5a307eb2281335f86d91e9247886540d1dc"
   },
   "finished_at": "2026-11-11T20:29:36.917789+08:00",
-  "all_passed": true
+  "all_passed": true,
+  "metadata_revision": {
+    "updated_at": "2026-11-11T23:25:09.601534+08:00",
+    "changed_fields": [
+      "branch"
+    ],
+    "description": "Branch labels now use renamed local branch aliases. This is a metadata-only revision after capture; original capture timestamps, test outputs, results and source hashes are unchanged.",
+    "original_report_commit": "383b76cf9223c96c75ab6f39c43a8fe9ae6119bc",
+    "original_report_path": "docs/validation/error_correction_python3139_20261111_202929.json",
+    "original_report_sha256": "66ec8f23a33d9d0759ebd17b40591044269e4d0b2a96807796f0b1d6f1244671"
+  }
 }

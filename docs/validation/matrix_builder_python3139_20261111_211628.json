@@ -3,7 +3,7 @@
   "python_version": "3.13.9",
   "executable": "D:\\python\\python.exe",
   "base_commit": "62b0ddf5312cc104730ec48edde4c14b9e45f844",
-  "branch": "codex/matrix-builder",
+  "branch": "feature/matrix-builder",
   "scope": "Unmasked V1/V2 matrix layout; format writing/masking and final QR acceptance remain pending.",
   "checks": {
     "unit_tests": {
@@ -350,5 +350,15 @@
     "tests/test_tracing.py": "6db1f986218438ee1425a21f6568b5a307eb2281335f86d91e9247886540d1dc"
   },
   "finished_at": "2026-11-11T21:16:35.343217+08:00",
-  "all_passed": true
+  "all_passed": true,
+  "metadata_revision": {
+    "updated_at": "2026-11-11T23:25:09.601534+08:00",
+    "changed_fields": [
+      "branch"
+    ],
+    "description": "Branch labels now use renamed local branch aliases. This is a metadata-only revision after capture; original capture timestamps, test outputs, results and source hashes are unchanged.",
+    "original_report_commit": "383b76cf9223c96c75ab6f39c43a8fe9ae6119bc",
+    "original_report_path": "docs/validation/matrix_builder_python3139_20261111_211628.json",
+    "original_report_sha256": "d9856c268ddcacdc163faf3075e894a415893461a9ec63d19b025919d2b5ed9e"
+  }
 }

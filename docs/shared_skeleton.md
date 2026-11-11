@@ -108,7 +108,8 @@ NumPy 原生线性代数检查、pip check、28 项项目基础测试和字节�
 当前 CLI 版本使用 Python 3.13.9 通过130项测试（其中33项CLI/报告测试）、16个模块导入、
 编译与 pip check。五个作业输入已通过真实入口运行并临时导出，成功/字符失败/容量失败符合预期。
 完整输出及源码/fixture哈希见[CLI发布前复验记录](validation/cli_python3139_20261111_225943.json)。
-本次没有增加依赖或修改公共请求/结果字段；正式demo文件仍待采集。
+本次没有增加依赖或修改公共请求/结果字段。随后已采集五份正式demo并重新通过130项测试，
+见[Stage1本机验收说明](../evidence/stage_1/README.md)和[实际采集记录](../evidence/stage_1/capture.json)。
 
 此前完成格式信息与Mask0后使用 D:\python\python.exe（Python 3.13.9）验证：97 项测试、13 个模块导入、
 字节码编译和 pip check 均通过；五个作业请求得到预期结果：三个成功、字符/容量两个失败。
@@ -132,7 +133,8 @@ python -m compileall -q main_cli.py qr_app tests
 它只验证编排；不能替代独立参考码字、矩阵正确性、五份真实 demo 或手机扫码。
 这些测试也不替代四个人各自至少三个非平凡扩展测试。
 
-`evidence/` 只有目录占位，五份 demo 尚未生成；不要把手写预期复制成实际运行证据。
+`evidence/` 已保存五份真实CLI导出的正式demo、manifest哈希清单和Stage1本机验收说明。
+`scripts/stage1_evidence.py`默认只核验现有证据与源码，不重新生成、不覆盖文件。
 本轮新增忽略 outputs/、data/usage/、data/diagnostics/、tmp/ 和 *.log；
 没有全局忽略 *.txt / *.csv，后续真实演示文件可以正常入库。
 

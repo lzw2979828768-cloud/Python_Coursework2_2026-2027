@@ -3,7 +3,7 @@
   "python_version": "3.13.9",
   "executable": "D:\\python\\python.exe",
   "base_commit": "9a228bbbb2e8b0bbbb4612754e29dff3ef2dafac",
-  "branch": "codex/format-mask0",
+  "branch": "feature/format-mask0",
   "scope": "Completed Byte/RS/matrix/BCH/fixed-Mask0 core. CLI, renderer, GUI, formal demo files and physical phone checks are not implemented or certified by this report.",
   "checks": {
     "unit_tests": {
@@ -406,5 +406,15 @@
     "tests/test_tracing.py": "6db1f986218438ee1425a21f6568b5a307eb2281335f86d91e9247886540d1dc"
   },
   "finished_at": "2026-11-11T22:16:47.828470+08:00",
-  "all_passed": true
+  "all_passed": true,
+  "metadata_revision": {
+    "updated_at": "2026-11-11T23:25:09.601534+08:00",
+    "changed_fields": [
+      "branch"
+    ],
+    "description": "Branch labels now use renamed local branch aliases. This is a metadata-only revision after capture; original capture timestamps, test outputs, results and source hashes are unchanged.",
+    "original_report_commit": "383b76cf9223c96c75ab6f39c43a8fe9ae6119bc",
+    "original_report_path": "docs/validation/format_mask0_python3139_20261111_221640.json",
+    "original_report_sha256": "6ba916a1ee7e3e0784b8e3c97094fc67e5fe44eaa2fd82c7ec595bd348e3a10d"
+  }
 }

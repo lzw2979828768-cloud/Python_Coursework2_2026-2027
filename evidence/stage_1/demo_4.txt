@@ -1,0 +1,27 @@
+QR trace report / schema 1.0 / interface 1.0
+Contains original input and reversible encoding data.
+Timestamp: 2026-11-11T15:10:46.387571+00:00
+Source: cli
+Mode: baseline
+Requested settings: {"capture_steps": true, "ecc_level": "L", "mask_id": 0, "options": {}, "version": 1}
+Selection policy: input_rules_v1
+Python: CPython 3.13.9
+NumPy: 2.2.6
+reedsolo: 1.7.0
+Logging status: {"error_code": null, "message": null, "state": "not_enabled"}
+Penalty scores: {}
+
+Request ID: d372ff31-ca34-495f-a9e8-3f290ecd0fc0
+Input (JSON): "From \u03b1 to \u0277..."
+Generation: FAILED
+Byte length: null
+Actual plan: null
+Actual mask: null
+Trace steps: 0
+Logging: not_enabled
+Error code: UNSUPPORTED_CHARACTER
+Error message: 输入包含 ISO-8859-1 不支持的字符。
+Error details: {"character_index": 5, "encoding": "iso-8859-1"}
+Final matrix: null
+
+Captured steps: 0
