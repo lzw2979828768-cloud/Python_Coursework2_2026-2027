@@ -11,6 +11,7 @@ from unittest.mock import Mock, patch
 
 import numpy as np
 
+from qr_app.core import error_correction
 from qr_app.core.byte_encoder import encode_text
 from qr_app.errors import ErrorCode, QRContractError, QRGenerationError
 from qr_app.models import (
@@ -93,7 +94,7 @@ class ServiceTests(unittest.TestCase):
 
     def test_baseline_capacity_boundary_and_partial_trace(self):
         at_limit = QRService().generate_qr(QRRequest("a" * 17))
-        # Capacity succeeded, but the actual data encoder is an explicit stub.
+        # Data encoding succeeds; the next, ECC stage is still an explicit stub.
         self.assertEqual(at_limit.error_code, ErrorCode.FEATURE_UNAVAILABLE)
         self.assertEqual(at_limit.plan.capacity_bytes, 17)
         for text in ("a" * 18, "Sugarplum_Fairy_Nightmare"):
@@ -176,7 +177,8 @@ class ServiceTests(unittest.TestCase):
         first = service.generate_qr(QRRequest("known"))
         disabled = service.generate_qr(QRRequest("known", capture_steps=False))
         failed = service.generate_qr(QRRequest(""))
-        self.assertEqual(len(first.trace_steps), 2)
+        self.assertEqual(len(first.trace_steps), 9)
+        self.assertEqual(first.trace_steps[-1].step_id, "data.data_codewords")
         self.assertEqual(disabled.trace_steps, ())
         self.assertEqual(failed.trace_steps, ())
 
@@ -221,3 +223,21 @@ class ServiceTests(unittest.TestCase):
             result = QRService().generate_qr(QRRequest("known"))
             self.assertEqual(result.error_code, ErrorCode.INTERNAL_GENERATION_ERROR)
             self.assertIsNone(result.matrix)
+
+    def test_real_data_codewords_reach_ecc_and_survive_its_failure(self):
+        expected = bytes.fromhex("40 56 b6 e6 f7 76 e0 ec 11 ec 11 ec 11 ec 11 ec 11 ec 11")
+        # Spy on the real ECC stub: the data encoder itself is not substituted.
+        with patch("qr_app.core.error_correction.build_final_codewords",
+                   wraps=error_correction.build_final_codewords) as ecc:
+            result = QRService().generate_qr(QRRequest("known"))
+        ecc.assert_called_once()
+        self.assertEqual(ecc.call_args.args[0], expected)
+        self.assertFalse(result.generation_success)
+        self.assertEqual(result.error_code, ErrorCode.FEATURE_UNAVAILABLE)
+        self.assertEqual(result.byte_length, 5)
+        self.assertEqual(result.plan.data_codewords, 19)
+        self.assertIsNone(result.matrix)
+        self.assertIsNone(result.mask_id)
+        self.assertEqual(len(result.trace_steps), 9)
+        self.assertEqual(result.trace_steps[-1].step_id, "data.data_codewords")
+        self.assertEqual(result.trace_steps[-1].payload, expected)

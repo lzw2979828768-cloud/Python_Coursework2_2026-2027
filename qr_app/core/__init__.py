@@ -1,1 +1,1 @@
-"""Pure calculation boundaries; QR algorithms are still to be implemented."""
+"""Pure calculations; Byte encoding is implemented, other QR stages pending."""

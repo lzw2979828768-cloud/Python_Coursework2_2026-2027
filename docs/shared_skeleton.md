@@ -1,12 +1,12 @@
 # 共享骨架开发说明
 
 日期：2026-11-11。契约依据：`项目规划/10_公共接口与修改权限规范.md` 1.0；
-输入规则：`input_rules_v1`。本轮提供公共基础，不实现个人扩展或最终提交材料。
+输入规则：`input_rules_v1`。当前提供公共基础与 Byte 数据码字编码，不实现个人扩展或最终提交材料。
 
 ## 已实现与待实现
 
 已实现请求/结果结构、枚举、错误边界、矩阵/轨迹副本、固定 V1/L 计划、严格
-ISO-8859-1 转换、输入与选项校验、生成编排、可选扩展装配和单次日志调用边界。
+ISO-8859-1 转换、Byte 数据码字编码、输入与选项校验、生成编排、可选扩展装配和单次日志调用边界。
 未知 options 键返回 `INVALID_OPTION`，不把 options 当作第二套参数入口。
 
 所有公共字段的单位按契约保持：输入长度是 bytes，码字内容为 bytes，
@@ -25,13 +25,14 @@ ISO-8859-1 转换、输入与选项校验、生成编排、可选扩展装配和
 
 | 文件/函数 | 实现目标 | 固定输入与返回 |
 |---|---|---|
-| core/byte_encoder.py: encode_data | 模式/长度/数据、终止、字节对齐、交替填充 | bytes + plan → EncodedData |
+| core/byte_encoder.py: encode_data | 已完成：模式/长度/数据、终止、字节对齐、交替填充 | bytes + plan → EncodedData |
 | core/error_correction.py: build_final_codewords | reedsolo RS、交织和余数位 | bytes + plan → FinalCodewords |
 | core/matrix_builder.py: build_matrix | 功能/保留区、Z 形数据落位 | tuple[int,...] + plan → MatrixLayout |
 | core/format_info.py: build_format_bits | 自行生成含纠错和异或的 15 位格式信息 | 实际 ECC + mask_id → tuple[int,...] |
 | core/fixed_mask.py: apply_fixed_mask_zero | 复制布局，仅掩码数据区，再写格式信息 | layout + plan → MaskSelection |
 
-上述占位函数统一抛 `FEATURE_UNAVAILABLE`，不返回全零二维码或空成功对象。
+除已完成的 encode_data 外，上表其余占位函数统一抛 FEATURE_UNAVAILABLE。
+数据码字编码保留 7 个真实步骤，说明见[数据码字编码](byte_encoding.md)。
 每个阶段实现时接受可选关键字 `trace=None`，只在真实步骤完成后调用 `trace.record(...)`。
 每个步骤由该阶段登记一次；候选专用步骤须带 mask 编号，避免 step_id 冲突。
 服务目前只登记 `input.iso_8859_1`、`plan.selected`，算法内不要重复登记这两个 ID。
@@ -102,10 +103,10 @@ NumPy 原生线性代数检查、pip check、28 项项目基础测试和字节�
 
 ## 检查命令与范围
 
-修复接入问题后使用 D:\python\python.exe（Python 3.13.9）重新验证：31 项基础测试、13 个模块导入、
+完成数据码字编码后使用 D:\python\python.exe（Python 3.13.9）验证：42 项测试、13 个模块导入、
 字节码编译和 pip check 均通过；五个真实服务请求均符合当前骨架的预期失败状态。
 详细命令、实际输出、请求结果及源码 SHA-256 见
-[2026-11-11 共享骨架验证记录](validation/shared_skeleton_python3139_20261111_191536.json)。
+[2026-11-11 共享骨架验证记录](validation/byte_encoder_pre_publish_python3139_20261111_200618.json)。
 包含 Latin-1 字符的终端验证采用 Python 的 -X utf8 选项。此结果不表示 QR 算法或 Stage1 已完成。
 
 

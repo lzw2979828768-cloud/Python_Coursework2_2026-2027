@@ -1,0 +1,206 @@
+{
+  "started_at": "2026-11-11T19:51:20.548822+08:00",
+  "scope": "Byte-mode data encoding and service handoff; ECC, matrix and QR generation remain pending.",
+  "python_version": "3.13.9",
+  "executable": "D:\\python\\python.exe",
+  "checks": {
+    "unit_tests": {
+      "success": true,
+      "command": [
+        "D:\\python\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_disabled_or_omitted_trace_does_not_change_output (test_byte_encoder.ByteEncoderTests.test_disabled_or_omitted_trace_does_not_change_output) ... ok\ntest_empty_segment_is_encodable_at_core_boundary (test_byte_encoder.ByteEncoderTests.test_empty_segment_is_encodable_at_core_boundary) ... ok\ntest_hand_derived_reference_vectors (test_byte_encoder.ByteEncoderTests.test_hand_derived_reference_vectors) ... ok\ntest_latin1_uses_actual_encoded_byte_length (test_byte_encoder.ByteEncoderTests.test_latin1_uses_actual_encoded_byte_length) ... ok\ntest_only_bytes_and_encoding_plan_are_accepted (test_byte_encoder.ByteEncoderTests.test_only_bytes_and_encoding_plan_are_accepted) ... ok\ntest_oversized_input_is_rejected_before_recording_any_encoding_step (test_byte_encoder.ByteEncoderTests.test_oversized_input_is_rejected_before_recording_any_encoding_step) ... ok\ntest_seventeen_byte_capacity_has_no_pad_codeword (test_byte_encoder.ByteEncoderTests.test_seventeen_byte_capacity_has_no_pad_codeword) ... ok\ntest_sixteen_bytes_leave_exactly_one_ec_pad (test_byte_encoder.ByteEncoderTests.test_sixteen_bytes_leave_exactly_one_ec_pad) ... ok\ntest_trace_contains_each_completed_stage_and_final_codewords (test_byte_encoder.ByteEncoderTests.test_trace_contains_each_completed_stage_and_final_codewords) ... ok\ntest_v2_plan_changes_capacity_without_adding_remainder_bits (test_byte_encoder.ByteEncoderTests.test_v2_plan_changes_capacity_without_adding_remainder_bits) ... ok\ntest_baseline_lookup_does_not_depend_on_resource_order (test_models.ModelTests.test_baseline_lookup_does_not_depend_on_resource_order) ... ok\ntest_baseline_lookup_rejects_missing_or_duplicate_entry (test_models.ModelTests.test_baseline_lookup_rejects_missing_or_duplicate_entry) ... ok\ntest_baseline_specification_counts (test_models.ModelTests.test_baseline_specification_counts) ... ok\ntest_codewords_and_bits_do_not_accept_string_bits_or_bool (test_models.ModelTests.test_codewords_and_bits_do_not_accept_string_bits_or_bool) ... ok\ntest_layout_copies_both_input_buffers (test_models.ModelTests.test_layout_copies_both_input_buffers) ... ok\ntest_layout_rejects_nonbinary_wrong_dtype_and_wrong_shape (test_models.ModelTests.test_layout_rejects_nonbinary_wrong_dtype_and_wrong_shape) ... ok\ntest_log_failure_requires_explicit_error (test_models.ModelTests.test_log_failure_requires_explicit_error) ... ok\ntest_plan_rejects_inconsistent_counts_and_units (test_models.ModelTests.test_plan_rejects_inconsistent_counts_and_units) ... ok\ntest_request_defaults_have_unique_identity_and_aware_time (test_models.ModelTests.test_request_defaults_have_unique_identity_and_aware_time) ... ok\ntest_result_cannot_mark_failure_as_success (test_models.ModelTests.test_result_cannot_mark_failure_as_success) ... ok\ntest_scores_require_consistent_totals_and_complete_candidates (test_models.ModelTests.test_scores_require_consistent_totals_and_complete_candidates) ... ok\ntest_success_matrix_is_independent_and_mask_zero_is_valid (test_models.ModelTests.test_success_matrix_is_independent_and_mask_zero_is_valid) ... ok\ntest_baseline_capacity_boundary_and_partial_trace (test_service.ServiceTests.test_baseline_capacity_boundary_and_partial_trace) ... ok\ntest_capture_disabled_and_service_reuse_do_not_share_steps (test_service.ServiceTests.test_capture_disabled_and_service_reuse_do_not_share_steps) ... ok\ntest_empty_and_character_failures_preserve_identity_without_fake_plan (test_service.ServiceTests.test_empty_and_character_failures_preserve_identity_without_fake_plan) ... ok\ntest_extended_auto_uses_returned_actual_values_and_all_scores (test_service.ServiceTests.test_extended_auto_uses_returned_actual_values_and_all_scores) ... ok\ntest_extensions_are_explicit_and_baseline_never_calls_them (test_service.ServiceTests.test_extensions_are_explicit_and_baseline_never_calls_them) ... ok\ntest_failure_inside_stage_retains_completed_steps_and_skips_later_stages (test_service.ServiceTests.test_failure_inside_stage_retains_completed_steps_and_skips_later_stages) ... ok\ntest_invalid_structures_raise_and_do_not_log (test_service.ServiceTests.test_invalid_structures_raise_and_do_not_log) ... ok\ntest_log_failure_does_not_change_generation_success_or_failure (test_service.ServiceTests.test_log_failure_does_not_change_generation_success_or_failure) ... ok\ntest_missing_extended_dependencies_fail_before_text_encoding (test_service.ServiceTests.test_missing_extended_dependencies_fail_before_text_encoding) ... ok\ntest_option_errors_precede_empty_and_unsupported_text (test_service.ServiceTests.test_option_errors_precede_empty_and_unsupported_text) ... ok\ntest_pipeline_cannot_publish_wrong_length_or_override_manual_mask (test_service.ServiceTests.test_pipeline_cannot_publish_wrong_length_or_override_manual_mask) ... ok\ntest_pipeline_receives_bytes_and_same_request_trace (test_service.ServiceTests.test_pipeline_receives_bytes_and_same_request_trace) ... ok\ntest_real_data_codewords_reach_ecc_and_survive_its_failure (test_service.ServiceTests.test_real_data_codewords_reach_ecc_and_survive_its_failure) ... ok\ntest_strict_latin1_preserves_whitespace_and_control_bytes (test_service.ServiceTests.test_strict_latin1_preserves_whitespace_and_control_bytes) ... ok\ntest_unexpected_error_does_not_leak_exception_text (test_service.ServiceTests.test_unexpected_error_does_not_leak_exception_text) ... ok\ntest_whitespace_remains_input_and_has_a_warning (test_service.ServiceTests.test_whitespace_remains_input_and_has_a_warning) ... ok\ntest_disabled_trace_is_empty_and_requests_are_independent (test_tracing.TraceTests.test_disabled_trace_is_empty_and_requests_are_independent) ... ok\ntest_duplicate_id_does_not_replace_prior_step (test_tracing.TraceTests.test_duplicate_id_does_not_replace_prior_step) ... ok\ntest_nested_payload_is_an_independent_readonly_snapshot (test_tracing.TraceTests.test_nested_payload_is_an_independent_readonly_snapshot) ... ok\ntest_score_breakdowns_are_supported_in_readonly_trace (test_tracing.TraceTests.test_score_breakdowns_are_supported_in_readonly_trace) ... ok\n\n----------------------------------------------------------------------\nRan 42 tests in 0.080s\n\nOK\n",
+      "test_count": 42
+    },
+    "bytecode_compilation": {
+      "success": true,
+      "command": [
+        "D:\\python\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "qr_app",
+        "tests"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "dependency_consistency": {
+      "success": true,
+      "command": [
+        "D:\\python\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "stdout": "No broken requirements found.\n",
+      "stderr": ""
+    },
+    "module_imports": {
+      "success": true,
+      "command": [
+        "D:\\python\\python.exe",
+        "-c",
+        "\nimport importlib, json, pkgutil, sys\nimport qr_app\nmodules = sorted(info.name for info in pkgutil.walk_packages(qr_app.__path__, qr_app.__name__ + '.'))\nfor name in modules:\n    importlib.import_module(name)\nunexpected = [name for name in ('PyQt5', 'matplotlib', 'pandas') if name in sys.modules]\nprint(json.dumps({'modules': modules, 'unexpected_ui_or_analytics_imports': unexpected}))\nassert not unexpected\n"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"modules\": [\"qr_app.core\", \"qr_app.core.byte_encoder\", \"qr_app.core.error_correction\", \"qr_app.core.fixed_mask\", \"qr_app.core.format_info\", \"qr_app.core.matrix_builder\", \"qr_app.errors\", \"qr_app.extensions\", \"qr_app.models\", \"qr_app.presentation\", \"qr_app.resources\", \"qr_app.service\", \"qr_app.tracing\"], \"unexpected_ui_or_analytics_imports\": []}\n",
+      "stderr": "",
+      "details": {
+        "modules": [
+          "qr_app.core",
+          "qr_app.core.byte_encoder",
+          "qr_app.core.error_correction",
+          "qr_app.core.fixed_mask",
+          "qr_app.core.format_info",
+          "qr_app.core.matrix_builder",
+          "qr_app.errors",
+          "qr_app.extensions",
+          "qr_app.models",
+          "qr_app.presentation",
+          "qr_app.resources",
+          "qr_app.service",
+          "qr_app.tracing"
+        ],
+        "unexpected_ui_or_analytics_imports": []
+      }
+    },
+    "pinned_numpy": {
+      "success": true
+    },
+    "real_service_requests": {
+      "success": true,
+      "cases": [
+        {
+          "input": "known",
+          "expected_error_code": "FEATURE_UNAVAILABLE",
+          "actual_error_code": "FEATURE_UNAVAILABLE",
+          "byte_length": 5,
+          "trace_step_ids": [
+            "input.iso_8859_1",
+            "plan.selected",
+            "data.mode_indicator",
+            "data.character_count",
+            "data.payload",
+            "data.terminator",
+            "data.byte_alignment",
+            "data.pad_codewords",
+            "data.data_codewords"
+          ],
+          "has_plan": true,
+          "generation_success": false,
+          "data_codewords_hex": "40 56 b6 e6 f7 76 e0 ec 11 ec 11 ec 11 ec 11 ec 11 ec 11",
+          "matrix_is_none": true,
+          "matches_skeleton_expectations": true
+        },
+        {
+          "input": "We've succeeded!",
+          "expected_error_code": "FEATURE_UNAVAILABLE",
+          "actual_error_code": "FEATURE_UNAVAILABLE",
+          "byte_length": 16,
+          "trace_step_ids": [
+            "input.iso_8859_1",
+            "plan.selected",
+            "data.mode_indicator",
+            "data.character_count",
+            "data.payload",
+            "data.terminator",
+            "data.byte_alignment",
+            "data.pad_codewords",
+            "data.data_codewords"
+          ],
+          "has_plan": true,
+          "generation_success": false,
+          "data_codewords_hex": "41 05 76 52 77 66 52 07 37 56 36 36 56 56 46 56 42 10 ec",
+          "matrix_is_none": true,
+          "matches_skeleton_expectations": true
+        },
+        {
+          "input": "~¡256_-_aA&ñ",
+          "expected_error_code": "FEATURE_UNAVAILABLE",
+          "actual_error_code": "FEATURE_UNAVAILABLE",
+          "byte_length": 12,
+          "trace_step_ids": [
+            "input.iso_8859_1",
+            "plan.selected",
+            "data.mode_indicator",
+            "data.character_count",
+            "data.payload",
+            "data.terminator",
+            "data.byte_alignment",
+            "data.pad_codewords",
+            "data.data_codewords"
+          ],
+          "has_plan": true,
+          "generation_success": false,
+          "data_codewords_hex": "40 c7 ea 13 23 53 65 f2 d5 f6 14 12 6f 10 ec 11 ec 11 ec",
+          "matrix_is_none": true,
+          "matches_skeleton_expectations": true
+        },
+        {
+          "input": "From α to ɷ...",
+          "expected_error_code": "UNSUPPORTED_CHARACTER",
+          "actual_error_code": "UNSUPPORTED_CHARACTER",
+          "byte_length": null,
+          "trace_step_ids": [],
+          "has_plan": false,
+          "generation_success": false,
+          "data_codewords_hex": null,
+          "matrix_is_none": true,
+          "matches_skeleton_expectations": true
+        },
+        {
+          "input": "Sugarplum_Fairy_Nightmare",
+          "expected_error_code": "CAPACITY_EXCEEDED",
+          "actual_error_code": "CAPACITY_EXCEEDED",
+          "byte_length": 25,
+          "trace_step_ids": [
+            "input.iso_8859_1"
+          ],
+          "has_plan": false,
+          "generation_success": false,
+          "data_codewords_hex": null,
+          "matrix_is_none": true,
+          "matches_skeleton_expectations": true
+        }
+      ]
+    }
+  },
+  "numpy_version": "2.2.6",
+  "source_sha256": {
+    "qr_app/__init__.py": "15ebd84a25fe5dfc3c8d34e2c863a90a9f669c65a20ec349005809ab0ae053ce",
+    "qr_app/core/__init__.py": "293ddd56e55f964b9f44681fa57ebde1aafef6613a6d7a5d84a4971271a0555f",
+    "qr_app/core/byte_encoder.py": "aa855829477e93884389c0f37efe0662eadd1d29a982d5a44349c9eaaf8ea394",
+    "qr_app/core/error_correction.py": "b1deae43c668b373ba9a214ad4e317ea60f64516ba75d1d3bef8e07eea8d46f7",
+    "qr_app/core/fixed_mask.py": "5b10c39fe6442d106de8846a850ee8274689520184929d985799496449033989",
+    "qr_app/core/format_info.py": "a2c3feb73184e0ba22a0ee7d65a9862ee59f553b8ff405d0783e2c025b3c95c4",
+    "qr_app/core/matrix_builder.py": "faac3db38fb01eab052fba509e7948f825db0e7dd5f327310d77bbfe4749f721",
+    "qr_app/errors.py": "9854e5b3b8b101a49cdd6d6856ff029a9c92d7454f06535c704f437ce6c89e16",
+    "qr_app/extensions/__init__.py": "6211bd36dcc7e76bfe4a734a86d70571f505d479e5b1d11ee3fdc649a8a9722b",
+    "qr_app/models.py": "02aef25cdc39b40e707dd2fc5f4baf6a5ab8fb91437d9fde51819b362bb75147",
+    "qr_app/presentation/__init__.py": "1b0ca0e751d44a9bec3f69842ae1f686861df7f71e78aa5506ce8fcf84abdef7",
+    "qr_app/resources/__init__.py": "2dbecbde64fc5471766f27fa8a6939b89f2754592b8e2182e3278aa16e5bc072",
+    "qr_app/resources/qr_capacity_v1_v2.json": "34c63796b1e3989c644811271686edcfaf502b9060e579cbfa9b27710d4d35e3",
+    "qr_app/service.py": "8f90055d36407e018f59cdbddde844d3cb5cced70869aaeb9773d5317468047d",
+    "qr_app/tracing.py": "7d274d2643665081e2c7f322207d85acf0091cee2953217d47c07bfcfb754ce4",
+    "requirements.txt": "791b38b2d102e7199e92d80bd0c65037a8bbbefb75d7b64d38cb101071b7d9ed",
+    "tests/__init__.py": "8312e6fcb24c087eb6f1e02fcdcf0b5dbec993324106e1bb0f19fe3107b04f2a",
+    "tests/fixtures/byte_mode_vectors.json": "9225a82378bcf066d4e1740f86519af517504ef2eb5d7fb9fb00c6992eb3f7da",
+    "tests/test_byte_encoder.py": "9ff6869ab3f5123c893a308f4a396fd2925fb22877c555249eae7cdd8106c4e9",
+    "tests/test_models.py": "80c00b2fd0f42c7a9659011b1b7d2acd8c8c3dfc8c3af4701aef01180553e284",
+    "tests/test_service.py": "23db0cc6b5bec1ddb85f276b4efc83ec21940bf9683e97fbe907548a25d65c6c",
+    "tests/test_tracing.py": "6db1f986218438ee1425a21f6568b5a307eb2281335f86d91e9247886540d1dc"
+  },
+  "all_passed": true,
+  "finished_at": "2026-11-11T19:51:24.214454+08:00"
+}
