@@ -1,1 +1,1 @@
-"""Pure calculations; Byte encoding is implemented, other QR stages pending."""
+"""Pure Byte-mode and RS calculations; matrix and masking stages pending."""

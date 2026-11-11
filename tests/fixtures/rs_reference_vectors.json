@@ -1,0 +1,91 @@
+{
+  "references": [
+    "https://www.thonky.com/qr-code-tutorial/error-correction-coding",
+    "https://www.thonky.com/qr-code-tutorial/error-correction-table"
+  ],
+  "reference_checked_on": "2026-11-11",
+  "published_v1_m": {
+    "data_hex": "20 5b 0b 78 d1 72 dc 4d 43 40 ec 11 ec 11 ec 11",
+    "ecc_hex": "c4 23 27 77 eb d7 e7 e2 5d 17",
+    "source": "Thonky published 1-M HELLO WORLD example; source data uses Alphanumeric mode. RS operates on codewords independently of the source mode."
+  },
+  "known_v1_l": {
+    "data_hex": "40 56 b6 e6 f7 76 e0 ec 11 ec 11 ec 11 ec 11 ec 11 ec 11",
+    "ecc_hex": "eb 90 48 a5 3b 9b 11",
+    "source": "Byte-mode data from the hand-derived known fixture; parity derived by the independent carryless polynomial division checker, not reedsolo."
+  },
+  "single_block_specs": [
+    {
+      "version": 1,
+      "ecc_level": "L",
+      "data_codewords": 19,
+      "ecc_codewords_per_block": 7,
+      "capacity_bytes": 17,
+      "total_codewords": 26,
+      "block_count": 1
+    },
+    {
+      "version": 1,
+      "ecc_level": "M",
+      "data_codewords": 16,
+      "ecc_codewords_per_block": 10,
+      "capacity_bytes": 14,
+      "total_codewords": 26,
+      "block_count": 1
+    },
+    {
+      "version": 1,
+      "ecc_level": "Q",
+      "data_codewords": 13,
+      "ecc_codewords_per_block": 13,
+      "capacity_bytes": 11,
+      "total_codewords": 26,
+      "block_count": 1
+    },
+    {
+      "version": 1,
+      "ecc_level": "H",
+      "data_codewords": 9,
+      "ecc_codewords_per_block": 17,
+      "capacity_bytes": 7,
+      "total_codewords": 26,
+      "block_count": 1
+    },
+    {
+      "version": 2,
+      "ecc_level": "L",
+      "data_codewords": 34,
+      "ecc_codewords_per_block": 10,
+      "capacity_bytes": 32,
+      "total_codewords": 44,
+      "block_count": 1
+    },
+    {
+      "version": 2,
+      "ecc_level": "M",
+      "data_codewords": 28,
+      "ecc_codewords_per_block": 16,
+      "capacity_bytes": 26,
+      "total_codewords": 44,
+      "block_count": 1
+    },
+    {
+      "version": 2,
+      "ecc_level": "Q",
+      "data_codewords": 22,
+      "ecc_codewords_per_block": 22,
+      "capacity_bytes": 20,
+      "total_codewords": 44,
+      "block_count": 1
+    },
+    {
+      "version": 2,
+      "ecc_level": "H",
+      "data_codewords": 16,
+      "ecc_codewords_per_block": 28,
+      "capacity_bytes": 14,
+      "total_codewords": 44,
+      "block_count": 1
+    }
+  ]
+}

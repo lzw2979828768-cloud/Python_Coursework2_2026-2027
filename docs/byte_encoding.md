@@ -53,12 +53,12 @@ python -X utf8 -m unittest tests.test_byte_encoder -v
 python -X utf8 -m unittest discover -s tests -v
 ```
 
-新增 10 项独立编码测试和 1 项服务接入测试，总计 42 项测试通过。
+Byte 编码实现时新增 10 项编码测试和 1 项接入测试，当时总计 42 项；当前加入 RS 纠错后为 56 项。
 `tests/fixtures/byte_mode_vectors.json` 保存手工推导的 known、含零及高位字节、Latin-1
 三个完整码字向量，期望值不由被测函数生成。另覆盖容量边界、错误类型、空段、轨迹、
 关闭轨迹及显式传入 V2/L 计划的 32/33 字节边界。V2 计划测试不表示版本选择扩展已实现。
 
-服务接入测试用真实 encode_data，并观察真实 ECC 占位函数的输入；它验证 19 个码字被交接，
+服务接入测试用真实 encode_data，并观察真实 ECC 函数及矩阵阶段的输入；它验证 19 个码字被交接，
 且后续失败不会丢失已完成轨迹。通用编排测试中的模拟矩阵仍不是 QR 正确性证据。
 
 通过服务自行查看实际结果：
@@ -68,11 +68,11 @@ from qr_app.models import QRRequest
 from qr_app.service import QRService
 
 result = QRService().generate_qr(QRRequest(text="known"))
-step = result.trace_steps[-1]
+step = next(s for s in result.trace_steps if s.step_id == "data.data_codewords")
 print(step.step_id)              # data.data_codewords
 print(step.payload.hex(" "))     # 上述 19 个码字
-print(len(result.trace_steps))   # 9：服务前置 2 步，加编码 7 步
-print(result.error_code)         # FEATURE_UNAVAILABLE：当前停止在待实现的 ECC
+print(len(result.trace_steps))   # 16：前置 2 步，加数据编码和 RS 各 7 步
+print(result.error_code)         # FEATURE_UNAVAILABLE：当前停止在待实现的矩阵阶段
 ```
 
 发布前复核通过 42 项测试，并以整数移位/掩码独立反向解析 510 组输出，覆盖全部 256 种字节值、
@@ -81,8 +81,8 @@ V1/L 的 0–17 字节与 V2/L 的 0–32 字节。原始数据、模式、长�
 
 ## 后续工作
 
-数据码字编码已经完成。下一步实现 build_final_codewords，使用 reedsolo 生成数据纠错码字，
-再实现矩阵落位、格式信息与 Mask0。当前整体结果仍为失败且 matrix=None，没有可扫码二维码。
+数据码字编码和 build_final_codewords 现已完成，参见[RS 纠错说明](error_correction.md)。
+下一步实现矩阵落位，再完成格式信息与 Mask0。当前整体结果仍为失败且 matrix=None，没有可扫码二维码。
 
 参考：[Thonky Data Encoding](https://www.thonky.com/qr-code-tutorial/data-encoding)、
 规划 08 的 Byte 容量与输入规则、规划 10 的 bytes/码字/轨迹接口。

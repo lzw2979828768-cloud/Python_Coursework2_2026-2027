@@ -11,7 +11,7 @@ from unittest.mock import Mock, patch
 
 import numpy as np
 
-from qr_app.core import error_correction
+from qr_app.core import error_correction, matrix_builder
 from qr_app.core.byte_encoder import encode_text
 from qr_app.errors import ErrorCode, QRContractError, QRGenerationError
 from qr_app.models import (
@@ -94,7 +94,7 @@ class ServiceTests(unittest.TestCase):
 
     def test_baseline_capacity_boundary_and_partial_trace(self):
         at_limit = QRService().generate_qr(QRRequest("a" * 17))
-        # Data encoding succeeds; the next, ECC stage is still an explicit stub.
+        # Data encoding and ECC succeed; matrix construction is still a stub.
         self.assertEqual(at_limit.error_code, ErrorCode.FEATURE_UNAVAILABLE)
         self.assertEqual(at_limit.plan.capacity_bytes, 17)
         for text in ("a" * 18, "Sugarplum_Fairy_Nightmare"):
@@ -177,8 +177,8 @@ class ServiceTests(unittest.TestCase):
         first = service.generate_qr(QRRequest("known"))
         disabled = service.generate_qr(QRRequest("known", capture_steps=False))
         failed = service.generate_qr(QRRequest(""))
-        self.assertEqual(len(first.trace_steps), 9)
-        self.assertEqual(first.trace_steps[-1].step_id, "data.data_codewords")
+        self.assertEqual(len(first.trace_steps), 16)
+        self.assertEqual(first.trace_steps[-1].step_id, "ecc.bitstream")
         self.assertEqual(disabled.trace_steps, ())
         self.assertEqual(failed.trace_steps, ())
 
@@ -224,20 +224,44 @@ class ServiceTests(unittest.TestCase):
             self.assertEqual(result.error_code, ErrorCode.INTERNAL_GENERATION_ERROR)
             self.assertIsNone(result.matrix)
 
-    def test_real_data_codewords_reach_ecc_and_survive_its_failure(self):
-        expected = bytes.fromhex("40 56 b6 e6 f7 76 e0 ec 11 ec 11 ec 11 ec 11 ec 11 ec 11")
-        # Spy on the real ECC stub: the data encoder itself is not substituted.
+    def test_real_data_and_ecc_reach_matrix_and_survive_its_failure(self):
+        data = bytes.fromhex("40 56 b6 e6 f7 76 e0 ec 11 ec 11 ec 11 ec 11 ec 11 ec 11")
+        parity = bytes.fromhex("eb 90 48 a5 3b 9b 11")
+        # Spies wrap the actual functions; encoding/ECC are not replaced.
         with patch("qr_app.core.error_correction.build_final_codewords",
-                   wraps=error_correction.build_final_codewords) as ecc:
+                   wraps=error_correction.build_final_codewords) as ecc, \
+             patch("qr_app.core.matrix_builder.build_matrix",
+                   wraps=matrix_builder.build_matrix) as matrix_stage:
             result = QRService().generate_qr(QRRequest("known"))
         ecc.assert_called_once()
-        self.assertEqual(ecc.call_args.args[0], expected)
+        matrix_stage.assert_called_once()
+        self.assertEqual(ecc.call_args.args[0], data)
+        bits = matrix_stage.call_args.args[0]
+        self.assertEqual(len(bits), 208)
+        packed = bytes(int("".join(map(str, bits[i:i + 8])), 2) for i in range(0, 208, 8))
+        self.assertEqual(packed, data + parity)
         self.assertFalse(result.generation_success)
         self.assertEqual(result.error_code, ErrorCode.FEATURE_UNAVAILABLE)
         self.assertEqual(result.byte_length, 5)
-        self.assertEqual(result.plan.data_codewords, 19)
         self.assertIsNone(result.matrix)
         self.assertIsNone(result.mask_id)
-        self.assertEqual(len(result.trace_steps), 9)
-        self.assertEqual(result.trace_steps[-1].step_id, "data.data_codewords")
-        self.assertEqual(result.trace_steps[-1].payload, expected)
+        self.assertEqual(len(result.trace_steps), 16)
+        self.assertEqual(result.trace_steps[-1].step_id, "ecc.bitstream")
+        self.assertEqual(result.trace_steps[-1].payload, bits)
+        steps = {step.step_id: step for step in result.trace_steps}
+        self.assertEqual(steps["data.data_codewords"].payload, data)
+        self.assertEqual(steps["ecc.block_1.parity"].payload, parity)
+        self.assertEqual(steps["ecc.final_codewords"].payload, data + parity)
+
+    def test_library_failure_is_safe_and_keeps_completed_trace(self):
+        with patch("qr_app.core.error_correction.RSCodec") as codec, \
+             patch("qr_app.core.matrix_builder.build_matrix") as matrix_stage:
+            codec.return_value.encode.side_effect = RuntimeError("PRIVATE encoder detail")
+            result = QRService().generate_qr(QRRequest("known"))
+        matrix_stage.assert_not_called()
+        self.assertEqual(result.error_code, ErrorCode.INTERNAL_GENERATION_ERROR)
+        self.assertNotIn("PRIVATE", result.error_message)
+        self.assertEqual(result.error_details, {})
+        self.assertEqual(len(result.trace_steps), 10)
+        self.assertEqual(result.trace_steps[-1].step_id, "ecc.block_1.data")
+        self.assertIsNone(result.matrix)

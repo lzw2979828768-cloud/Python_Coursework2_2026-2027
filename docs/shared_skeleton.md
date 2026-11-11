@@ -1,12 +1,12 @@
 # 共享骨架开发说明
 
 日期：2026-11-11。契约依据：`项目规划/10_公共接口与修改权限规范.md` 1.0；
-输入规则：`input_rules_v1`。当前提供公共基础与 Byte 数据码字编码，不实现个人扩展或最终提交材料。
+输入规则：`input_rules_v1`。当前提供公共基础、Byte 数据码字编码与 RS 纠错，不实现个人扩展或最终提交材料。
 
 ## 已实现与待实现
 
 已实现请求/结果结构、枚举、错误边界、矩阵/轨迹副本、固定 V1/L 计划、严格
-ISO-8859-1 转换、Byte 数据码字编码、输入与选项校验、生成编排、可选扩展装配和单次日志调用边界。
+ISO-8859-1 转换、Byte 数据码字与 RS 纠错编码、输入与选项校验、生成编排、可选扩展装配和单次日志调用边界。
 未知 options 键返回 `INVALID_OPTION`，不把 options 当作第二套参数入口。
 
 所有公共字段的单位按契约保持：输入长度是 bytes，码字内容为 bytes，
@@ -26,13 +26,13 @@ ISO-8859-1 转换、Byte 数据码字编码、输入与选项校验、生成编�
 | 文件/函数 | 实现目标 | 固定输入与返回 |
 |---|---|---|
 | core/byte_encoder.py: encode_data | 已完成：模式/长度/数据、终止、字节对齐、交替填充 | bytes + plan → EncodedData |
-| core/error_correction.py: build_final_codewords | reedsolo RS、交织和余数位 | bytes + plan → FinalCodewords |
+| core/error_correction.py: build_final_codewords | 已完成：reedsolo RS、交织和余数位 | bytes + plan → FinalCodewords |
 | core/matrix_builder.py: build_matrix | 功能/保留区、Z 形数据落位 | tuple[int,...] + plan → MatrixLayout |
 | core/format_info.py: build_format_bits | 自行生成含纠错和异或的 15 位格式信息 | 实际 ECC + mask_id → tuple[int,...] |
 | core/fixed_mask.py: apply_fixed_mask_zero | 复制布局，仅掩码数据区，再写格式信息 | layout + plan → MaskSelection |
 
-除已完成的 encode_data 外，上表其余占位函数统一抛 FEATURE_UNAVAILABLE。
-数据码字编码保留 7 个真实步骤，说明见[数据码字编码](byte_encoding.md)。
+encode_data 和 build_final_codewords 已完成，上表其余占位函数统一抛 FEATURE_UNAVAILABLE。
+数据编码与纠错各保留 7 个步骤，说明见[Byte 编码](byte_encoding.md)与[RS 纠错](error_correction.md)。
 每个阶段实现时接受可选关键字 `trace=None`，只在真实步骤完成后调用 `trace.record(...)`。
 每个步骤由该阶段登记一次；候选专用步骤须带 mask 编号，避免 step_id 冲突。
 服务目前只登记 `input.iso_8859_1`、`plan.selected`，算法内不要重复登记这两个 ID。
@@ -50,7 +50,7 @@ if trace is not None:
 不要向轨迹传控件、文件句柄或服务对象。
 
 V1/L 独立于个人版本策略运行。规格表目前只有 V1/L，文件名保留规划路径；
-完整 V1/V2 八组数据仍待扩展开发和独立复核，不能认为该表已完整。
+本轮测试参考已核对 V1/V2 八组规格，均为单块；生产表完整接入和版本选择扩展仍待开发。
 服务按 version=1、ecc_level=L 查找唯一基础计划，不依赖资源表行序；缺失或重复条目明确报错。
 
 ## 四项扩展怎样接入
@@ -87,12 +87,13 @@ extended 需要版本策略；没有掩码策略时只允许显式 Mask0。
 | 测试框架 | 标准库 unittest |
 | pip check | No broken requirements found |
 | Python 3.13.9 / 教学机房 | 当前机器已验证；教学机房待验证 |
-| reedsolo / PyQt5 | 当前未安装，算法/GUI接入时单独验证固定版本 |
+| reedsolo | 1.7.0，已安装并通过公开参考码字和独立 RS 交叉验证 |
+| PyQt5 | 当前未安装，GUI 接入时单独验证版本 |
 | matplotlib / pandas | 3.10.7 / 2.3.0，已通过导入检查；骨架不依赖，业务功能未验收 |
 | lint / GitLab Runner / 正式 CI | 待选型和配置，当前没有声明 CI 通过 |
 
-requirements.txt 只记录本轮真正使用和验证的 numpy==2.2.6。
-未伪造 conda 环境文件，未在依赖里填尚未验证的 reedsolo、Qt 或测试工具版本。
+requirements.txt 固定已验证的 numpy==2.2.6 和 reedsolo==1.7.0。
+未生成未验证的 conda 环境文件，未在依赖里填尚未验证的 Qt 或测试工具版本。
 本次未建立干净虚拟环境重新安装；安装命令是复现步骤，不能当作已执行证据。
 
 2026-11-11 已将原 D:\python 环境从 Python 3.13.4 原位升级为 3.13.9，
@@ -103,10 +104,11 @@ NumPy 原生线性代数检查、pip check、28 项项目基础测试和字节�
 
 ## 检查命令与范围
 
-完成数据码字编码后使用 D:\python\python.exe（Python 3.13.9）验证：42 项测试、13 个模块导入、
+完成 RS 纠错后使用 D:\python\python.exe（Python 3.13.9）验证：56 项测试、13 个模块导入、
 字节码编译和 pip check 均通过；五个真实服务请求均符合当前骨架的预期失败状态。
 详细命令、实际输出、请求结果及源码 SHA-256 见
-[2026-11-11 共享骨架验证记录](validation/byte_encoder_pre_publish_python3139_20261111_200618.json)。
+[2026-11-11 共享骨架验证记录](validation/error_correction_python3139_20261111_202929.json)。
+另完成 800 组独立 RS 长除法与零综合征核验，覆盖八组规格和全部256种字节值。
 包含 Latin-1 字符的终端验证采用 Python 的 -X utf8 选项。此结果不表示 QR 算法或 Stage1 已完成。
 
 
