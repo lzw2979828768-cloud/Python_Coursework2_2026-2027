@@ -39,7 +39,7 @@
 | matrix.data_placed | 完整的未掩码 uint8 数据布局 |
 
 每次记录都立即复制，后续数据落位不会改变早期矩阵。关闭轨迹时输出布局保持一致。
-服务对 known 当前共保留 22 步：前置 2 步、Byte 编码 7 步、RS 纠错 7 步、矩阵 6 步。
+矩阵构建自身有6步；服务对known当前共25步，包括后续格式信息/Mask0的3步。
 
 ## 独立参考与验证
 
@@ -70,7 +70,7 @@ python -X utf8 -m unittest tests.test_matrix_builder -v
 python -X utf8 -m unittest discover -s tests -v
 ```
 
-预期分别为 16 项和 73 项测试全部通过。直接调用示例：
+预期分别为16项和当前97项测试全部通过。直接调用示例：
 
 ```python
 from qr_app.core.byte_encoder import encode_data
@@ -92,9 +92,9 @@ print(layout.modules.flags.writeable) # False
 
 ## 当前边界与下一步
 
-MatrixLayout 是未掩码的中间布局。QRService 当前仍在固定 Mask0 占位函数处返回
-FEATURE_UNAVAILABLE，最终 QRResult.matrix=None；中间布局保留在 matrix.data_placed 步骤。
-下一步实现格式信息 BCH 和固定 Mask0，完成之后才能返回最终二维码主体，再进入渲染和扫码验证。
+MatrixLayout仍是未掩码中间布局，保留在matrix.data_placed步骤。后续格式信息与Mask0现已完成，
+QRService对有效基线请求返回成功和完整主体，详见[格式/Mask0](format_mask0.md)。
+后续仍需CLI、正式demo、渲染/保存和真实手机扫码验收。
 
 规范参考：[Thonky 矩阵落位](https://www.thonky.com/qr-code-tutorial/module-placement-matrix)、
 [对齐图案位置](https://www.thonky.com/qr-code-tutorial/alignment-pattern-locations)。

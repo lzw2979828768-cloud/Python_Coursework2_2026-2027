@@ -15,3 +15,7 @@ matrix_reference_vectors.json 来自已有 qrcode 8.2，生成过程不调用 qr
 清零30个格式位置，保留深色模块，得到未掩码布局。逐个标记位独立提取208/359个数据位置，
 线性索引为 row * matrix_size + col。包含 V1/V2 的 known 完整未掩码矩阵与功能区、保留区。
 结构探针包含 V2 余数位置，不声称非零余数位是合法 QR。常规测试只读静态 JSON，不导入 qrcode。
+
+format_mask0_reference_vectors.json 包含实际读取Thonky取得的32个格式字符串，与qrcode 8.2交叉核对；
+另包含独立提取的两份格式写入坐标和八组强制Byte/Mask0的known最终矩阵。
+生成过程不调用qr_app。常规测试读取静态JSON，不依赖参考生成器或OpenCV。

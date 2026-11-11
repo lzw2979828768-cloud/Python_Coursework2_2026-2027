@@ -1,7 +1,7 @@
 # 共享骨架开发说明
 
 日期：2026-11-11。契约依据：`项目规划/10_公共接口与修改权限规范.md` 1.0；
-输入规则：`input_rules_v1`。当前提供公共基础、Byte 编码、RS 纠错和未掩码矩阵，不实现个人扩展或最终提交材料。
+输入规则：`input_rules_v1`。当前基础编码核心已贯通至格式信息与固定 Mask0，个人扩展和最终提交材料仍待后续完成。
 
 ## 已实现与待实现
 
@@ -28,11 +28,11 @@ ISO-8859-1 转换、Byte 数据码字、RS 纠错、矩阵构建、输入与选�
 | core/byte_encoder.py: encode_data | 已完成：模式/长度/数据、终止、字节对齐、交替填充 | bytes + plan → EncodedData |
 | core/error_correction.py: build_final_codewords | 已完成：reedsolo RS、交织和余数位 | bytes + plan → FinalCodewords |
 | core/matrix_builder.py: build_matrix | 已完成：功能/保留区、双列折返数据落位 | tuple[int,...] + plan → MatrixLayout |
-| core/format_info.py: build_format_bits | 自行生成含纠错和异或的 15 位格式信息 | 实际 ECC + mask_id → tuple[int,...] |
-| core/fixed_mask.py: apply_fixed_mask_zero | 复制布局，仅掩码数据区，再写格式信息 | layout + plan → MaskSelection |
+| core/format_info.py: build_format_bits | 已完成：自行生成含 BCH 和异或的15位格式信息，高位在前 | 实际 ECC + mask_id → tuple[int,...] |
+| core/fixed_mask.py: apply_fixed_mask_zero | 已完成：复制布局，仅掩码数据区，再写两份格式信息 | layout + plan → MaskSelection |
 
-encode_data、build_final_codewords、build_matrix 已完成，格式信息和固定掩码仍为占位。
-Byte/RS 各有 7 步，矩阵有 6 步，说明见[Byte](byte_encoding.md)、[RS](error_correction.md)、[矩阵](matrix_building.md)。
+五个计算阶段均已实现。前置2步、Byte/RS各7步、矩阵6步、格式/Mask0共3步，完整基线请求共25步。
+说明见[Byte](byte_encoding.md)、[RS](error_correction.md)、[矩阵](matrix_building.md)、[格式/Mask0](format_mask0.md)。
 每个阶段实现时接受可选关键字 `trace=None`，只在真实步骤完成后调用 `trace.record(...)`。
 每个步骤由该阶段登记一次；候选专用步骤须带 mask 编号，避免 step_id 冲突。
 服务目前只登记 `input.iso_8859_1`、`plan.selected`，算法内不要重复登记这两个 ID。
@@ -64,7 +64,7 @@ V1/L 独立于个人版本策略运行。规格表目前只有 V1/L，文件名�
 
 `service.capabilities` 是只读 frozenset，按已传入依赖报告
 `version_ecc` / `mask_selection` / `usage_logging`。启动端只能装配已真正实现的扩展。
-它不表示尚未实现的 Stage1 算法已经可用。
+该集合仅表示装配的个人扩展；baseline 固定生成路径独立可用。
 
 baseline 永远不调用版本/ECC或完整掩码扩展，但可调用日志。
 extended 需要版本策略；没有掩码策略时只允许显式 Mask0。
@@ -104,12 +104,12 @@ NumPy 原生线性代数检查、pip check、28 项项目基础测试和字节�
 
 ## 检查命令与范围
 
-完成矩阵构建后使用 D:\python\python.exe（Python 3.13.9）验证：73 项测试、13 个模块导入、
-字节码编译和 pip check 均通过；五个真实服务请求均符合当前骨架的预期失败状态。
+完成格式信息与Mask0后使用 D:\python\python.exe（Python 3.13.9）验证：97 项测试、13 个模块导入、
+字节码编译和 pip check 均通过；五个作业请求得到预期结果：三个成功、字符/容量两个失败。
 详细命令、实际输出、请求结果及源码 SHA-256 见
-[2026-11-11 共享骨架验证记录](validation/matrix_builder_python3139_20261111_211628.json)。
-矩阵另完成 567 个逐位标记、800 组独立逐格对照。qrcode 8.2 只用作离线参考，
-应用与常规测试不依赖它，已有 Byte/RS 验证记录保留为历史。
+[2026-11-11 共享骨架验证记录](validation/format_mask0_python3139_20261111_221640.json)。
+另核对32种公开格式字符串、800组完整矩阵，并通过5个本机解码样例。
+qrcode/OpenCV只用作离线参考，应用和常规测试不依赖它们，旧阶段记录保留为历史。
 包含 Latin-1 字符的终端验证采用 Python 的 -X utf8 选项。此结果不表示 QR 算法或 Stage1 已完成。
 
 

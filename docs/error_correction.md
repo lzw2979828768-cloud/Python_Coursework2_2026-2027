@@ -70,8 +70,7 @@ V2/Q 为 22 数据 + 22 ECC，V2/H 为 16 数据 + 28 ECC，均另有 7 个零�
 | ecc.bitstream | 含余数位的完整位流 |
 
 每个步骤完成后才记录。库中途失败会保留数据分块步骤，不伪造尚未生成的纠错结果。
-服务对 known 当前共保留 22 步：前置 2 步、数据编码/纠错各 7 步、矩阵 6 步。
-随后因固定掩码待实现而返回 FEATURE_UNAVAILABLE，最终 QRResult.matrix=None。
+服务对known当前共保留25步，最后的格式信息/Mask0增加3步；有效请求返回完整主体和成功结果。
 
 ## 自行验证
 
@@ -82,7 +81,7 @@ python -X utf8 -m unittest tests.test_error_correction -v
 python -X utf8 -m unittest discover -s tests -v
 ```
 
-预期为 13 项纠错专项测试、当前 73 项总测试全部通过。
+预期为 13 项纠错专项测试、当前97项总测试全部通过。
 也可以在 Python 3.13.9 中直接调用：
 
 ```python
@@ -107,4 +106,4 @@ known 的纠错参考由独立算法推导，未用被测 reedsolo 输出生成�
 [纠错验证记录](validation/error_correction_python3139_20261111_202929.json)。
 这不替代完整 QR、手机扫码、正式 CI 或团队非作者评审。
 
-build_matrix 现已完成，当前完整验证见[矩阵说明](matrix_building.md)。下一步实现格式信息和固定 Mask0。
+矩阵与格式/Mask0均已完成，当前完整验证见[格式/Mask0说明](format_mask0.md)。下一步补齐CLI和正式demo。

@@ -130,9 +130,9 @@ class QRService:
     def generate_qr(self, request: QRRequest) -> QRResult:
         """Return business failures with partial trace; raise caller errors.
 
-        Byte-mode data encoding, data ECC and matrix layout are implemented.
-        Masking/format writing remain explicit stubs; valid baseline requests
-        currently stop there with FEATURE_UNAVAILABLE, never a fake final QR.
+        The baseline Byte-mode pipeline is complete through fixed Mask0 and
+        both format-information copies. Valid baseline requests return the
+        final matrix; optional extensions remain explicitly assembled.
         Each accepted request invokes the optional usage logger once.
         """
         _validate_request(request)

@@ -1,1 +1,1 @@
-"""Pure Byte, RS and matrix calculations; format information and masking pending."""
+"""Pure QR Byte, RS, matrix, BCH format and fixed-Mask0 calculations."""

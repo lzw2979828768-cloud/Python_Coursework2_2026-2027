@@ -1,7 +1,7 @@
-# 共享 QR 编码与矩阵构建（开发入口）
+# QR 基础编码核心（开发入口）
 
 这是依据 `项目规划/10_公共接口与修改权限规范.md` 契约 1.0 建立的开发骨架。
-当前用于统一四人的字段、调用边界和基础测试；完整 Stage1 二维码算法尚未实现。
+当前已实现共享接口与 Byte/RS/矩阵/格式信息/固定 Mask0；CLI 和五份正式 Stage1 demo 仍待完成。
 本文件是开发使用说明，最终评分用 README 和反思仍需团队根据真实实现自行撰写。
 
 ## 安装与检查
@@ -42,11 +42,10 @@ print(result.error_code)
 print([step.step_id for step in result.trace_steps])
 ```
 
-当前上述调用返回 False、FEATURE_UNAVAILABLE，保留 22 个真实步骤：前置 2 步、
-Byte 编码 7 步、RS 纠错 7 步、矩阵构建 6 步。known 已生成 26 个码字、208 位，并完成 21×21
-未掩码布局。当前停止在待实现的固定掩码/格式信息阶段；中间矩阵保留在 matrix.data_placed，
-最终 QRResult.matrix 为 None。详见[Byte 编码](docs/byte_encoding.md)、[RS 纠错](docs/error_correction.md)
-和[矩阵构建](docs/matrix_building.md)。
+当前上述调用返回 True、None，生成完整的 V1/L/Mask0 主体矩阵，尺寸为21×21，
+保留25个真实步骤。result.matrix 为只读 uint8 0/1 数组，不含 quiet zone；mask_id=0，
+penalty_scores为空。详见[Byte](docs/byte_encoding.md)、[RS](docs/error_correction.md)、
+[矩阵](docs/matrix_building.md)与[格式/Mask0](docs/format_mask0.md)。
 
 基础默认值为 V1/L/Mask0，步骤采集默认开启，ID 和带时区时间自动建立。
 输入原文不会 trim 或截断。空输入、字符不支持、容量超限分别有明确错误。
@@ -62,7 +61,7 @@ CLI 与 GUI 后续都调用这个实例方法，不另写一套生成流程。
 | `qr_app/errors.py` | 统一错误码、业务异常、调用异常、独立保存/读取异常 |
 | `qr_app/tracing.py` | 每请求轨迹、重复步骤检测、独立只读矩阵和嵌套载荷 |
 | `qr_app/service.py` | 参数检查 → 严格编码 → 计划 → 编码/ECC/矩阵/掩码 → 一次日志处理 |
-| `qr_app/core/` | 已实现字符转换、数据码字、RS 与未掩码矩阵；格式信息/掩码待实现 |
+| `qr_app/core/` | 已实现字符转换、数据码字、RS、矩阵、BCH 格式信息与固定 Mask0 |
 | `qr_app/resources/qr_capacity_v1_v2.json` | 当前仅有 V1/L 规格，附来源和待复核状态 |
 | `qr_app/extensions/` | 预留四项个人扩展位置，当前不自动导入或启用 |
 | `qr_app/presentation/` | 预留 CLI/GUI 位置，当前没有界面或启动脚本 |
@@ -76,12 +75,12 @@ CLI 与 GUI 后续都调用这个实例方法，不另写一套生成流程。
 后续四人同步同一个 main 提交，再各自建立功能分支；公共变更继续按约定进行 PR 和非作者复核。
 模块接入顺序和签名见[开发说明](docs/shared_skeleton.md)。
 
-Python 3.13.9 下 73 项测试、13 个模块导入、编译和依赖检查均通过。
+Python 3.13.9 下 97 项测试、13 个模块导入、编译和依赖检查均通过。
 本地复核修复了评分对象无法记录进轨迹、V1/L 计划依赖资源行序的问题；
-[当前验证记录](docs/validation/matrix_builder_python3139_20261111_211628.json)保留实际输出和源码哈希。
-既有 Byte/RS 验证记录已保留；本轮矩阵完成 567 个逐位标记及 800 组独立逐格对照。
-qrcode 8.2 仅用作离线参考，常规测试读静态 fixture，没有加入应用依赖。
+[当前验证记录](docs/validation/format_mask0_python3139_20261111_221640.json)保留实际输出和源码哈希。
+已核对32种公开格式组合、800组完整矩阵，并完成5个本机解码样例。
+既有阶段记录保留为历史；qrcode/OpenCV仅作离线验证，应用和常规测试没有新增依赖。
 团队非作者评审、正式 CI 和完整二维码功能仍待完成。
 
-数据码字、RS 纠错与矩阵落位已完成；Stage1 还需完成格式信息、Mask0、CLI 和五份真实 demo。
+基础编码算法已贯通；Stage1 还需完成 CLI 和五份正式 demo，之后再做渲染/保存、GUI和真实手机扫码。
 测试中的模拟矩阵仅用于检查编排与故障隔离，不代表 QR 编码正确、可扫码或 Stage1 验收通过。

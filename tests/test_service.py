@@ -21,6 +21,7 @@ from qr_app.models import (
     MatrixLayout, PenaltyBreakdown, QRRequest,
 )
 from qr_app.service import QRService, _baseline_plan
+from tests.test_error_correction import plan_from_reference
 
 
 @contextmanager
@@ -96,8 +97,10 @@ class ServiceTests(unittest.TestCase):
 
     def test_baseline_capacity_boundary_and_partial_trace(self):
         at_limit = QRService().generate_qr(QRRequest("a" * 17))
-        # Encoding, ECC and layout succeed; fixed masking is still a stub.
-        self.assertEqual(at_limit.error_code, ErrorCode.FEATURE_UNAVAILABLE)
+        # The full fixed-Mask0 pipeline accepts the exact capacity.
+        self.assertTrue(at_limit.generation_success)
+        self.assertIsNone(at_limit.error_code)
+        self.assertEqual(at_limit.mask_id, 0)
         self.assertEqual(at_limit.plan.capacity_bytes, 17)
         for text in ("a" * 18, "Sugarplum_Fairy_Nightmare"):
             result = QRService().generate_qr(QRRequest(text))
@@ -110,7 +113,8 @@ class ServiceTests(unittest.TestCase):
     def test_whitespace_remains_input_and_has_a_warning(self):
         result = QRService().generate_qr(QRRequest(" "))
         self.assertEqual(result.byte_length, 1)
-        self.assertEqual(result.error_code, ErrorCode.FEATURE_UNAVAILABLE)
+        self.assertTrue(result.generation_success)
+        self.assertIsNone(result.error_code)
         self.assertTrue(result.warnings)
         self.assertEqual(result.trace_steps[0].payload, b" ")
 
@@ -163,8 +167,7 @@ class ServiceTests(unittest.TestCase):
                     LogState.FAILED, "LOG_WRITE_FAILED", "写入失败。",
                 )
             service = QRService(usage_logger=logger)
-            with fake_pipeline():
-                success = service.generate_qr(QRRequest("known"))
+            success = service.generate_qr(QRRequest("known"))
             failure = service.generate_qr(QRRequest(""))
             self.assertTrue(success.generation_success)
             self.assertIsNotNone(success.matrix)
@@ -179,8 +182,11 @@ class ServiceTests(unittest.TestCase):
         first = service.generate_qr(QRRequest("known"))
         disabled = service.generate_qr(QRRequest("known", capture_steps=False))
         failed = service.generate_qr(QRRequest(""))
-        self.assertEqual(len(first.trace_steps), 22)
-        self.assertEqual(first.trace_steps[-1].step_id, "matrix.data_placed")
+        self.assertEqual(len(first.trace_steps), 25)
+        self.assertEqual(first.trace_steps[-1].step_id, "mask0.final_matrix")
+        self.assertTrue(first.generation_success)
+        self.assertTrue(disabled.generation_success)
+        np.testing.assert_array_equal(first.matrix, disabled.matrix)
         self.assertEqual(disabled.trace_steps, ())
         self.assertEqual(failed.trace_steps, ())
 
@@ -226,10 +232,10 @@ class ServiceTests(unittest.TestCase):
             self.assertEqual(result.error_code, ErrorCode.INTERNAL_GENERATION_ERROR)
             self.assertIsNone(result.matrix)
 
-    def test_real_encoding_and_layout_reach_mask_and_keep_trace_on_failure(self):
+    def test_real_pipeline_returns_complete_reference_matrix(self):
         data = bytes.fromhex("40 56 b6 e6 f7 76 e0 ec 11 ec 11 ec 11 ec 11 ec 11 ec 11")
         parity = bytes.fromhex("eb 90 48 a5 3b 9b 11")
-        # All wrapped stages execute real code, including the remaining mask stub.
+        # Every wrapped stage executes the actual implementation.
         with patch("qr_app.core.error_correction.build_final_codewords",
                    wraps=error_correction.build_final_codewords) as ecc, \
              patch("qr_app.core.matrix_builder.build_matrix",
@@ -253,14 +259,21 @@ class ServiceTests(unittest.TestCase):
         rows = fixture["versions"][0]["known_unmasked_rows"]
         expected = np.array([[int(bit) for bit in row] for row in rows], dtype=np.uint8)
         np.testing.assert_array_equal(layout.modules, expected)
-        self.assertFalse(result.generation_success)
-        self.assertEqual(result.error_code, ErrorCode.FEATURE_UNAVAILABLE)
+        self.assertTrue(result.generation_success)
+        self.assertIsNone(result.error_code)
+        self.assertIsNone(result.error_message)
         self.assertEqual(result.byte_length, 5)
-        self.assertIsNone(result.matrix)
-        self.assertIsNone(result.mask_id)
-        self.assertEqual(len(result.trace_steps), 22)
-        self.assertEqual(result.trace_steps[-1].step_id, "matrix.data_placed")
-        np.testing.assert_array_equal(result.trace_steps[-1].payload, layout.modules)
+        self.assertEqual(result.mask_id, 0)
+        self.assertEqual(result.penalty_scores, {})
+        self.assertFalse(result.matrix.flags.writeable)
+        final_fixture = json.loads((Path(__file__).parent / "fixtures" / "format_mask0_reference_vectors.json").read_text(encoding="utf-8"))
+        rows = final_fixture["known_mask0_matrices"][0]["final_matrix_rows"]
+        expected_final = np.array([[int(bit) for bit in row] for row in rows], dtype=np.uint8)
+        np.testing.assert_array_equal(result.matrix, expected_final)
+        self.assertEqual(len(result.trace_steps), 25)
+        self.assertEqual(result.trace_steps[-1].step_id, "mask0.final_matrix")
+        np.testing.assert_array_equal(result.trace_steps[-1].payload, result.matrix)
+        self.assertFalse(np.shares_memory(result.trace_steps[-1].payload, result.matrix))
         steps = {step.step_id: step for step in result.trace_steps}
         self.assertEqual(steps["data.data_codewords"].payload, data)
         self.assertEqual(steps["ecc.block_1.parity"].payload, parity)
@@ -291,3 +304,39 @@ class ServiceTests(unittest.TestCase):
         self.assertEqual(len(result.trace_steps), 10)
         self.assertEqual(result.trace_steps[-1].step_id, "ecc.block_1.data")
         self.assertIsNone(result.matrix)
+
+    def test_format_failure_is_safe_and_retains_completed_mask_step(self):
+        with patch("qr_app.core.fixed_mask.build_format_bits", side_effect=RuntimeError("PRIVATE format failure")):
+            result = QRService().generate_qr(QRRequest("known"))
+        self.assertFalse(result.generation_success)
+        self.assertEqual(result.error_code, ErrorCode.INTERNAL_GENERATION_ERROR)
+        self.assertNotIn("PRIVATE", result.error_message)
+        self.assertIsNone(result.matrix)
+        self.assertIsNone(result.mask_id)
+        self.assertEqual(len(result.trace_steps), 23)
+        self.assertEqual(result.trace_steps[-1].step_id, "mask0.applied")
+
+    def test_explicit_extended_mask_zero_works_without_full_mask_selector(self):
+        fixture = json.loads((Path(__file__).parent / "fixtures" / "rs_reference_vectors.json").read_text(encoding="utf-8"))
+        spec = next(item for item in fixture["single_block_specs"] if item["version"] == 2 and item["ecc_level"] == "H")
+        plan = plan_from_reference(spec)
+        selector = Mock(return_value=plan)  # Test-only fixed plan, not a version-policy implementation.
+        service = QRService(version_selector=selector)
+        request = QRRequest("known", mode="extended", version=2, ecc_level="H", mask_id=0)
+        result = service.generate_qr(request)
+        self.assertTrue(result.generation_success)
+        self.assertEqual(result.plan, plan)
+        self.assertEqual(result.mask_id, 0)
+        self.assertEqual(result.matrix.shape, (25, 25))
+        self.assertEqual(result.penalty_scores, {})
+        selector.assert_called_once_with(5, 2, "H", "extended")
+
+    def test_cli_and_gui_source_fields_use_identical_real_generation(self):
+        service = QRService()
+        cli_request, gui_request = QRRequest("known", source="cli"), QRRequest("known", source="gui")
+        cli, gui = service.generate_qr(cli_request), service.generate_qr(gui_request)
+        self.assertTrue(cli.generation_success)
+        self.assertTrue(gui.generation_success)
+        self.assertNotEqual(cli.request_id, gui.request_id)
+        np.testing.assert_array_equal(cli.matrix, gui.matrix)
+        self.assertEqual(cli.mask_id, gui.mask_id)
