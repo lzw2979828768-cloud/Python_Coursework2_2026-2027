@@ -6,12 +6,14 @@ These tests verify orchestration/failure isolation, not encoding correctness.
 from contextlib import ExitStack, contextmanager
 from dataclasses import replace
 from datetime import datetime
+import json
+from pathlib import Path
 import unittest
 from unittest.mock import Mock, patch
 
 import numpy as np
 
-from qr_app.core import error_correction, matrix_builder
+from qr_app.core import error_correction, fixed_mask, matrix_builder
 from qr_app.core.byte_encoder import encode_text
 from qr_app.errors import ErrorCode, QRContractError, QRGenerationError
 from qr_app.models import (
@@ -94,7 +96,7 @@ class ServiceTests(unittest.TestCase):
 
     def test_baseline_capacity_boundary_and_partial_trace(self):
         at_limit = QRService().generate_qr(QRRequest("a" * 17))
-        # Data encoding and ECC succeed; matrix construction is still a stub.
+        # Encoding, ECC and layout succeed; fixed masking is still a stub.
         self.assertEqual(at_limit.error_code, ErrorCode.FEATURE_UNAVAILABLE)
         self.assertEqual(at_limit.plan.capacity_bytes, 17)
         for text in ("a" * 18, "Sugarplum_Fairy_Nightmare"):
@@ -177,8 +179,8 @@ class ServiceTests(unittest.TestCase):
         first = service.generate_qr(QRRequest("known"))
         disabled = service.generate_qr(QRRequest("known", capture_steps=False))
         failed = service.generate_qr(QRRequest(""))
-        self.assertEqual(len(first.trace_steps), 16)
-        self.assertEqual(first.trace_steps[-1].step_id, "ecc.bitstream")
+        self.assertEqual(len(first.trace_steps), 22)
+        self.assertEqual(first.trace_steps[-1].step_id, "matrix.data_placed")
         self.assertEqual(disabled.trace_steps, ())
         self.assertEqual(failed.trace_steps, ())
 
@@ -224,34 +226,58 @@ class ServiceTests(unittest.TestCase):
             self.assertEqual(result.error_code, ErrorCode.INTERNAL_GENERATION_ERROR)
             self.assertIsNone(result.matrix)
 
-    def test_real_data_and_ecc_reach_matrix_and_survive_its_failure(self):
+    def test_real_encoding_and_layout_reach_mask_and_keep_trace_on_failure(self):
         data = bytes.fromhex("40 56 b6 e6 f7 76 e0 ec 11 ec 11 ec 11 ec 11 ec 11 ec 11")
         parity = bytes.fromhex("eb 90 48 a5 3b 9b 11")
-        # Spies wrap the actual functions; encoding/ECC are not replaced.
+        # All wrapped stages execute real code, including the remaining mask stub.
         with patch("qr_app.core.error_correction.build_final_codewords",
                    wraps=error_correction.build_final_codewords) as ecc, \
              patch("qr_app.core.matrix_builder.build_matrix",
-                   wraps=matrix_builder.build_matrix) as matrix_stage:
+                   wraps=matrix_builder.build_matrix) as matrix_stage, \
+             patch("qr_app.core.fixed_mask.apply_fixed_mask_zero",
+                   wraps=fixed_mask.apply_fixed_mask_zero) as mask_stage:
             result = QRService().generate_qr(QRRequest("known"))
         ecc.assert_called_once()
         matrix_stage.assert_called_once()
+        mask_stage.assert_called_once()
         self.assertEqual(ecc.call_args.args[0], data)
         bits = matrix_stage.call_args.args[0]
         self.assertEqual(len(bits), 208)
         packed = bytes(int("".join(map(str, bits[i:i + 8])), 2) for i in range(0, 208, 8))
         self.assertEqual(packed, data + parity)
+        layout = mask_stage.call_args.args[0]
+        self.assertEqual(layout.modules.shape, (21, 21))
+        self.assertEqual(int(layout.reserved_mask.sum()), 233)
+        self.assertFalse(layout.modules.flags.writeable)
+        fixture = json.loads((Path(__file__).parent / "fixtures" / "matrix_reference_vectors.json").read_text(encoding="utf-8"))
+        rows = fixture["versions"][0]["known_unmasked_rows"]
+        expected = np.array([[int(bit) for bit in row] for row in rows], dtype=np.uint8)
+        np.testing.assert_array_equal(layout.modules, expected)
         self.assertFalse(result.generation_success)
         self.assertEqual(result.error_code, ErrorCode.FEATURE_UNAVAILABLE)
         self.assertEqual(result.byte_length, 5)
         self.assertIsNone(result.matrix)
         self.assertIsNone(result.mask_id)
-        self.assertEqual(len(result.trace_steps), 16)
-        self.assertEqual(result.trace_steps[-1].step_id, "ecc.bitstream")
-        self.assertEqual(result.trace_steps[-1].payload, bits)
+        self.assertEqual(len(result.trace_steps), 22)
+        self.assertEqual(result.trace_steps[-1].step_id, "matrix.data_placed")
+        np.testing.assert_array_equal(result.trace_steps[-1].payload, layout.modules)
         steps = {step.step_id: step for step in result.trace_steps}
         self.assertEqual(steps["data.data_codewords"].payload, data)
         self.assertEqual(steps["ecc.block_1.parity"].payload, parity)
         self.assertEqual(steps["ecc.final_codewords"].payload, data + parity)
+
+    def test_matrix_geometry_failure_stops_before_mask_and_keeps_real_steps(self):
+        # Inject an invalid plan to verify the matrix boundary, not a QR fixture.
+        bad_plan = replace(_baseline_plan(), ecc_codewords_per_block=8, total_codewords=27)
+        with patch("qr_app.service._baseline_plan", return_value=bad_plan), \
+             patch("qr_app.core.fixed_mask.apply_fixed_mask_zero") as mask_stage:
+            result = QRService().generate_qr(QRRequest("known"))
+        mask_stage.assert_not_called()
+        self.assertEqual(result.error_code, ErrorCode.INTERNAL_GENERATION_ERROR)
+        self.assertIsNone(result.matrix)
+        self.assertIsNone(result.mask_id)
+        self.assertEqual(len(result.trace_steps), 21)
+        self.assertEqual(result.trace_steps[-1].step_id, "matrix.reserved_mask")
 
     def test_library_failure_is_safe_and_keeps_completed_trace(self):
         with patch("qr_app.core.error_correction.RSCodec") as codec, \

@@ -53,7 +53,7 @@ python -X utf8 -m unittest tests.test_byte_encoder -v
 python -X utf8 -m unittest discover -s tests -v
 ```
 
-Byte 编码实现时新增 10 项编码测试和 1 项接入测试，当时总计 42 项；当前加入 RS 纠错后为 56 项。
+Byte 编码实现时新增 10 项编码测试和 1 项接入测试，当时总计 42 项；当前加入矩阵构建后为 73 项。
 `tests/fixtures/byte_mode_vectors.json` 保存手工推导的 known、含零及高位字节、Latin-1
 三个完整码字向量，期望值不由被测函数生成。另覆盖容量边界、错误类型、空段、轨迹、
 关闭轨迹及显式传入 V2/L 计划的 32/33 字节边界。V2 计划测试不表示版本选择扩展已实现。
@@ -71,8 +71,8 @@ result = QRService().generate_qr(QRRequest(text="known"))
 step = next(s for s in result.trace_steps if s.step_id == "data.data_codewords")
 print(step.step_id)              # data.data_codewords
 print(step.payload.hex(" "))     # 上述 19 个码字
-print(len(result.trace_steps))   # 16：前置 2 步，加数据编码和 RS 各 7 步
-print(result.error_code)         # FEATURE_UNAVAILABLE：当前停止在待实现的矩阵阶段
+print(len(result.trace_steps))   # 22：前置 2 步、Byte/RS 各 7 步、矩阵 6 步
+print(result.error_code)         # FEATURE_UNAVAILABLE：当前停止在待实现的固定掩码阶段
 ```
 
 发布前复核通过 42 项测试，并以整数移位/掩码独立反向解析 510 组输出，覆盖全部 256 种字节值、
@@ -82,7 +82,7 @@ V1/L 的 0–17 字节与 V2/L 的 0–32 字节。原始数据、模式、长�
 ## 后续工作
 
 数据码字编码和 build_final_codewords 现已完成，参见[RS 纠错说明](error_correction.md)。
-下一步实现矩阵落位，再完成格式信息与 Mask0。当前整体结果仍为失败且 matrix=None，没有可扫码二维码。
+矩阵落位现已完成，见[矩阵说明](matrix_building.md)；下一步完成格式信息与 Mask0。当前整体结果仍为失败且 matrix=None，没有可扫码二维码。
 
 参考：[Thonky Data Encoding](https://www.thonky.com/qr-code-tutorial/data-encoding)、
 规划 08 的 Byte 容量与输入规则、规划 10 的 bytes/码字/轨迹接口。

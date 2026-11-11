@@ -1,12 +1,12 @@
 # 共享骨架开发说明
 
 日期：2026-11-11。契约依据：`项目规划/10_公共接口与修改权限规范.md` 1.0；
-输入规则：`input_rules_v1`。当前提供公共基础、Byte 数据码字编码与 RS 纠错，不实现个人扩展或最终提交材料。
+输入规则：`input_rules_v1`。当前提供公共基础、Byte 编码、RS 纠错和未掩码矩阵，不实现个人扩展或最终提交材料。
 
 ## 已实现与待实现
 
 已实现请求/结果结构、枚举、错误边界、矩阵/轨迹副本、固定 V1/L 计划、严格
-ISO-8859-1 转换、Byte 数据码字与 RS 纠错编码、输入与选项校验、生成编排、可选扩展装配和单次日志调用边界。
+ISO-8859-1 转换、Byte 数据码字、RS 纠错、矩阵构建、输入与选项校验、生成编排、可选扩展装配和单次日志调用边界。
 未知 options 键返回 `INVALID_OPTION`，不把 options 当作第二套参数入口。
 
 所有公共字段的单位按契约保持：输入长度是 bytes，码字内容为 bytes，
@@ -27,12 +27,12 @@ ISO-8859-1 转换、Byte 数据码字与 RS 纠错编码、输入与选项校验
 |---|---|---|
 | core/byte_encoder.py: encode_data | 已完成：模式/长度/数据、终止、字节对齐、交替填充 | bytes + plan → EncodedData |
 | core/error_correction.py: build_final_codewords | 已完成：reedsolo RS、交织和余数位 | bytes + plan → FinalCodewords |
-| core/matrix_builder.py: build_matrix | 功能/保留区、Z 形数据落位 | tuple[int,...] + plan → MatrixLayout |
+| core/matrix_builder.py: build_matrix | 已完成：功能/保留区、双列折返数据落位 | tuple[int,...] + plan → MatrixLayout |
 | core/format_info.py: build_format_bits | 自行生成含纠错和异或的 15 位格式信息 | 实际 ECC + mask_id → tuple[int,...] |
 | core/fixed_mask.py: apply_fixed_mask_zero | 复制布局，仅掩码数据区，再写格式信息 | layout + plan → MaskSelection |
 
-encode_data 和 build_final_codewords 已完成，上表其余占位函数统一抛 FEATURE_UNAVAILABLE。
-数据编码与纠错各保留 7 个步骤，说明见[Byte 编码](byte_encoding.md)与[RS 纠错](error_correction.md)。
+encode_data、build_final_codewords、build_matrix 已完成，格式信息和固定掩码仍为占位。
+Byte/RS 各有 7 步，矩阵有 6 步，说明见[Byte](byte_encoding.md)、[RS](error_correction.md)、[矩阵](matrix_building.md)。
 每个阶段实现时接受可选关键字 `trace=None`，只在真实步骤完成后调用 `trace.record(...)`。
 每个步骤由该阶段登记一次；候选专用步骤须带 mask 编号，避免 step_id 冲突。
 服务目前只登记 `input.iso_8859_1`、`plan.selected`，算法内不要重复登记这两个 ID。
@@ -104,11 +104,12 @@ NumPy 原生线性代数检查、pip check、28 项项目基础测试和字节�
 
 ## 检查命令与范围
 
-完成 RS 纠错后使用 D:\python\python.exe（Python 3.13.9）验证：56 项测试、13 个模块导入、
+完成矩阵构建后使用 D:\python\python.exe（Python 3.13.9）验证：73 项测试、13 个模块导入、
 字节码编译和 pip check 均通过；五个真实服务请求均符合当前骨架的预期失败状态。
 详细命令、实际输出、请求结果及源码 SHA-256 见
-[2026-11-11 共享骨架验证记录](validation/error_correction_python3139_20261111_202929.json)。
-另完成 800 组独立 RS 长除法与零综合征核验，覆盖八组规格和全部256种字节值。
+[2026-11-11 共享骨架验证记录](validation/matrix_builder_python3139_20261111_211628.json)。
+矩阵另完成 567 个逐位标记、800 组独立逐格对照。qrcode 8.2 只用作离线参考，
+应用与常规测试不依赖它，已有 Byte/RS 验证记录保留为历史。
 包含 Latin-1 字符的终端验证采用 Python 的 -X utf8 选项。此结果不表示 QR 算法或 Stage1 已完成。
 
 

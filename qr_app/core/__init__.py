@@ -1,1 +1,1 @@
-"""Pure Byte-mode and RS calculations; matrix and masking stages pending."""
+"""Pure Byte, RS and matrix calculations; format information and masking pending."""
