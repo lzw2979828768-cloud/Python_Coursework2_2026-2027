@@ -1,0 +1,4 @@
+# Stage 2 GUI environment; install into the project-local .venv.
+-r requirements.txt
+matplotlib==3.10.7
+PyQt5==5.15.11

@@ -3,6 +3,7 @@
 这是依据 `项目规划/10_公共接口与修改权限规范.md` 契约 1.0 建立的开发骨架。
 当前已完成 Stage1：共享接口、Byte/RS/矩阵/格式信息/固定 Mask0、CLI、五份正式 demo 与本机验收文档。
 真实文件及逐项说明见[Stage1证据入口](evidence/README.md)。
+完整开发顺序、模块交接、25步轨迹与历史验证版本见[Stage1开发流程梳理](docs/stage1_development_review.md)。
 本文件是开发使用说明，最终评分用 README 和反思仍需团队根据真实实现自行撰写。
 
 ## 安装与检查
@@ -25,8 +26,25 @@ python -m venv .venv
 python -m unittest discover -s tests -v
 ```
 
-本次测试在现有解释器运行；新建虚拟环境和重新安装依赖尚未验证。
+Stage1历史测试在现有解释器运行；Stage2已另建项目内`.venv`并安装界面依赖，见下方说明。
+尚未在新`.venv`重跑Stage1全量测试。
 测试使用标准库 `unittest`，不需要额外安装 pytest。
+
+## Stage2界面环境
+
+第1步环境准备已完成：项目内`.venv`使用Python3.13.9、PyQt5 5.15.11、Qt5.15.2和matplotlib3.10.7。
+离屏与Windows原生隐藏窗口均通过画布绘制、事件循环、自动关闭和依赖检查。
+已通过显式Unicode插件路径解决中文目录下Qt平台插件无法定位的问题；后续GUI入口先调用
+`qr_app.presentation.qt_environment.configure_qt_environment()`。
+
+环境配置、完整依赖锁定、验证记录与后续启动顺序见[Stage2界面环境说明](docs/stage2_gui_environment.md)。
+GUI开发使用`.venv\Scripts\python.exe`。可在项目根目录打开约10秒的诊断窗口：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 scripts/check_gui_environment.py --platform windows --visible --close-after-ms 10000
+```
+
+该窗口仅验证环境，显示的诊断棋盘不是二维码；正式GUI、二维码图像和PNG保存仍待实现。
 
 ## 运行 CLI
 
