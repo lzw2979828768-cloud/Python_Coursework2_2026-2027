@@ -22,10 +22,11 @@ Stage1 本机功能、五份正式 demo 和阶段文档已完成。证据于2026
 在项目根目录验证，不会重新生成或覆盖 demo：
 
 ```powershell
-& 'D:\python\python.exe' -X utf8 scripts/stage1_evidence.py
+& 'D:\python\python.exe' -X utf8 scripts/stage1_evidence.py --historical
 ```
 
-预期以 `PASS: 5 exact inputs, 6 artifact hashes` 开头。此命令校验已有证据与当前源码；
+预期以 `PASS: 5 exact inputs, 6 artifact hashes` 开头。此命令校验已有证据与记录的383b76c Git源码；
+新菜单是后续改动，不用旧记录证明其已测试。不加 `--historical` 时严格比较当前源码，版本不符会明确失败。
 若要重新执行单元测试，另运行 `python -X utf8 -m unittest discover -s tests -v`。
 
 采集由本机脚本执行，标签为 `automated_local_capture`；学生个人贡献、组内非作者评审和教师验收分别记录。

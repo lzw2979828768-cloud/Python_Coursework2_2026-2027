@@ -44,7 +44,7 @@ class CLITests(unittest.TestCase):
         for line, expected in [("  known  \r\n", "  known  "), ("known\n", "known"),
                 ("a\t \n", "a\t "), ("known", "known"), ("a\r\r\n", "a\r")]:
             with self.subTest(line=line):
-                code, _, errors, service = self.invoke([], line)
+                code, _, errors, service = self.invoke([], "1\n" + line)
                 self.assertEqual((code, errors), (0, ""))
                 service.generate_qr.assert_called_once()
                 self.assertEqual(service.generate_qr.call_args.args[0].text, expected)
@@ -56,7 +56,7 @@ class CLITests(unittest.TestCase):
         service.generate_qr.assert_not_called()
 
     def test_empty_submissions_are_real_failed_requests(self):
-        for args, text in [([], "\n"), (["--text", ""], ""), (["--stdin"], "")]:
+        for args, text in [([], "1\n\n"), ([], "2\n:end\n"), (["--text", ""], ""), (["--stdin"], "")]:
             with self.subTest(args=args):
                 code, output, errors, service = self.invoke(args, text)
                 self.assertEqual(code, 1)
@@ -65,6 +65,82 @@ class CLITests(unittest.TestCase):
                 self.assertIn("Final matrix: null", output)
                 service.generate_qr.assert_called_once()
                 self.assertEqual(service.generate_qr.call_args.args[0].text, "")
+
+    def test_menu_exit_does_not_generate_or_export(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "cancelled.txt"
+            code, output, errors, service = self.invoke(["--steps-out", str(path)], "0\n")
+            self.assertEqual((code, errors), (0, ""))
+            self.assertIn("已退出", output)
+            self.assertNotIn("Request ID:", output)
+            service.generate_qr.assert_not_called()
+            self.assertFalse(path.exists())
+
+    def test_invalid_menu_choices_retry_without_accepting_requests(self):
+        code, output, errors, service = self.invoke([], "\nwrong\n3\n 1 \nknown\n")
+        self.assertEqual(code, 0)
+        self.assertEqual(errors.count("无效选项"), 3)
+        self.assertIn("多行输入", output)
+        service.generate_qr.assert_called_once()
+        self.assertEqual(service.generate_qr.call_args.args[0].text, "known")
+
+    def test_multiline_preserves_spaces_controls_and_line_endings(self):
+        cases = [("  a \nb\t\n:end\n", "  a \nb\t"),
+                 ("ñ\r\nb\r\n:end\r\n", "ñ\r\nb"),
+                 ("\na\n\n:end\n", "\na\n"),
+                 ("a\n\n\n:end\n", "a\n\n"),
+                 ("\x00\t\n:end", "\x00\t"),
+                 ("\n:end\n", "")]
+        for entered, expected in cases:
+            with self.subTest(entered=entered):
+                code, _, _, service = self.invoke([], "2\n" + entered)
+                self.assertEqual(code, 0 if expected else 1)
+                service.generate_qr.assert_called_once()
+                self.assertEqual(service.generate_qr.call_args.args[0].text, expected)
+
+    def test_only_exact_standalone_terminator_ends_multiline(self):
+        text = ":end \n :end\nx:end"
+        code, _, errors, service = self.invoke([], "2\n" + text + "\n:end\n")
+        self.assertEqual((code, errors), (0, ""))
+        self.assertEqual(service.generate_qr.call_args.args[0].text, text)
+
+    def test_incomplete_menu_input_never_generates(self):
+        for text in ("wrong\n", "1\n", "2\n", "2\nknown\n", "2\nknown"):
+            with self.subTest(text=text):
+                code, _, errors, service = self.invoke([], text)
+                self.assertEqual(code, 2)
+                self.assertIn("EOF", errors)
+                service.generate_qr.assert_not_called()
+
+    def test_multiline_enforces_the_same_character_and_byte_limits(self):
+        cases = [("12345678\n12345678", 0, None),
+                 ("12345678\n123456789", 1, "CAPACITY_EXCEEDED"),
+                 ("a\nα", 1, "UNSUPPORTED_CHARACTER")]
+        for text, expected, error in cases:
+            with self.subTest(text=text):
+                code, output, errors, service = self.invoke([], "2\n" + text + "\n:end\n")
+                self.assertEqual(code, expected)
+                self.assertEqual(service.generate_qr.call_args.args[0].text, text)
+                service.generate_qr.assert_called_once()
+                if error:
+                    self.assertIn(error, errors)
+                else:
+                    self.assertIn("Byte length: 17", output)
+
+    def test_multiline_display_export_and_logging_use_one_request(self):
+        logger = Mock()
+        logger.append_attempt.return_value = LogStatus(LogState.WRITTEN)
+        service = Mock(wraps=QRService(usage_logger=logger))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "multiline.txt"
+            code, _, errors, _ = self.invoke(["--show-steps", "--steps-out", str(path)],
+                "2\na\nb\n:end\n", service=service)
+            self.assertEqual((code, errors), (0, ""))
+            service.generate_qr.assert_called_once()
+            logger.append_attempt.assert_called_once()
+            saved = path.read_text(encoding="utf-8")
+            self.assertIn('Input (JSON): "a\\nb"', saved)
+            self.assertNotIn(":end", saved)
 
     def test_text_argument_wins_over_unread_stdin(self):
         source = Mock()
@@ -338,6 +414,25 @@ class EntryPointTests(unittest.TestCase):
                 self.assertEqual(process.returncode, code)
                 if error:
                     self.assertIn(error, process.stderr.decode("utf-8"))
+
+    def test_interactive_menu_multiline_and_single_line_in_real_process(self):
+        for data, expected in [(b"1\r\nknown\r\n", "known"),
+                               ("2\r\nñ\r\nb\r\n:end\r\n".encode("utf-8"), "ñ\r\nb")]:
+            with self.subTest(data=data):
+                process = self.run_cli([], data)
+                self.assertEqual(process.returncode, 0, process.stderr.decode("utf-8"))
+                output = process.stdout.decode("utf-8")
+                line = next(line for line in output.splitlines() if line.startswith("Input (JSON): "))
+                self.assertEqual(json.loads(line.removeprefix("Input (JSON): ")), expected)
+
+    def test_explicit_stdin_does_not_interpret_menu_or_end_marker(self):
+        text = "2\n:end\n0\n"
+        process = self.run_cli(["--stdin"], text.encode("utf-8"))
+        self.assertEqual(process.returncode, 0)
+        output = process.stdout.decode("utf-8")
+        self.assertNotIn("请选择输入方式", output)
+        line = next(line for line in output.splitlines() if line.startswith("Input (JSON): "))
+        self.assertEqual(json.loads(line.removeprefix("Input (JSON): ")), text)
 
     def test_invalid_utf8_stdin_fails_without_traceback(self):
         process = self.run_cli(["--stdin"], b"\xff")

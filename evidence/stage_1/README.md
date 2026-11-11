@@ -51,12 +51,12 @@
 
 ```powershell
 # 只核验已有证据，不改写文件或重新生成
-& 'D:\python\python.exe' -X utf8 scripts/stage1_evidence.py
+& 'D:\python\python.exe' -X utf8 scripts/stage1_evidence.py --historical
 
 # 重新运行所有单元测试
 & 'D:\python\python.exe' -X utf8 -m unittest discover -s tests -v
 
-# 现场演示动态输入，输入 known 后回车
+# 现场演示动态输入，先选1，再输入 known 并回车
 & 'D:\python\python.exe' main_cli.py
 
 # 查看完整真实步骤
@@ -64,14 +64,18 @@
 ```
 
 校验脚本检查五个原文、结果/错误、25/25/25/0/1步、矩阵结构、known独立参考矩阵、
-六个制品哈希、捕获工具与34个源码/fixture哈希，以及清单和报告的请求ID一致性。
+六个制品哈希、记录版本的34个源码/fixture哈希，以及清单和报告的请求ID一致性。
+当前CLI已新增输入菜单，本目录保留对应383b76c的历史报告。`--historical`从Git读取当时源码和参考矩阵，
+不将历史结果视为当前菜单代码的测试结论；也不要求当前校验工具与旧工具哈希相同。
+省略该参数则严格比较当前源码及工具哈希，版本变化会报告失败，不悄悄接受不同版本。
 `manifest.csv`不包含自己的哈希，避免自引用；报告和清单使用UTF-8与LF，由`.gitattributes`保留换行。
 校验成功不等于重新执行测试；测试重跑使用上面的独立命令。
 
 如只想试用导出，保存到已存在的 `outputs/`，不要覆盖正式demo。
 采集命令为 `python -X utf8 scripts/stage1_evidence.py --capture`，它会拒绝已有证据。
 需生成新版本时先保留/归档本版，更新源码版本关联后重新采集，不手改现有报告或只重算哈希来掩盖差异。
-源码或测试变化后，旧版证据可继续作为历史，但校验脚本会报告当前源码与捕获版本不同。
+源码或测试变化后，旧版证据可继续作为历史；使用 `--historical` 核验记录的Git源码，
+新代码另行测试和记录，不改写旧报告中的请求ID、时间、执行结果或源码哈希。
 
 ## 下一阶段
 

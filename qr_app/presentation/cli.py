@@ -13,12 +13,61 @@ class _Parser(argparse.ArgumentParser):
     def __init__(self, output, error):
         super().__init__(prog="main_cli.py", allow_abbrev=False,
             description="生成 baseline V1/L/Mask0 QR 矩阵，严格使用 ISO-8859-1。",
-            epilog="不自动保存使用日志。步骤报告包含输入全文和可逆编码数据；仅显式导出时写文件。")
+            epilog="省略 --text/--stdin 时显示输入菜单。多行输入用单独一行 :end 结束。"
+                   "不自动保存使用日志；步骤报告包含输入全文和可逆编码数据。")
         self._output, self._error = output, error
 
     def _print_message(self, message, file=None):
         if message:
             (self._output if file is sys.stdout else self._error).write(message)
+
+
+def _remove_submission_newline(text: str) -> str:
+    if text.endswith("\n"):
+        text = text[:-1]
+        if text.endswith("\r"):
+            text = text[:-1]
+    return text
+
+
+def _interactive_input(input_stream, output_stream, error_stream) -> tuple[str | None, int]:
+    """Collect one submission; menu choices and terminators are never QR data."""
+    while True:
+        output_stream.write("请选择输入方式：\n1. 单行输入\n2. 多行输入\n0. 退出\n请输入选项：\n")
+        output_stream.flush()
+        line = input_stream.readline()
+        if line == "":
+            error_stream.write("未收到选项（EOF），没有提交生成请求。\n")
+            return None, 2
+        choice = _remove_submission_newline(line).strip()
+        if choice == "0":
+            output_stream.write("已退出。\n")
+            return None, 0
+        if choice in ("1", "2"):
+            break
+        error_stream.write("无效选项，请输入 1、2 或 0。\n")
+
+    if choice == "1":
+        output_stream.write("请输入文本（单行，回车提交，保留首尾空格）：\n")
+        output_stream.flush()
+        line = input_stream.readline()
+        if line == "":
+            error_stream.write("未收到文本（EOF），没有提交生成请求。\n")
+            return None, 2
+        return _remove_submission_newline(line), 0
+
+    output_stream.write("请输入多行文本，输入单独一行 :end 结束。\n"
+                        "保留行间换行和空格；末行提交回车不计入内容，结束前的空行可保留末尾换行。\n")
+    output_stream.flush()
+    lines = []
+    while True:
+        line = input_stream.readline()
+        if line == "":
+            error_stream.write("多行输入尚未收到 :end 便遇到 EOF，没有提交生成请求。\n")
+            return None, 2
+        if _remove_submission_newline(line) == ":end":
+            return _remove_submission_newline("".join(lines)), 0
+        lines.append(line)
 
 
 def _run(argv, service, input_stream, output_stream, error_stream):
@@ -41,17 +90,9 @@ def _run(argv, service, input_stream, output_stream, error_stream):
     elif args.stdin:
         text = input_stream.read()
     else:
-        output_stream.write("请输入文本（单行；保留空格；完整多行输入请用 --stdin）：\n")
-        output_stream.flush()
-        text = input_stream.readline()
-        if text == "":
-            error_stream.write("未收到输入（EOF），没有提交生成请求。\n")
-            return 2
-        # Remove exactly one submission newline, never trim user content.
-        if text.endswith("\n"):
-            text = text[:-1]
-            if text.endswith("\r"):
-                text = text[:-1]
+        text, code = _interactive_input(input_stream, output_stream, error_stream)
+        if text is None:
+            return code
 
     request = QRRequest(text=text, source=Source.CLI)
     try:

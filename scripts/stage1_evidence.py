@@ -60,7 +60,7 @@ def field(text, label):
     return values[0]
 
 
-def inspect_demo(path, case):
+def inspect_demo(path, case, reference=None):
     text, expected_exit, error, length, steps = case
     raw = path.read_bytes()
     report = raw.decode("utf-8")
@@ -98,7 +98,8 @@ def inspect_demo(path, case):
         rows = report.split(header, 1)[1].splitlines()[:21]
         require(len(rows) == 21 and all(re.fullmatch(r"[01]( [01]){20}", row) for row in rows), "Invalid final matrix")
         if text == "known":
-            reference = json.loads((ROOT / "tests/fixtures/format_mask0_reference_vectors.json").read_text(encoding="utf-8"))
+            if reference is None:
+                reference = json.loads((ROOT / "tests/fixtures/format_mask0_reference_vectors.json").read_text(encoding="utf-8"))
             vector = next(item for item in reference["known_mask0_matrices"]
                           if (item["version"], item["ecc_level"]) == (1, "L"))
             require([row.replace(" ", "") for row in rows] == vector["final_matrix_rows"], "Reference matrix mismatch")
@@ -136,7 +137,7 @@ def capture():
             "expected_steps": case[4], "actual": actual, "observed": observed,
             "sha256": digest(path), "conclusion": "PASS"})
         print(f"demo_{index}: PASS ({observed['result']}, {len(observed['steps'])} steps)", flush=True)
-    interactive = run([sys.executable, str(ROOT / "main_cli.py")], b"known\n")
+    interactive = run([sys.executable, str(ROOT / "main_cli.py")], b"1\nknown\n")
     require(interactive["exit_code"] == 0 and json.loads(field(interactive["stdout"], "Input (JSON)")) == "known",
             "Interactive CLI smoke check failed")
     record["interactive_cli"] = interactive
@@ -176,8 +177,17 @@ def capture():
             "rule_version": "input_rules_v1", "sha256": digest(CAPTURE), "privacy_review": "Public coursework inputs and local runtime metadata only"})
 
 
-def verify():
+def verify(*, historical=False):
     record = json.loads(CAPTURE.read_text(encoding="utf-8"))
+    reference = None
+    if historical:
+        committed = {path: subprocess.check_output(
+            ["git", "show", record["code_commit"] + ":" + path], cwd=ROOT, timeout=15)
+            for path in record["source_sha256"]}
+        checked_sources = {path: hashlib.sha256(raw).hexdigest() for path, raw in committed.items()}
+        reference = json.loads(committed["tests/fixtures/format_mask0_reference_vectors.json"])
+    else:
+        checked_sources = sources()
     with MANIFEST.open(encoding="utf-8", newline="") as stream:
         rows = list(csv.DictReader(stream))
     require(len(rows) == 6, "Expected five demos and one capture record")
@@ -189,25 +199,30 @@ def verify():
     require(record["all_passed"] and record["unit_tests"]["exit_code"] == 0, "Capture did not pass")
     require(len(record["cases"]) == 5, "Missing capture cases")
     for index, case in enumerate(CASES, 1):
-        observed = inspect_demo(STAGE / f"demo_{index}.txt", case)
+        observed = inspect_demo(STAGE / f"demo_{index}.txt", case, reference=reference)
         item = record["cases"][index - 1]
         require(observed == item["observed"] and item["actual"]["exit_code"] == case[1], "Capture/report mismatch")
         row = next(row for row in rows if row["case_id"] == f"S1-{index:02d}")
         require(row["request_id"] == observed["request_id"] and row["actual"] == observed["result"], "Manifest/report mismatch")
-    require(sources() == record["source_sha256"], "Current application/tests differ from captured version")
-    tool_hash = record.get("verification_tool_sha256", record["capture_tool_sha256"])
-    require(digest(Path(__file__)) == tool_hash, "Capture/verification tool changed")
-    print(f"PASS: 5 exact inputs, 6 artifact hashes, real partial traces, reference matrix, {record['unit_tests']['test_count']} recorded tests, {len(record['source_sha256'])} source hashes")
+    require(checked_sources == record["source_sha256"],
+            "Application/tests differ from captured version; use --historical to check its recorded Git sources")
+    if not historical:
+        tool_hash = record.get("verification_tool_sha256", record["capture_tool_sha256"])
+        require(digest(Path(__file__)) == tool_hash, "Capture/verification tool changed")
+    scope = "historical Git sources (current working code is not certified)" if historical else "current sources"
+    print(f"PASS: 5 exact inputs, 6 artifact hashes, real partial traces, reference matrix, {record['unit_tests']['test_count']} recorded tests, {len(record['source_sha256'])} source hashes; {scope}")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--capture", action="store_true", help="Capture once; refuses existing evidence. Default: verify only.")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("--capture", action="store_true", help="Capture once; refuses existing evidence. Default: verify current sources.")
+    group.add_argument("--historical", action="store_true", help="Verify existing evidence against its recorded Git source version, without certifying current code.")
     args = parser.parse_args()
     try:
         if args.capture:
             capture()
-        verify()
+        verify(historical=args.historical)
     except (OSError, ValueError, KeyError, subprocess.SubprocessError) as error:
         print(f"FAIL: {error}", file=sys.stderr)
         return 1

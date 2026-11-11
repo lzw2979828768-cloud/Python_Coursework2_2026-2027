@@ -105,7 +105,11 @@ NumPy 原生线性代数检查、pip check、28 项项目基础测试和字节�
 
 ## 检查命令与范围
 
-当前 CLI 版本使用 Python 3.13.9 通过130项测试（其中33项CLI/报告测试）、16个模块导入、
+当前菜单版本使用Python3.13.9通过139项测试（其中42项CLI/报告测试）、编译和依赖检查，
+见[菜单实际验证记录](validation/interactive_input_python3139_20261112_000620.json)。输入菜单提供单行、多行及退出，
+保留显式参数输入；不改动Byte/RS/矩阵/格式算法或原始正式demo。
+
+原 CLI 版本使用 Python 3.13.9 通过130项测试（其中33项CLI/报告测试）、16个模块导入、
 编译与 pip check。五个作业输入已通过真实入口运行并临时导出，成功/字符失败/容量失败符合预期。
 完整输出及源码/fixture哈希见[CLI发布前复验记录](validation/cli_python3139_20261111_225943.json)。
 本次没有增加依赖或修改公共请求/结果字段。随后已采集五份正式demo并重新通过130项测试，
@@ -134,7 +138,8 @@ python -m compileall -q main_cli.py qr_app tests
 这些测试也不替代四个人各自至少三个非平凡扩展测试。
 
 `evidence/` 已保存五份真实CLI导出的正式demo、manifest哈希清单和Stage1本机验收说明。
-`scripts/stage1_evidence.py`默认只核验现有证据与源码，不重新生成、不覆盖文件。
+`scripts/stage1_evidence.py`默认严格核验现有证据与当前源码，不重新生成、不覆盖文件。
+菜单更新后的源码与旧版demo不同，使用 `--historical` 可核验demo记录的383b76c Git源码；新菜单另有测试记录。
 本轮新增忽略 outputs/、data/usage/、data/diagnostics/、tmp/ 和 *.log；
 没有全局忽略 *.txt / *.csv，后续真实演示文件可以正常入库。
 
