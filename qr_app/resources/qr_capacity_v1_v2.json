@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "scope": "Only the V1/L baseline entry is transcribed; V1/V2 extensions are pending.",
+  "sources": [
+    "项目规划/02_系统架构与接口规划.md, section 7: V1/L 19 data + 7 ECC codewords",
+    "项目规划/08_输入与自动选择规则.md, sections 5 and 7: capacity 17 bytes, Mask0",
+    "https://www.thonky.com/qr-code-tutorial/character-capacities",
+    "https://www.thonky.com/qr-code-tutorial/error-correction-table"
+  ],
+  "review_status": "Transcribed from planning; independent team specification review pending.",
+  "plans": [
+    {
+      "version": 1,
+      "ecc_level": "L",
+      "matrix_size": 21,
+      "capacity_bytes": 17,
+      "data_codewords": 19,
+      "ecc_codewords_per_block": 7,
+      "block_groups": [{"block_count": 1, "data_codewords_per_block": 19}],
+      "total_codewords": 26,
+      "remainder_bits": 0,
+      "character_count_bits": 8
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+# Shared skeleton; verified on Windows with CPython 3.13.9, 2026-11-11.
+# Upgraded in place from 3.13.4; teaching-lab compatibility remains unverified.
+numpy==2.2.6

@@ -22,3 +22,10 @@ env/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Local runtime data (may contain the original input)
+outputs/
+data/usage/
+data/diagnostics/
+tmp/
+*.log

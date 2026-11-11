@@ -1,0 +1,73 @@
+{
+  "verified_at": "2026-11-11T18:52:01.860037+08:00",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python_version": "3.13.9",
+  "executable": "D:\\python\\python.exe",
+  "previous_python_version": "3.13.4 (tags/v3.13.4:8a526ec, Jun  3 2025, 17:46:04) [MSC v.1943 64 bit (AMD64)]",
+  "previous_package_count": 153,
+  "current_package_count": 153,
+  "missing_packages": [],
+  "changed_package_versions": {},
+  "checks": {
+    "target_version": true,
+    "original_location": true,
+    "packages_preserved": true,
+    "import_numpy": {
+      "success": true,
+      "version": "2.2.6"
+    },
+    "import_pandas": {
+      "success": true,
+      "version": "2.3.0"
+    },
+    "import_matplotlib": {
+      "success": true,
+      "version": "3.10.7"
+    },
+    "import_scipy": {
+      "success": true,
+      "version": "1.16.3"
+    },
+    "import_PIL": {
+      "success": true,
+      "version": "12.0.0"
+    },
+    "import_sklearn": {
+      "success": true,
+      "version": "1.8.0"
+    },
+    "import_cv2": {
+      "success": true,
+      "version": "4.12.0"
+    },
+    "numpy_native_linear_algebra": true,
+    "pip_check": {
+      "success": true,
+      "exit_code": 0,
+      "stdout": "No broken requirements found.\n",
+      "stderr": ""
+    },
+    "project_tests": {
+      "success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_baseline_specification_counts (test_models.ModelTests.test_baseline_specification_counts) ... ok\ntest_codewords_and_bits_do_not_accept_string_bits_or_bool (test_models.ModelTests.test_codewords_and_bits_do_not_accept_string_bits_or_bool) ... ok\ntest_layout_copies_both_input_buffers (test_models.ModelTests.test_layout_copies_both_input_buffers) ... ok\ntest_layout_rejects_nonbinary_wrong_dtype_and_wrong_shape (test_models.ModelTests.test_layout_rejects_nonbinary_wrong_dtype_and_wrong_shape) ... ok\ntest_log_failure_requires_explicit_error (test_models.ModelTests.test_log_failure_requires_explicit_error) ... ok\ntest_plan_rejects_inconsistent_counts_and_units (test_models.ModelTests.test_plan_rejects_inconsistent_counts_and_units) ... ok\ntest_request_defaults_have_unique_identity_and_aware_time (test_models.ModelTests.test_request_defaults_have_unique_identity_and_aware_time) ... ok\ntest_result_cannot_mark_failure_as_success (test_models.ModelTests.test_result_cannot_mark_failure_as_success) ... ok\ntest_scores_require_consistent_totals_and_complete_candidates (test_models.ModelTests.test_scores_require_consistent_totals_and_complete_candidates) ... ok\ntest_success_matrix_is_independent_and_mask_zero_is_valid (test_models.ModelTests.test_success_matrix_is_independent_and_mask_zero_is_valid) ... ok\ntest_baseline_capacity_boundary_and_partial_trace (test_service.ServiceTests.test_baseline_capacity_boundary_and_partial_trace) ... ok\ntest_capture_disabled_and_service_reuse_do_not_share_steps (test_service.ServiceTests.test_capture_disabled_and_service_reuse_do_not_share_steps) ... ok\ntest_empty_and_character_failures_preserve_identity_without_fake_plan (test_service.ServiceTests.test_empty_and_character_failures_preserve_identity_without_fake_plan) ... ok\ntest_extended_auto_uses_returned_actual_values_and_all_scores (test_service.ServiceTests.test_extended_auto_uses_returned_actual_values_and_all_scores) ... ok\ntest_extensions_are_explicit_and_baseline_never_calls_them (test_service.ServiceTests.test_extensions_are_explicit_and_baseline_never_calls_them) ... ok\ntest_failure_inside_stage_retains_completed_steps_and_skips_later_stages (test_service.ServiceTests.test_failure_inside_stage_retains_completed_steps_and_skips_later_stages) ... ok\ntest_invalid_structures_raise_and_do_not_log (test_service.ServiceTests.test_invalid_structures_raise_and_do_not_log) ... ok\ntest_log_failure_does_not_change_generation_success_or_failure (test_service.ServiceTests.test_log_failure_does_not_change_generation_success_or_failure) ... ok\ntest_missing_extended_dependencies_fail_before_text_encoding (test_service.ServiceTests.test_missing_extended_dependencies_fail_before_text_encoding) ... ok\ntest_option_errors_precede_empty_and_unsupported_text (test_service.ServiceTests.test_option_errors_precede_empty_and_unsupported_text) ... ok\ntest_pipeline_cannot_publish_wrong_length_or_override_manual_mask (test_service.ServiceTests.test_pipeline_cannot_publish_wrong_length_or_override_manual_mask) ... ok\ntest_pipeline_receives_bytes_and_same_request_trace (test_service.ServiceTests.test_pipeline_receives_bytes_and_same_request_trace) ... ok\ntest_strict_latin1_preserves_whitespace_and_control_bytes (test_service.ServiceTests.test_strict_latin1_preserves_whitespace_and_control_bytes) ... ok\ntest_unexpected_error_does_not_leak_exception_text (test_service.ServiceTests.test_unexpected_error_does_not_leak_exception_text) ... ok\ntest_whitespace_remains_input_and_has_a_warning (test_service.ServiceTests.test_whitespace_remains_input_and_has_a_warning) ... ok\ntest_disabled_trace_is_empty_and_requests_are_independent (test_tracing.TraceTests.test_disabled_trace_is_empty_and_requests_are_independent) ... ok\ntest_duplicate_id_does_not_replace_prior_step (test_tracing.TraceTests.test_duplicate_id_does_not_replace_prior_step) ... ok\ntest_nested_payload_is_an_independent_readonly_snapshot (test_tracing.TraceTests.test_nested_payload_is_an_independent_readonly_snapshot) ... ok\n\n----------------------------------------------------------------------\nRan 28 tests in 0.070s\n\nOK\n"
+    },
+    "compileall": {
+      "success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "all_passed": true,
+  "installer": {
+    "source": "https://www.python.org/ftp/python/3.13.9/python-3.13.9-amd64.exe",
+    "sha256": "200ddff856bbff949d2cc1be42e8807c07538abd6b6966d5113a094cf628c5c5",
+    "authenticode_status": "Valid",
+    "signer": "Python Software Foundation",
+    "installation_scope": "current_user",
+    "installer_exit_code": 0,
+    "restart_required": false
+  }
+}
