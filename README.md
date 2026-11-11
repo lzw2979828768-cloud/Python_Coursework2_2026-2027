@@ -1,7 +1,7 @@
 # QR 基础编码核心（开发入口）
 
 这是依据 `项目规划/10_公共接口与修改权限规范.md` 契约 1.0 建立的开发骨架。
-当前已实现共享接口与 Byte/RS/矩阵/格式信息/固定 Mask0；CLI 和五份正式 Stage1 demo 仍待完成。
+当前已实现共享接口、Byte/RS/矩阵/格式信息/固定 Mask0 和 CLI；五份正式 Stage1 demo 仍待完成。
 本文件是开发使用说明，最终评分用 README 和反思仍需团队根据真实实现自行撰写。
 
 ## 安装与检查
@@ -27,6 +27,22 @@ python -m unittest discover -s tests -v
 本次测试在现有解释器运行；新建虚拟环境和重新安装依赖尚未验证。
 测试使用标准库 `unittest`，不需要额外安装 pytest。
 
+## 运行 CLI
+
+在项目根目录使用当前 Python 3.13.9：
+
+```powershell
+& 'D:\python\python.exe' main_cli.py
+& 'D:\python\python.exe' main_cli.py --text "known"
+& 'D:\python\python.exe' main_cli.py --text "known" --show-steps
+& 'D:\python\python.exe' main_cli.py --help
+```
+
+默认固定 V1/L/Mask0，成功时显示25步计数和完整21×21数值矩阵。
+`--steps-out PATH` 可导出 UTF-8 真实步骤报告，父目录须已存在，已有文件需加 `--overwrite`。
+`--stdin` 完整读取 UTF-8 标准输入并保留换行；原文不 trim。
+当前不自动保存使用日志。详细命令、输入规则和退出码见[CLI 使用说明](docs/cli.md)。
+
 ## 统一调用
 
 ```python
@@ -51,7 +67,7 @@ penalty_scores为空。详见[Byte](docs/byte_encoding.md)、[RS](docs/error_cor
 输入原文不会 trim 或截断。空输入、字符不支持、容量超限分别有明确错误。
 
 调用类型/ID/时间错误抛 `QRContractError`；结构有效的业务失败返回 `QRResult`。
-CLI 与 GUI 后续都调用这个实例方法，不另写一套生成流程。
+CLI 已调用这个实例方法，未来 GUI 也复用同一流程。
 
 ## 主要文件
 
@@ -64,7 +80,8 @@ CLI 与 GUI 后续都调用这个实例方法，不另写一套生成流程。
 | `qr_app/core/` | 已实现字符转换、数据码字、RS、矩阵、BCH 格式信息与固定 Mask0 |
 | `qr_app/resources/qr_capacity_v1_v2.json` | 当前仅有 V1/L 规格，附来源和待复核状态 |
 | `qr_app/extensions/` | 预留四项个人扩展位置，当前不自动导入或启用 |
-| `qr_app/presentation/` | 预留 CLI/GUI 位置，当前没有界面或启动脚本 |
+| `main_cli.py` | CLI 启动脚本，UTF-8 标准输入输出 |
+| `qr_app/presentation/` | CLI 输入/结果展示、显式步骤报告导出；GUI 待实现 |
 | `tests/` | 公共模型、编码/纠错/矩阵与编排测试 |
 | `docs/shared_skeleton.md` | 接口接入、实际环境、测试范围及合并前事项 |
 | `evidence/` | 预留真实证据目录，当前没有五份 demo 或扫码证据 |
@@ -75,12 +92,13 @@ CLI 与 GUI 后续都调用这个实例方法，不另写一套生成流程。
 后续四人同步同一个 main 提交，再各自建立功能分支；公共变更继续按约定进行 PR 和非作者复核。
 模块接入顺序和签名见[开发说明](docs/shared_skeleton.md)。
 
-Python 3.13.9 下 97 项测试、13 个模块导入、编译和依赖检查均通过。
-本地复核修复了评分对象无法记录进轨迹、V1/L 计划依赖资源行序的问题；
-[当前验证记录](docs/validation/format_mask0_python3139_20261111_221640.json)保留实际输出和源码哈希。
-已核对32种公开格式组合、800组完整矩阵，并完成5个本机解码样例。
-既有阶段记录保留为历史；qrcode/OpenCV仅作离线验证，应用和常规测试没有新增依赖。
+Python 3.13.9 下 **130 项测试**（含33项 CLI/导出测试）、16个模块导入、编译和依赖检查均通过。
+[当前 CLI 验证记录](docs/validation/cli_python3139_20261111_225943.json)保留发布前复验的实际输出和源码哈希；
+五个作业样例已通过真实 CLI 运行并临时导出，三个成功、字符/容量两个失败符合预期。
+核心上一阶段已核对32种公开格式组合、800组完整矩阵，并完成5个本机解码样例，见
+[格式/Mask0历史记录](docs/validation/format_mask0_python3139_20261111_221640.json)。
+qrcode/OpenCV仅作离线验证，应用和常规测试没有新增依赖。
 团队非作者评审、正式 CI 和完整二维码功能仍待完成。
 
-基础编码算法已贯通；Stage1 还需完成 CLI 和五份正式 demo，之后再做渲染/保存、GUI和真实手机扫码。
+基础编码算法与 CLI 已贯通；Stage1 还需五份正式 demo，之后再做图像渲染/保存、GUI和真实手机扫码。
 测试中的模拟矩阵仅用于检查编排与故障隔离，不代表 QR 编码正确、可扫码或 Stage1 验收通过。

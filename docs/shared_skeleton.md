@@ -18,7 +18,8 @@ ISO-8859-1 转换、Byte 数据码字、RS 纠错、矩阵构建、输入与选�
 请求结构的最终验证在服务边界执行，未知枚举值作为业务参数错误返回。
 
 骨架不产生二维码图像，不导入 GUI，不自动保存轨迹或建立使用 CSV。
-未来展示层负责错误展示及诊断 handler 装配；服务当前仅发出 ID 和异常类型的诊断日志，
+CLI 展示生成与保存错误，并可显式导出 UTF-8 步骤报告，见[CLI 使用说明](cli.md)。
+未来 GUI 仍复用同一服务。服务当前仅发出 ID 和异常类型的诊断日志，
 没有自动创建诊断文件，也不把原文、异常文本或堆栈送进公开结果。
 
 ## Stage1 接入顺序
@@ -104,18 +105,23 @@ NumPy 原生线性代数检查、pip check、28 项项目基础测试和字节�
 
 ## 检查命令与范围
 
-完成格式信息与Mask0后使用 D:\python\python.exe（Python 3.13.9）验证：97 项测试、13 个模块导入、
+当前 CLI 版本使用 Python 3.13.9 通过130项测试（其中33项CLI/报告测试）、16个模块导入、
+编译与 pip check。五个作业输入已通过真实入口运行并临时导出，成功/字符失败/容量失败符合预期。
+完整输出及源码/fixture哈希见[CLI发布前复验记录](validation/cli_python3139_20261111_225943.json)。
+本次没有增加依赖或修改公共请求/结果字段；正式demo文件仍待采集。
+
+此前完成格式信息与Mask0后使用 D:\python\python.exe（Python 3.13.9）验证：97 项测试、13 个模块导入、
 字节码编译和 pip check 均通过；五个作业请求得到预期结果：三个成功、字符/容量两个失败。
 详细命令、实际输出、请求结果及源码 SHA-256 见
 [2026-11-11 共享骨架验证记录](validation/format_mask0_python3139_20261111_221640.json)。
 另核对32种公开格式字符串、800组完整矩阵，并通过5个本机解码样例。
 qrcode/OpenCV只用作离线参考，应用和常规测试不依赖它们，旧阶段记录保留为历史。
-包含 Latin-1 字符的终端验证采用 Python 的 -X utf8 选项。此结果不表示 QR 算法或 Stage1 已完成。
+包含 Latin-1 字符的终端验证采用 Python 的 -X utf8 选项。此历史结果不表示 Stage1 正式证据已完成。
 
 
 ```powershell
 python -m unittest discover -s tests -v
-python -m compileall -q qr_app tests
+python -m compileall -q main_cli.py qr_app tests
 ```
 
 基础测试覆盖：规格数量/单位、矩阵和嵌套载荷的独立副本、整数位流、错误优先级、

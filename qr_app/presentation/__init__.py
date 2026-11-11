@@ -1,1 +1,1 @@
-"""Reserved presentation package; no Qt application is created on import."""
+"""CLI and explicit trace export; no application or files are created on import."""
