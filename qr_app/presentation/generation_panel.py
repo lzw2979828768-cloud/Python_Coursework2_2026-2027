@@ -17,6 +17,7 @@ from ..service import QRService
 from .png_dialog import save_png_dialog
 from .renderer import draw_matrix
 from .gui_messages import generation_error_text, generation_warning_texts
+from .jelly_button import JellyButton
 from .theme import TOKENS, tone_stylesheet
 
 _LOGGER = logging.getLogger(__name__)
@@ -104,9 +105,9 @@ class GenerationPanel(QWidget):
         self.byte_hint = _label(name="byteHint")
         left.addWidget(self.byte_hint)
         buttons = QHBoxLayout()
-        self.generate_button = QPushButton("Generate")
+        self.generate_button = JellyButton("Generate", primary=True)
         self.generate_button.setObjectName("generateButton")
-        self.clear_button = QPushButton("Clear input")
+        self.clear_button = JellyButton("Clear input")
         self.clear_button.setObjectName("clearButton")
         buttons.addWidget(self.generate_button, stretch=1)
         buttons.addWidget(self.clear_button)
@@ -168,7 +169,7 @@ class GenerationPanel(QWidget):
         _tone(self.warning_label, "warning")
         self.warning_label.hide()
         right.addWidget(self.warning_label)
-        self.save_button = QPushButton("Save PNG")
+        self.save_button = JellyButton("Save PNG")
         self.save_button.setObjectName("saveButton")
         right.addWidget(self.save_button)
         self.export_label = _label(name="exportStatus")
@@ -212,6 +213,8 @@ class GenerationPanel(QWidget):
 
     def _update_controls(self):
         locked = self.busy or self.saving
+        for button in (self.generate_button, self.clear_button, self.save_button):
+            button.set_busy(locked)
         self.generate_button.setEnabled(not locked)
         self.clear_button.setEnabled(not locked and bool(self.input_text()))
         self.text_input.setReadOnly(locked)

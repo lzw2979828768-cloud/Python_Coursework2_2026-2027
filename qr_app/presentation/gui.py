@@ -8,6 +8,7 @@ import sys
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Open the baseline QR Generator desktop application.")
     parser.add_argument("--text", help="Prefill input without generating")
+    parser.add_argument("--reduced-motion", action="store_true", help="Disable button motion")
     parser.add_argument("--offscreen", action="store_true", help="Hidden check with automatic close")
     parser.add_argument("--close-after-ms", type=int, help="Automatically close after 250..60000 ms")
     args = parser.parse_args(argv)
@@ -25,6 +26,7 @@ def main(argv=None):
     app = QApplication([sys.argv[0]])
     app.setApplicationName("QR Generator")
     app.setFont(QFont("Segoe UI", 10))
+    app.setProperty("reducedMotion", args.reduced_motion)
     from .main_window import MainWindow
     window = MainWindow()
     if not args.offscreen:
