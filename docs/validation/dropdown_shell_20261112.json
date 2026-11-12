@@ -1,0 +1,57 @@
+{
+  "branch": "feature/soft-minimal-ui",
+  "parent": "e71b75a",
+  "fix": "Remove the native rectangular popup frame, menu panel and operating-system shadow; retain the list border and Qt.Popup behavior.",
+  "tests": {
+    "count": 12,
+    "exit_code": 0,
+    "output": "docs/validation/dropdown_shell_tests_20261112.txt"
+  },
+  "offscreen": {
+    "platform": "offscreen",
+    "scale": 1.6,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "mouse_selection": true,
+    "keyboard_selection": true,
+    "escape_cancel": true,
+    "outside_click_dismissal": true,
+    "captures": [
+      "docs/validation/dropdown_shell_offscreen_160_popup_20261112.png"
+    ],
+    "passed": true
+  },
+  "desktop": {
+    "platform": "windows",
+    "QT_SCALE_FACTOR": 1.6,
+    "capture": "QScreen.grabWindow",
+    "popup_centered_for_margin_capture": true,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "right_margin_unchanged": true,
+    "bottom_margin_unchanged": true,
+    "right_margin_changed_pixels": 0,
+    "mouse_selection": true,
+    "keyboard_selection": true,
+    "escape_cancel": true,
+    "outside_click_scope": "Verified offscreen. Direct QWidget injection is not an operating-system outside click.",
+    "image": "docs/validation/dropdown_shell_windows_screen_checked_160_desktop_20261112.png"
+  },
+  "source_sha256": {
+    "qr_app/presentation/information.py": "a046e6cd896dbf579c27b2a9b33f68d8e7d989fd1e3e0f95aef4847bbfeaeb28",
+    "qr_app/presentation/theme.py": "c536dd15bf86520dc4a87566b470128b18a65c5f3bf24b85624a0712b5a16c76"
+  },
+  "artifact_sha256": {
+    "docs/validation/dropdown_shell_tests_20261112.txt": "69d4b3057f51355c61acd04eba684d16b2a37af7dc15a7b0adbbb452ccdc8fd1",
+    "docs/validation/dropdown_shell_windows_screen_checked_160_desktop_20261112.png": "53d276e91b26d645109b5b9edb34d05fbf4529f040f41199e571840111f4ca7d",
+    "docs/validation/dropdown_shell_offscreen_160_popup_20261112.png": "e80572414800ac2fc4dc631055110817ffd75b5f1b9ded18f61f27ee8c18a975"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "branch": "feature/soft-minimal-ui",
+  "parent_commit": "d9dd6c6c47750bd602e3ed0d3422e019932927a7",
+  "cause": "Disabling the focused action let Qt advance focus through Clear input to Input rules. The blue ring is the existing focus style.",
+  "before": {
+    "focus_events": [
+      [
+        "generateButton",
+        "clearButton"
+      ],
+      [
+        "clearButton",
+        "inputRulesButton"
+      ]
+    ],
+    "final_focus": "inputRulesButton",
+    "rules_has_graphics_effect": false
+  },
+  "after": {
+    "focus_events": [
+      [
+        "generateButton",
+        "generationPanel"
+      ],
+      [
+        "generationPanel",
+        "generateButton"
+      ]
+    ],
+    "final_focus": "generateButton",
+    "rules_has_graphics_effect": false
+  },
+  "tests": {
+    "count": 40,
+    "exit_code": 0,
+    "output_file": "docs/validation/action_focus_tests_20261112.txt"
+  },
+  "source_sha256": {
+    "qr_app/presentation/generation_panel.py": "007fd70505e91e23bbdf1ec14b659803714c1693fa42d2d0f2615e42bf2f6dcc",
+    "tests/test_jelly_button.py": "f2366bc8f3342b05f66a88ded4b8bfc8c2dee8b97bc1b3e22581afb6518d2b30"
+  },
+  "test_output_sha256": "a444f485eb98cfd6fefcd03be2219e8779b52442d5212c4d5f24f14cf73ced8c",
+  "scope": "Qt offscreen focus events, actual mouse/keyboard inputs, existing generation/save/information and spring-pixel checks."
+}

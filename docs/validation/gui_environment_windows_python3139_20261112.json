@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-11-11T16:50:45.802544+00:00",
+  "scope": "Stage2 step1 local GUI environment; no QR generation or phone scan",
+  "executable": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+  "python": "3.13.9",
+  "architecture": "64bit",
+  "virtual_environment": true,
+  "os": "Windows-11-10.0.26300-SP0",
+  "script_sha256": "5ffb2f0e871ef4328d55696ed6efbe6bed14a837147275ab197696ff66ac6a4a",
+  "requested_platform": "windows",
+  "window_visible_requested": false,
+  "checks": {
+    "python_3139": true,
+    "matplotlib_uses_pyqt5": true,
+    "platform_plugin_present": true,
+    "requested_platform_loaded": true,
+    "canvas_rendered_rgba": true,
+    "black_and_white_pixels": true,
+    "text_roundtrip": true,
+    "event_loop_timer": true,
+    "window_closed": true,
+    "event_loop_exit_zero": true,
+    "matplotlib_draw_event": true,
+    "pip_check": true
+  },
+  "qt_plugin_root": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Lib\\site-packages\\PyQt5\\Qt5\\plugins",
+  "qt_bootstrap_sha256": "0581aaf005e81e5f86e8e8e41fe31ad9e85602b6a9a2e98c289152506f15d929",
+  "packages": {
+    "numpy": "2.2.6",
+    "reedsolo": "1.7.0",
+    "matplotlib": "3.10.7",
+    "PyQt5": "5.15.11",
+    "PyQt5-Qt5": "5.15.2",
+    "PyQt5-sip": "12.20.0"
+  },
+  "qt_compiled_version": "5.15.2",
+  "pyqt_version": "5.15.11",
+  "matplotlib_qt_binding": "PyQt5",
+  "qt_messages": [],
+  "actual_platform": "windows",
+  "screen": {
+    "logical_dpi": 144.0,
+    "device_pixel_ratio": 1.0
+  },
+  "draw_event_count": 2,
+  "pip_check": {
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": ""
+  },
+  "all_passed": true,
+  "completed_at": "2026-11-11T16:50:52.265463+00:00"
+}

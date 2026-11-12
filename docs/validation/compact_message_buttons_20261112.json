@@ -1,0 +1,94 @@
+{
+  "platform": "windows",
+  "scale_factor": 1.6,
+  "dialogs": [
+    {
+      "kind": "saved",
+      "buttons": [
+        {
+          "text": "OK",
+          "logical_size": [
+            70,
+            28
+          ]
+        }
+      ],
+      "image": "docs/validation/compact_message_windows_saved_20261112.png",
+      "sha256": "f1ded21dc14e29073fd5421d8aff81d71534ecdc868165521208dc1fa7c469c5"
+    },
+    {
+      "kind": "warning",
+      "buttons": [
+        {
+          "text": "OK",
+          "logical_size": [
+            70,
+            28
+          ]
+        }
+      ],
+      "image": "docs/validation/compact_message_windows_warning_20261112.png",
+      "sha256": "79be7166a0528a3bf6a284b763bc196845f014fbab26a8ede8ddc5bc3dffcd0d"
+    },
+    {
+      "kind": "replace",
+      "buttons": [
+        {
+          "text": "&Yes",
+          "logical_size": [
+            70,
+            28
+          ]
+        },
+        {
+          "text": "&No",
+          "logical_size": [
+            70,
+            28
+          ]
+        }
+      ],
+      "image": "docs/validation/compact_message_windows_replace_20261112.png",
+      "sha256": "c5f69c8165001447daaab5d9624c599bb70cb5d049b2e9171172d7f18799ecbb"
+    },
+    {
+      "kind": "replace_yes",
+      "buttons": [
+        {
+          "text": "&Yes",
+          "logical_size": [
+            70,
+            28
+          ]
+        },
+        {
+          "text": "&No",
+          "logical_size": [
+            70,
+            28
+          ]
+        }
+      ],
+      "image": "docs/validation/compact_message_windows_replace_yes_20261112.png",
+      "sha256": "c5f69c8165001447daaab5d9624c599bb70cb5d049b2e9171172d7f18799ecbb"
+    }
+  ],
+  "errors": [],
+  "main_button_size_unchanged": [
+    220,
+    42
+  ],
+  "enter_escape_and_confirmation_passed": true,
+  "tests": {
+    "count": 32,
+    "exit_code": 0,
+    "output": "test_cancel_does_not_save_or_show_a_confirmation (tests.test_png_dialog.PNGDialogTests.test_cancel_does_not_save_or_show_a_confirmation) ... ok\ntest_confirmed_replacement_writes_a_complete_png (tests.test_png_dialog.PNGDialogTests.test_confirmed_replacement_writes_a_complete_png) ... ok\ntest_declining_replacement_keeps_the_original (tests.test_png_dialog.PNGDialogTests.test_declining_replacement_keeps_the_original) ... ok\ntest_missing_extension_is_added_before_saving (tests.test_png_dialog.PNGDialogTests.test_missing_extension_is_added_before_saving) ... ok\ntest_save_failure_reports_error_and_keeps_the_canvas_usable (tests.test_png_dialog.PNGDialogTests.test_save_failure_reports_error_and_keeps_the_canvas_usable) ... ok\ntest_importing_entry_does_not_load_qt_or_matplotlib (tests.test_gui_generation.GUIEntryTests.test_importing_entry_does_not_load_qt_or_matplotlib) ... ok\ntest_offscreen_startup_prefills_without_automatically_generating (tests.test_gui_generation.GUIEntryTests.test_offscreen_startup_prefills_without_automatically_generating) ... ok\ntest_busy_guard_prevents_reentrant_requests_and_edit_actions (tests.test_gui_generation.GUIGenerationTests.test_busy_guard_prevents_reentrant_requests_and_edit_actions) ... ok\ntest_default_window_keeps_generate_and_save_controls_in_view_after_success (tests.test_gui_generation.GUIGenerationTests.test_default_window_keeps_generate_and_save_controls_in_view_after_success) ... ok\ntest_display_failure_keeps_generation_truth_but_disables_save (tests.test_gui_generation.GUIGenerationTests.test_display_failure_keeps_generation_truth_but_disables_save) ... ok\ntest_draft_changes_clear_and_revert_do_not_regenerate_or_save_old_input (tests.test_gui_generation.GUIGenerationTests.test_draft_changes_clear_and_revert_do_not_regenerate_or_save_old_input) ... ok\ntest_editing_updates_byte_hint_without_generating_or_truncating (tests.test_gui_generation.GUIGenerationTests.test_editing_updates_byte_hint_without_generating_or_truncating) ... ok\ntest_failed_requests_remove_old_image_and_preserve_real_partial_steps (tests.test_gui_generation.GUIGenerationTests.test_failed_requests_remove_old_image_and_preserve_real_partial_steps) ... ok\ntest_generate_uses_gui_request_and_displays_the_actual_result (tests.test_gui_generation.GUIGenerationTests.test_generate_uses_gui_request_and_displays_the_actual_result) ... ok\ntest_initial_state_has_no_request_or_saveable_image (tests.test_gui_generation.GUIGenerationTests.test_initial_state_has_no_request_or_saveable_image) ... ok\ntest_log_failure_does_not_break_generation_or_duplicate_logging (tests.test_gui_generation.GUIGenerationTests.test_log_failure_does_not_break_generation_or_duplicate_logging) ... ok\ntest_real_save_button_exports_without_regenerating_or_replacing_canvas (tests.test_gui_generation.GUIGenerationTests.test_real_save_button_exports_without_regenerating_or_replacing_canvas) ... ok\ntest_repeated_submissions_keep_one_canvas_and_distinct_request_ids (tests.test_gui_generation.GUIGenerationTests.test_repeated_submissions_keep_one_canvas_and_distinct_request_ids) ... ok\ntest_results_from_a_previous_request_are_rejected (tests.test_gui_generation.GUIGenerationTests.test_results_from_a_previous_request_are_rejected) ... ok\ntest_save_cancel_and_unexpected_error_leave_qr_and_controls_usable (tests.test_gui_generation.GUIGenerationTests.test_save_cancel_and_unexpected_error_leave_qr_and_controls_usable) ... ok\ntest_service_exception_is_safe_and_controls_recover (tests.test_gui_generation.GUIGenerationTests.test_service_exception_is_safe_and_controls_recover) ... ok\ntest_small_windows_stack_cards_and_scroll_instead_of_cutting_off_controls (tests.test_gui_generation.GUIGenerationTests.test_small_windows_stack_cards_and_scroll_instead_of_cutting_off_controls) ... ok\ntest_spaces_newlines_tabs_and_latin1_nonbreaking_space_are_preserved (tests.test_gui_generation.GUIGenerationTests.test_spaces_newlines_tabs_and_latin1_nonbreaking_space_are_preserved) ... ok\ntest_whitespace_warning_remains_visible_with_a_successful_qr (tests.test_gui_generation.GUIGenerationTests.test_whitespace_warning_remains_visible_with_a_successful_qr) ... ok\ntest_external_links_files_and_embedded_resources_are_not_opened (tests.test_information.InformationTests.test_external_links_files_and_embedded_resources_are_not_opened) ... ok\ntest_f1_opens_information_from_the_generation_page (tests.test_information.InformationTests.test_f1_opens_information_from_the_generation_page) ... ok\ntest_help_does_not_turn_a_stale_draft_or_failed_result_into_success (tests.test_information.InformationTests.test_help_does_not_turn_a_stale_draft_or_failed_result_into_success) ... ok\ntest_internal_sections_scroll_and_back_link_returns_to_start (tests.test_information.InformationTests.test_internal_sections_scroll_and_back_link_returns_to_start) ... ok\ntest_navigation_preserves_success_request_image_and_save_ability (tests.test_information.InformationTests.test_navigation_preserves_success_request_image_and_save_ability) ... ok\ntest_opening_and_leaving_help_never_submits_a_request (tests.test_information.InformationTests.test_opening_and_leaving_help_never_submits_a_request) ... ok\ntest_save_after_help_still_exports_current_qr_without_regenerating (tests.test_information.InformationTests.test_save_after_help_still_exports_current_qr_without_regenerating) ... ok\ntest_user_html_does_not_enter_help_and_help_is_read_only (tests.test_information.InformationTests.test_user_html_does_not_enter_help_and_help_is_read_only) ... ok\n\n----------------------------------------------------------------------\nRan 32 tests in 4.965s\n\nOK\n"
+  },
+  "source_sha256": {
+    "qr_app/presentation/theme.py": "f9d0da8afdca8526b42b2a435a85818bf235f79bdc892b76277816456b447b29"
+  },
+  "scope": "Windows native hidden message boxes. No animations implemented.",
+  "limitations": [
+    "Offscreen message-box capture terminated in the Qt platform backend; native Windows capture and input checks passed."
+  ]
+}

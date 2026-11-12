@@ -1,0 +1,17 @@
+test_external_links_files_and_embedded_resources_are_not_opened (tests.test_information.InformationTests.test_external_links_files_and_embedded_resources_are_not_opened) ... ok
+test_f1_opens_information_from_the_generation_page (tests.test_information.InformationTests.test_f1_opens_information_from_the_generation_page) ... ok
+test_help_does_not_turn_a_stale_draft_or_failed_result_into_success (tests.test_information.InformationTests.test_help_does_not_turn_a_stale_draft_or_failed_result_into_success) ... ok
+test_internal_sections_scroll_and_back_link_returns_to_start (tests.test_information.InformationTests.test_internal_sections_scroll_and_back_link_returns_to_start) ... ok
+test_navigation_preserves_success_request_image_and_save_ability (tests.test_information.InformationTests.test_navigation_preserves_success_request_image_and_save_ability) ... ok
+test_opening_and_leaving_help_never_submits_a_request (tests.test_information.InformationTests.test_opening_and_leaving_help_never_submits_a_request) ... ok
+test_save_after_help_still_exports_current_qr_without_regenerating (tests.test_information.InformationTests.test_save_after_help_still_exports_current_qr_without_regenerating) ... ok
+test_user_html_does_not_enter_help_and_help_is_read_only (tests.test_information.InformationTests.test_user_html_does_not_enter_help_and_help_is_read_only) ... ok
+test_input_rules_link_preserves_draft_and_submitted_result (tests.test_soft_ui.SoftUITests.test_input_rules_link_preserves_draft_and_submitted_result) ... ok
+test_manual_collapse_preserves_current_page_and_request (tests.test_soft_ui.SoftUITests.test_manual_collapse_preserves_current_page_and_request) ... ok
+test_narrow_window_reflows_both_pages_and_keeps_navigation_usable (tests.test_soft_ui.SoftUITests.test_narrow_window_reflows_both_pages_and_keeps_navigation_usable) ... ok
+test_sidebar_buttons_and_existing_shortcuts_keep_selection_in_sync (tests.test_soft_ui.SoftUITests.test_sidebar_buttons_and_existing_shortcuts_keep_selection_in_sync) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 3.779s
+
+OK

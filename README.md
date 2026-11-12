@@ -1,9 +1,33 @@
-# QR 基础编码核心（开发入口）
+# QR Generator（CLI 与桌面应用）
 
 这是依据 `项目规划/10_公共接口与修改权限规范.md` 契约 1.0 建立的开发骨架。
 当前已完成 Stage1：共享接口、Byte/RS/矩阵/格式信息/固定 Mask0、CLI、五份正式 demo 与本机验收文档。
 真实文件及逐项说明见[Stage1证据入口](evidence/README.md)。
+完整开发顺序、模块交接、25步轨迹与历史验证版本见[Stage1开发流程梳理](docs/stage1_development_review.md)。
 本文件是开发使用说明，最终评分用 README 和反思仍需团队根据真实实现自行撰写。
+
+## 正式桌面应用
+
+PyQt5文本输入与生成页面已实现。在项目根目录使用已准备的`.venv`启动：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 main_gui.py
+```
+
+在窗口中输入文字 → 点击`Generate` → 查看二维码 → 点击`Save PNG`。
+字节数实时显示，基础限制仍为ISO-8859-1、17字节、V1/L/Mask0。编辑草稿不会自动生成；旧结果明确标记，生成失败清除旧图并禁用保存。
+桌面应用采用柔和极简主题：灰白工作区、圆角输入/预览卡片、深灰主按钮，以及可折叠的左侧导航。
+默认窗口可直接看到生成和保存按钮，小窗口自动上下排版并纵向滚动。71项前端相关测试通过。
+新版操作、新旧截图对比和安全切回旧版的方法见[界面改版说明](docs/soft_minimal_ui.md)。
+Generate、Save PNG 和 Clear input 已加入[果冻按压与回弹](docs/jelly_buttons.md)，可通过 `--reduced-motion` 关闭。
+新版作为正式桌面界面，整合方式、旧版保留及剩余验收见[桌面版本整合说明](docs/stage2_desktop_release.md)。
+早期操作与状态说明见[正式生成页面](docs/gui_generation.md)。左侧`Information`提供说明，F1也可打开；手机扫码和机房人工验收仍待完成。
+
+## Information
+
+Information已实现，包含信息模型、ISO-8859-1/容量/换行规则、数据完整性、错误处理、隐私安全、PNG保存与扫码说明。
+支持分节跳转和返回生成页，不自动打开外部网址。切页不会重新生成、丢失草稿或改变当前结果状态。
+初版的58项前端测试及实际窗口交互记录见[Information说明](docs/information.md)；主题、截图和后续验证入口见[界面改版说明](docs/soft_minimal_ui.md)。
 
 ## 安装与检查
 
@@ -15,7 +39,7 @@ Python 3.13.9 已在当前机器完成升级和验证，教学机房环境仍待
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-gui.txt
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
@@ -25,8 +49,55 @@ python -m venv .venv
 python -m unittest discover -s tests -v
 ```
 
-本次测试在现有解释器运行；新建虚拟环境和重新安装依赖尚未验证。
+项目内`.venv`已安装界面依赖，并在 Python3.13.9 下完成 **210项完整回归测试，无跳过**，覆盖编码核心、CLI、渲染、PNG保存及GUI。
+实际输出、源码哈希、编译和依赖检查见[整合前完整验证](docs/validation/pre_merge_full_20261112.json)。仅运行CLI时可只安装 `requirements.txt`。
 测试使用标准库 `unittest`，不需要额外安装 pytest。
+
+## Stage2界面环境
+
+第1步环境准备已完成：项目内`.venv`使用Python3.13.9、PyQt5 5.15.11、Qt5.15.2和matplotlib3.10.7。
+离屏与Windows原生隐藏窗口均通过画布绘制、事件循环、自动关闭和依赖检查。
+已通过显式Unicode插件路径解决中文目录下Qt平台插件无法定位的问题；后续GUI入口先调用
+`qr_app.presentation.qt_environment.configure_qt_environment()`。
+
+环境配置、完整依赖锁定、验证记录与后续启动顺序见[Stage2界面环境说明](docs/stage2_gui_environment.md)。
+GUI开发使用`.venv\Scripts\python.exe`。可在项目根目录打开约10秒的诊断窗口：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 scripts/check_gui_environment.py --platform windows --visible --close-after-ms 10000
+```
+
+该窗口仅验证环境，显示的诊断棋盘不是二维码；真实二维码渲染见下一节。
+
+## Stage2二维码渲染
+
+matplotlib渲染已完成：0白1黑、默认4模块白边、最近邻绘制、正方形比例；默认V1图像为290×290像素。
+`qr_app/presentation/renderer.py`提供`RenderOptions`、`render_qr()`和`draw_matrix()`，不修改原矩阵、不自动保存。
+
+在项目根目录打开真实二维码预览：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 scripts/preview_qr.py --text "known"
+& '.\.venv\Scripts\python.exe' -X utf8 -m unittest tests.test_renderer -v
+```
+
+13项渲染专项测试、5个真实图像的本机OpenCV解码及Qt离屏预览通过。
+用法、接口、验证图与边界见[渲染说明](docs/renderer.md)和[本次验证记录](docs/validation/renderer_python3139_20261112.json)。
+轻量预览窗口提供Save PNG按钮；正式窗口内输入、生成和Information使用`main_gui.py`。手机扫码仍待人工验收。
+
+## Stage2 PNG保存
+
+PNG保存已实现：在预览窗口点击`Save PNG`选择路径，已有文件确认后才覆盖；取消或失败保留当前二维码。
+也可以在终端直接保存：
+
+```powershell
+New-Item -ItemType Directory -Force outputs
+& '.\.venv\Scripts\python.exe' -X utf8 scripts/preview_qr.py --text "Hello QR" --png-out outputs/hello.png --no-preview
+```
+
+再次保存到同名文件需明确加`--overwrite`。父目录必须存在；保存前完整编码到临时文件，失败不会破坏旧文件。
+31项保存/对话框/渲染测试、实际Qt按钮保存以及五张导出图的本机解码通过。
+接口、覆盖规则和退出码见[PNG保存说明](docs/png_export.md)，实际结果见[验证记录](docs/validation/png_export_python3139_20261112.json)。
 
 ## 运行 CLI
 
@@ -87,7 +158,10 @@ CLI 已调用这个实例方法，未来 GUI 也复用同一流程。
 | `qr_app/resources/qr_capacity_v1_v2.json` | 当前仅有 V1/L 规格，附来源和待复核状态 |
 | `qr_app/extensions/` | 预留四项个人扩展位置，当前不自动导入或启用 |
 | `main_cli.py` | CLI 启动脚本，UTF-8 标准输入输出 |
-| `qr_app/presentation/` | CLI 输入/结果展示、显式步骤报告导出；GUI 待实现 |
+| `qr_app/presentation/` | CLI、步骤报告、matplotlib渲染、PNG保存、Qt环境和正式生成页面 |
+| `main_gui.py` | 正式桌面应用入口，窗口内输入、生成、错误反馈与保存 |
+| `qr_app/presentation/image_export.py` | 独立PNG保存、覆盖保护、实际制品返回 |
+| `scripts/preview_qr.py` | Qt二维码预览、Save PNG按钮与终端显式PNG导出 |
 | `tests/` | 公共模型、编码/纠错/矩阵与编排测试 |
 | `docs/shared_skeleton.md` | 接口接入、实际环境、测试范围及合并前事项 |
 | `evidence/` | 五份正式Stage1 demo、运行记录、制品哈希与本机验收说明；扫码证据待Stage2 |
@@ -109,6 +183,6 @@ Python 3.13.9 下当前菜单版本通过 **139 项测试**（含42项 CLI/导�
 qrcode/OpenCV仅作离线验证，应用和常规测试没有新增依赖。
 团队非作者评审、正式 CI 和完整二维码功能仍待完成。
 
-Stage1本机交付已完成；下一步进入Stage2：图像渲染/PNG保存、PyQt5 GUI和真实手机扫码。
-当前CLI输出数值矩阵和步骤报告，尚不显示或保存二维码图片。
+Stage1本机交付已完成；Stage2环境、渲染、PNG保存、正式生成页面及Information均已实现，下一步完成原生界面、显示缩放、手机扫码、机房复现和完整阶段验收。
+main_cli.py继续输出数值矩阵和步骤报告；图像预览与保存使用scripts/preview_qr.py。
 测试中的模拟矩阵仅用于检查编排与故障隔离；Stage1正确性另有独立参考和真实demo支撑。

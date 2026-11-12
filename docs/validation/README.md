@@ -1,5 +1,28 @@
 # 共享骨架与编码验证记录
 
+新版桌面应用整合前已完成 **210项完整回归，无跳过**，覆盖139项核心/CLI与71项前端相关测试，并通过编译和依赖检查。
+[本轮完整记录](pre_merge_full_20261112.json)保存真实测试输出索引与源码哈希，[原始输出](pre_merge_full_tests_20261112.txt)保留全部210项结果。
+此前记录按各自源码版本保留；旧记录中的“未重跑Stage1”等描述是当时状态。
+
+Information已完成：[58项前端测试、Qt说明导航/返回/保存及图像解码](information_python3139_20261112.json)。
+新增8项Information测试，原生成/保存/渲染50项回归；原记录及截图按其对应源码保留。
+窗口说明、输入规则与隐私安全截图见[Information说明](../information.md)。
+
+正式生成页已完成：[50项前端测试、Qt窗口交互与截图/PNG解码](gui_generation_python3139_20261112.json)。
+上传前的[GUI发布复验](gui_generation_pre_publish_python3139_20261112.json)再次全部通过，并核对真实GUI输入的换行0A和空格20。
+其中新增19项GUI测试，保存/渲染回归31项；不代表Stage1的139项历史测试已重新执行。
+本轮修复离屏字体和画布尺寸反馈问题，窗口截图见[正式GUI说明](../gui_generation.md)；旧环境/预览记录仍按其当时源码哈希理解。
+
+Stage2 PNG保存已完成：[31项保存/对话框/渲染测试、Qt按钮保存与五张图解码](png_export_python3139_20261112.json)。
+GitHub上传前的[PNG保存复验记录](png_export_pre_publish_python3139_20261112.json)另含真实测试及Qt操作输出，全部通过。
+[known保存样例](png_saved_known_20261112.png)由实际保存接口生成，保存失败与生成失败分别处理。
+
+Stage2渲染已完成：[13项专项测试、5个本机图像解码及Qt离屏预览](renderer_python3139_20261112.json)。
+GitHub上传前另有[发布前复验](renderer_pre_publish_python3139_20261112.json)，全部通过；保留原始记录，并增加仓库LF文本哈希供提交后核对。
+本次没有重跑Stage1全量测试；独立渲染像素核对与真实服务接入均通过。
+[known验证图](renderer_known_preview_20261112.png)是渲染阶段显式写出的验证制品；当前PNG保存接口及预览脚本版本见上方保存记录。
+环境准备另见[离屏记录](gui_environment_offscreen_python3139_20261112.json)与[Windows原生记录](gui_environment_windows_python3139_20261112.json)。
+
 当前菜单版本：[Python3.13.9，139项测试](interactive_input_python3139_20261112_000620.json)。
 包含42项CLI/报告测试、编译与依赖检查，真实子进程覆盖单行、多行、非法菜单选项、空输入、
 退出与EOF、原始stdin，以及五个作业样例。新菜单采用1/2/0选择，单独一行:end结束多行。

@@ -1,0 +1,216 @@
+{
+  "checked_at": "2026-11-12T00:48:09.423725+00:00",
+  "scope": "PNG export, command and Qt save action; local decoder only",
+  "code_base_commit": "097b5268236ae9e6a01c437c5a56b9e583d28228",
+  "branch": "feature/stage2-gui-environment",
+  "source_dirty": true,
+  "python": "3.13.9",
+  "executable": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+  "packages": {
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.7",
+    "PyQt5": "5.15.11",
+    "pillow": "13.0.0"
+  },
+  "checks": {
+    "focused_tests": true,
+    "known_pixels_match_rendered_reference": true,
+    "five_complete_pngs": true,
+    "five_local_decodes": true,
+    "qt_window_action": true,
+    "compile": true
+  },
+  "focused_tests": {
+    "record_type": "summary of completed local focused test run",
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "tests.test_image_export",
+      "tests.test_png_dialog",
+      "tests.test_renderer",
+      "-v"
+    ],
+    "exit_code": 0,
+    "tests_run": 31,
+    "all_passed": true,
+    "skipped": 0
+  },
+  "source_sha256": {
+    "qr_app/presentation/image_export.py": "ea91294210764176f462222558dd7462a48560b7786f4a08cebfdecca311046d",
+    "qr_app/presentation/png_dialog.py": "bb5d8ff558e4dfd87cffef1fcc1d72a98c93a1564b6824a62c8b69bc1f717f3c",
+    "scripts/preview_qr.py": "0da1f546f385483211311b2daf700d19b0c595bdf9974aeb816a91539b96c1c4",
+    "qr_app/presentation/renderer.py": "48d71f339b3d4f77b72888619b040099e281cf75cbea27370d1a18441eb31934",
+    "qr_app/presentation/qt_environment.py": "0581aaf005e81e5f86e8e8e41fe31ad9e85602b6a9a2e98c289152506f15d929",
+    "tests/test_image_export.py": "d831ff59ede423e892492613585b760b879e1675737350200c6e13435cd01bcf",
+    "tests/test_png_dialog.py": "d01c5622e60366258771a907458ae4bcb28f3f0a57f084dd452579b13dc93c4a",
+    "tests/test_renderer.py": "916ec931344181b611bdb98a7d83e46fa7044acc101266f82e14d08191a0d432"
+  },
+  "saved_cases": [
+    {
+      "input": "known",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\png_saved_known_20261112.png",
+      "media_type": "image/png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "opaque": true,
+      "only_black_white": true,
+      "sha256": "abc4d0ed32e5400bf9bb8a17903a7e2a9ba62241d31020dafada57441e9b4f2b"
+    },
+    {
+      "input": "We've succeeded!",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\export_case_2.png",
+      "media_type": "image/png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "opaque": true,
+      "only_black_white": true,
+      "sha256": "61695e07fd2ff88f84dac0fcba6b6b2bcb007e9b7919949587744aed45a6af31"
+    },
+    {
+      "input": "~¡256_-_aA&ñ",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\export_case_3.png",
+      "media_type": "image/png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "opaque": true,
+      "only_black_white": true,
+      "sha256": "5d3e01274b3b78cd20011ce0143d2bc99d93617a705454fd90600b4f0a76be9c"
+    },
+    {
+      "input": "AAAAAAAAAAAAAAAAA",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\export_case_4.png",
+      "media_type": "image/png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "opaque": true,
+      "only_black_white": true,
+      "sha256": "6faec2192d0b1b7f3826ea8c3aaac19ee4ea7a36cf7e858bbd76cb710a1f8ce2"
+    },
+    {
+      "input": " ",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\export_case_5.png",
+      "media_type": "image/png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "opaque": true,
+      "only_black_white": true,
+      "sha256": "be156e5e60c4f25454df7772acb7ece405e800a9ba5051ca640640203bb96034"
+    }
+  ],
+  "offline_decoder": {
+    "command": [
+      "D:\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-c",
+      "import sys,json,cv2,numpy as np\nout=[]\nfor item in json.load(sys.stdin):\n    image=cv2.imdecode(np.fromfile(item['path'],dtype=np.uint8),cv2.IMREAD_GRAYSCALE)\n    raw,points,_=cv2.QRCodeDetector().detectAndDecodeBytes(image)\n    text=raw.decode('utf-8')\n    out.append({'input':item['input'],'decoded_text':text,'passed':text==item['input'] and points is not None})\nprint(json.dumps({'opencv':cv2.__version__,'cases':out},ensure_ascii=False))"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"opencv\": \"4.12.0\", \"cases\": [{\"input\": \"known\", \"decoded_text\": \"known\", \"passed\": true}, {\"input\": \"We've succeeded!\", \"decoded_text\": \"We've succeeded!\", \"passed\": true}, {\"input\": \"~¡256_-_aA&ñ\", \"decoded_text\": \"~¡256_-_aA&ñ\", \"passed\": true}, {\"input\": \"AAAAAAAAAAAAAAAAA\", \"decoded_text\": \"AAAAAAAAAAAAAAAAA\", \"passed\": true}, {\"input\": \" \", \"decoded_text\": \" \", \"passed\": true}]}\r\n",
+    "stderr": ""
+  },
+  "decoded_cases": {
+    "opencv": "4.12.0",
+    "cases": [
+      {
+        "input": "known",
+        "decoded_text": "known",
+        "passed": true
+      },
+      {
+        "input": "We've succeeded!",
+        "decoded_text": "We've succeeded!",
+        "passed": true
+      },
+      {
+        "input": "~¡256_-_aA&ñ",
+        "decoded_text": "~¡256_-_aA&ñ",
+        "passed": true
+      },
+      {
+        "input": "AAAAAAAAAAAAAAAAA",
+        "decoded_text": "AAAAAAAAAAAAAAAAA",
+        "passed": true
+      },
+      {
+        "input": " ",
+        "decoded_text": " ",
+        "passed": true
+      }
+    ]
+  },
+  "qt_window_action": {
+    "record_type": "summary of completed offscreen Qt button run",
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tmp/check_png_window.py"
+    ],
+    "exit_code": 0,
+    "script_sha256": "68962f5c528809721ded7499339d3b4fdf9b99d0c9d21b1054e65c05902f462a",
+    "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\window_saved.png",
+    "pixel_size": [
+      422,
+      388
+    ],
+    "sha256": "7afa17f2b5fa5cda5a0e04381c28e3c58587e428b0bc6afea1aa46c1854848b5",
+    "checks": {
+      "button_clicked": true,
+      "same_canvas": true,
+      "saved_pixels_match_canvas": true,
+      "canvas_draw_after_save": true,
+      "single_generation": true,
+      "single_save": true,
+      "success_message": true,
+      "no_save_error": true,
+      "normal_close": true
+    }
+  },
+  "compile": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "compileall",
+      "-q",
+      "qr_app/presentation/image_export.py",
+      "qr_app/presentation/png_dialog.py",
+      "scripts/preview_qr.py",
+      "qr_app/presentation/renderer.py",
+      "qr_app/presentation/qt_environment.py",
+      "tests/test_image_export.py",
+      "tests/test_png_dialog.py",
+      "tests/test_renderer.py"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "published_png": {
+    "path": "docs/validation/png_saved_known_20261112.png",
+    "sha256": "abc4d0ed32e5400bf9bb8a17903a7e2a9ba62241d31020dafada57441e9b4f2b",
+    "input": "known"
+  },
+  "all_passed": true,
+  "completed_at": "2026-11-12T00:48:12.006513+00:00"
+}

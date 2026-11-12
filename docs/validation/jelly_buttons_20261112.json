@@ -1,0 +1,376 @@
+{
+  "platform": "windows",
+  "QT_SCALE_FACTOR": 1.6,
+  "device_pixel_ratio": 3.1999969482421875,
+  "samples": [
+    {
+      "phase": "idle",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "pressed",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "pressed",
+      "scale": [
+        0.9610799999999999,
+        0.9221600000000001
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "pressed",
+      "scale": [
+        0.96,
+        0.92
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "pressed",
+      "scale": [
+        0.96,
+        0.92
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "pressed",
+      "scale": [
+        0.96,
+        0.92
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0158847736625514,
+        1.0370644718792867
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0269511111111111,
+        1.062885925925926
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.02997,
+        1.06993
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0136442889182413,
+        1.0334148567908028
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        0.9945455173280957,
+        0.9906939203391614
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        0.9985072886297376,
+        0.997201166180758
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    },
+    {
+      "phase": "rebound",
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "geometry": [
+        25,
+        358,
+        220,
+        42
+      ]
+    }
+  ],
+  "painted_widths_pixels": [
+    704,
+    704,
+    677,
+    676,
+    676,
+    676,
+    704,
+    715,
+    723,
+    725,
+    714,
+    700,
+    703,
+    704,
+    704,
+    704,
+    704,
+    704,
+    704,
+    704,
+    704,
+    704,
+    704
+  ],
+  "generate_calls": 2,
+  "secondary_peak": 1.0449382716049382,
+  "geometry_unchanged": true,
+  "qr_pixels_unchanged": true,
+  "reduced_motion_passed": true,
+  "clear_disabled_motion_stopped": true,
+  "gif": "docs/validation/jelly_button_windows_20261112.gif",
+  "states": "docs/validation/jelly_button_states_20261112.png",
+  "passed": true,
+  "branch": "feature/soft-minimal-ui",
+  "parent_commit": "062317c03c3c3825b61746ac78b9ed47f486cd7e",
+  "tests": {
+    "count": 69,
+    "exit_code": 0,
+    "skipped": 0,
+    "output_file": "docs/validation/jelly_buttons_tests_20261112.txt"
+  },
+  "cli_reduced_motion_startup_exit_code": 0,
+  "source_sha256": {
+    "qr_app/presentation/jelly_button.py": "f5a07e639eab8921959b20e3bbdca783c5591e7a572437acf9a6a7f065e774a7",
+    "qr_app/presentation/generation_panel.py": "261dc8b9522f43408f636d575c570b8bd1d6d016dd1abaef286bde0846356e4f",
+    "qr_app/presentation/gui.py": "5fafb71e7bc6e7f5c11cf18dc4b11cda8d5c542a60eb1875be75972cbb5fa24e",
+    "tests/test_jelly_button.py": "73073b36b4216cfab03c20786ec70dfb04ee2e4decf96879fb5b75ab6e49b2a9"
+  },
+  "artifact_sha256": {
+    "docs/validation/jelly_button_windows_20261112.gif": "0835549397842c53d94543b9483ece4672d9a4e695a3dbef5b344af0773c28c8",
+    "docs/validation/jelly_button_states_20261112.png": "a8f7b6f41fbc570c6ba1c15a526b04708bb92e1528a7a2d77c3bc30d8a889e4d",
+    "docs/validation/jelly_buttons_tests_20261112.txt": "20c62d107d06dbb9e7efd17d5cf9e8ac0cc028cf68ac55de795c9944c38b8a10"
+  },
+  "gif_frames": 12,
+  "unchanged_paths": [
+    "qr_app/core",
+    "qr_app/service.py",
+    "qr_app/models.py",
+    "qr_app/resources",
+    "qr_app/presentation/renderer.py",
+    "qr_app/presentation/image_export.py",
+    "qr_app/presentation/png_dialog.py",
+    "qr_app/presentation/theme.py"
+  ],
+  "limits": [
+    "Windows native checks used hidden automatically closed widgets.",
+    "Synchronous generation pauses rendering; release feedback resumes when controls become available.",
+    "No dialog fade or sidebar motion added."
+  ]
+}

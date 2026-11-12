@@ -1,0 +1,172 @@
+{
+  "date": "2026-11-12",
+  "new_branch": "feature/soft-minimal-ui",
+  "new_parent": "25bfb327f116d78de53d7daff2eff57989139f25",
+  "previous_branch": "feature/stage2-gui-environment",
+  "previous_commit": "1f14ba73e7c1a01e19f18b78860af0ae1ecab401",
+  "tests": [
+    {
+      "version": "new",
+      "count": 62,
+      "exit_code": 0,
+      "output_file": "docs/validation/ui_polish_new_tests_20261112.txt"
+    },
+    {
+      "version": "previous",
+      "count": 58,
+      "exit_code": 0,
+      "output_file": "docs/validation/ui_polish_previous_tests_20261112.txt"
+    }
+  ],
+  "captures": [
+    {
+      "checkout": "new",
+      "scale": "1.6",
+      "captures": [
+        "docs\\validation\\ui_polish_new_scale1_6_empty_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_6_generated_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_6_information_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_6_dropdown_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_6_narrow_bottom_20261112.png"
+      ],
+      "platform": "offscreen",
+      "empty_error": "EMPTY_INPUT: Enter a message or URL before generating a QR code.",
+      "dropdown_keyboard_selected": "model",
+      "dropdown_escape_preserved_selection": true,
+      "information_wheel_scroll": 60,
+      "navigation_preserved_result": true,
+      "narrow_save_visible": true,
+      "passed": true
+    },
+    {
+      "checkout": "new",
+      "scale": "1.6",
+      "captures": [
+        "docs\\validation\\ui_polish_new_scale1_6_windows_empty_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_6_windows_generated_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_6_windows_information_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_6_windows_dropdown_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_6_windows_narrow_bottom_20261112.png"
+      ],
+      "platform": "windows",
+      "empty_error": "EMPTY_INPUT: Enter a message or URL before generating a QR code.",
+      "dropdown_keyboard_selected": "model",
+      "dropdown_escape_preserved_selection": true,
+      "information_wheel_scroll": 60,
+      "navigation_preserved_result": true,
+      "narrow_save_visible": true,
+      "passed": true
+    },
+    {
+      "checkout": "new",
+      "scale": "1",
+      "captures": [
+        "docs\\validation\\ui_polish_new_scale1_empty_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_generated_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_information_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_dropdown_20261112.png",
+        "docs\\validation\\ui_polish_new_scale1_narrow_bottom_20261112.png"
+      ],
+      "platform": "offscreen",
+      "empty_error": "EMPTY_INPUT: Enter a message or URL before generating a QR code.",
+      "dropdown_keyboard_selected": "model",
+      "dropdown_escape_preserved_selection": true,
+      "information_wheel_scroll": 60,
+      "navigation_preserved_result": true,
+      "narrow_save_visible": true,
+      "passed": true
+    },
+    {
+      "checkout": "previous",
+      "scale": "1",
+      "captures": [
+        "docs\\validation\\ui_polish_previous_scale1_empty_20261112.png",
+        "docs\\validation\\ui_polish_previous_scale1_generated_20261112.png",
+        "docs\\validation\\ui_polish_previous_scale1_information_20261112.png",
+        "docs\\validation\\ui_polish_previous_scale1_dropdown_20261112.png"
+      ],
+      "platform": "offscreen",
+      "empty_error": "EMPTY_INPUT: Enter a message or URL before generating a QR code.",
+      "dropdown_keyboard_selected": "model",
+      "dropdown_escape_preserved_selection": true,
+      "information_wheel_scroll": 60,
+      "navigation_preserved_result": true,
+      "passed": true
+    }
+  ],
+  "entry_settings": {
+    "font": "Segoe UI 10",
+    "high_dpi_scaling": true,
+    "high_dpi_pixmaps": true
+  },
+  "decode": {
+    "opencv": "4.12.0",
+    "results": [
+      {
+        "file": "docs/validation/ui_polish_new_scale1_6_generated_20261112.png",
+        "text": "known",
+        "passed": true
+      },
+      {
+        "file": "docs/validation/ui_polish_new_scale1_6_windows_generated_20261112.png",
+        "text": "known",
+        "passed": true
+      },
+      {
+        "file": "docs/validation/ui_polish_new_scale1_generated_20261112.png",
+        "text": "known",
+        "passed": true
+      },
+      {
+        "file": "docs/validation/ui_polish_previous_scale1_generated_20261112.png",
+        "text": "known",
+        "passed": true
+      }
+    ]
+  },
+  "protected_paths_unchanged": [
+    "qr_app/core",
+    "qr_app/models.py",
+    "qr_app/service.py",
+    "qr_app/resources",
+    "qr_app/presentation/renderer.py",
+    "qr_app/presentation/image_export.py"
+  ],
+  "source_sha256": {
+    "qr_app/presentation/generation_panel.py": "f76eea2a0a832c84758c6f14bc2f0a03e88ece6645373147f596c9f622af559f",
+    "qr_app/presentation/gui_messages.py": "cad8c94022a7fc6b4f04a6ee0e3b424fd2292afe537dc65eeb3ce578e3cb180c",
+    "qr_app/presentation/png_dialog.py": "3d89ad4ef950373585292dcfc819ec9ec6e7b28d9255fb4141a89462ded2c5f1",
+    "qr_app/presentation/information.py": "9a05b3ed0610942ea61348b09d46df4f08c114ee4b91a85cf9983e98eac42ee6",
+    "qr_app/presentation/theme.py": "ae9bb3e3b8074b06abdb3fdd84d144f29c84f51a1a537e8446f6e6ccf7377261",
+    "qr_app/presentation/assets/chevron-down.svg": "60ae254fdccbe0a2fc99f563894422cc2a1203ba661ae790811fc7470d81f7d1",
+    "tests/test_gui_generation.py": "f1f3b113712bf33d88ce45bf734344994cf46e7177e99a40fa569b3aa1ce3856",
+    "tests/test_png_dialog.py": "765ac1cea7124c5e910bc2d085073b272f7fa36a70a599021c3a42141418d5fc"
+  },
+  "artifact_sha256": {
+    "docs/validation/ui_polish_new_scale1_6_dropdown_20261112.png": "170b522caa47dd72de8c7b4b3e1bb3e64cba1990fe5adc5c3dadd17dacd6c58d",
+    "docs/validation/ui_polish_new_scale1_6_empty_20261112.png": "2affa9aed160ba380f9e2310b0ab2d3742bb8bb4f7e64780a9a07ca475c0fe46",
+    "docs/validation/ui_polish_new_scale1_6_generated_20261112.png": "eb80e7177793b9746a1cfda1ec2d904ee8cf65df4581f70cd35eb26b49e100c7",
+    "docs/validation/ui_polish_new_scale1_6_information_20261112.png": "6a0970866fc16d75b25fa11187ccda8689d9c2976c7bce7521a460fdea005ae6",
+    "docs/validation/ui_polish_new_scale1_6_narrow_bottom_20261112.png": "285a64fe1352d393d53f95f8979ab919e0c1b45538fa9a4e3ad8114850a574f6",
+    "docs/validation/ui_polish_new_scale1_6_windows_dropdown_20261112.png": "58a3276a73de821aa0f20b4cb28d85968cb931f97183a74fb3bfb9b545d63bd2",
+    "docs/validation/ui_polish_new_scale1_6_windows_empty_20261112.png": "93ef1445d20d1f08d0acf5cb2978ce826c3495a51da16014745c17ea0c568e24",
+    "docs/validation/ui_polish_new_scale1_6_windows_generated_20261112.png": "643d3b7a51a3b893a581484005f8a83cc4f5adae92974835f924ed73234d9fbf",
+    "docs/validation/ui_polish_new_scale1_6_windows_information_20261112.png": "3c5bf5d30a7d9250c8e61f947b48314b71a7ad490e0475e0dc1d85d3ae8023a1",
+    "docs/validation/ui_polish_new_scale1_6_windows_narrow_bottom_20261112.png": "e3c40390306878536c300f10c57a285aef557a290db3c1dfafe14570acc901cc",
+    "docs/validation/ui_polish_new_scale1_dropdown_20261112.png": "3514bf23ae68d44edd84b7dc958113ded44171e809b7f275d68a64a7ffa67502",
+    "docs/validation/ui_polish_new_scale1_empty_20261112.png": "50e49a90077121f06bb14499257a63f72dea8f83c87e0ce495b376ead36869f7",
+    "docs/validation/ui_polish_new_scale1_generated_20261112.png": "d04c2f1e844993ee36bb158cc73d9788adc876d5ac8946b4658f6022280339d2",
+    "docs/validation/ui_polish_new_scale1_information_20261112.png": "0dbcb5d2dc6ce12f3b206c1f470678a08bd5e048001592eb28d9968cc9496d60",
+    "docs/validation/ui_polish_new_scale1_narrow_bottom_20261112.png": "f0a2c0bcbbacf638a8e62f836f499a5cb4e342bfe4b1cc0ab2d22e8389f49b56",
+    "docs/validation/ui_polish_new_tests_20261112.txt": "62a19d2f3dfd5107020e062637365c9087756aee70fe6c54b3a37baff467b5a7",
+    "docs/validation/ui_polish_previous_scale1_dropdown_20261112.png": "20e5a0ffbb2a204c6fe02df1b203083f6b792578abfccabedaae04a6bb6fa595",
+    "docs/validation/ui_polish_previous_scale1_empty_20261112.png": "867e55b4ef4a8cd597124df8f028a3e44359de1675c2d2f297602462ecf51f06",
+    "docs/validation/ui_polish_previous_scale1_generated_20261112.png": "e3ab4f72739b9e400d41d6f21ff356f77e27e006c8bc7535699ccf18e65eb14b",
+    "docs/validation/ui_polish_previous_scale1_information_20261112.png": "2bb32a95aa9de6a576d4c633d76febe6c267c98d38122e9acd5d0ca85793b673",
+    "docs/validation/ui_polish_previous_tests_20261112.txt": "5166f90566ccb4222eb14e74849758cb091bf1da2cef140b80a100d0cf388fac"
+  },
+  "limits": [
+    "Windows checks used automatically closed hidden widgets.",
+    "Multi-monitor manual acceptance and phone scanning are still pending."
+  ]
+}
