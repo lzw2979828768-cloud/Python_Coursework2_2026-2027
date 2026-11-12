@@ -62,11 +62,11 @@ git switch feature/stage2-gui-environment
 重新使用新版：
 
 ```powershell
-git switch feature/soft-minimal-ui
+git switch main
 & '.\.venv\Scripts\python.exe' -X utf8 main_gui.py
 ```
 
-若之后又改过代码，应先保存到提交或暂存，再切分支。无需 reset，也无需删除任何版本。本轮保存为本地提交，未自动上传或合并。
+若之后又改过代码，应先保存到提交或暂存，再切分支。无需 reset，也无需删除任何版本。`feature/soft-minimal-ui` 保留开发历史；正式版本从 `main` 使用，整合流程和验证见[桌面版本整合说明](stage2_desktop_release.md)。
 
 ## 实现位置
 

@@ -1,4 +1,4 @@
-# QR 基础编码核心（开发入口）
+# QR Generator（CLI 与桌面应用）
 
 这是依据 `项目规划/10_公共接口与修改权限规范.md` 契约 1.0 建立的开发骨架。
 当前已完成 Stage1：共享接口、Byte/RS/矩阵/格式信息/固定 Mask0、CLI、五份正式 demo 与本机验收文档。
@@ -16,10 +16,11 @@ PyQt5文本输入与生成页面已实现。在项目根目录使用已准备的
 
 在窗口中输入文字 → 点击`Generate` → 查看二维码 → 点击`Save PNG`。
 字节数实时显示，基础限制仍为ISO-8859-1、17字节、V1/L/Mask0。编辑草稿不会自动生成；旧结果明确标记，生成失败清除旧图并禁用保存。
-当前分支采用柔和极简主题：灰白工作区、圆角输入/预览卡片、深灰主按钮，以及可折叠的左侧导航。
-默认窗口可直接看到生成和保存按钮，小窗口自动上下排版并纵向滚动。69项前端相关测试通过。
+桌面应用采用柔和极简主题：灰白工作区、圆角输入/预览卡片、深灰主按钮，以及可折叠的左侧导航。
+默认窗口可直接看到生成和保存按钮，小窗口自动上下排版并纵向滚动。71项前端相关测试通过。
 新版操作、新旧截图对比和安全切回旧版的方法见[界面改版说明](docs/soft_minimal_ui.md)。
-Generate、Save PNG 和 Clear input 已加入[果冻按压与回弹](docs/jelly_buttons.md)，可通过 `--reduced-motion` 关闭；69项前端相关测试通过。
+Generate、Save PNG 和 Clear input 已加入[果冻按压与回弹](docs/jelly_buttons.md)，可通过 `--reduced-motion` 关闭。
+新版作为正式桌面界面，整合方式、旧版保留及剩余验收见[桌面版本整合说明](docs/stage2_desktop_release.md)。
 早期操作与状态说明见[正式生成页面](docs/gui_generation.md)。左侧`Information`提供说明，F1也可打开；手机扫码和机房人工验收仍待完成。
 
 ## Information
@@ -38,7 +39,7 @@ Python 3.13.9 已在当前机器完成升级和验证，教学机房环境仍待
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-gui.txt
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
@@ -48,8 +49,8 @@ python -m venv .venv
 python -m unittest discover -s tests -v
 ```
 
-Stage1历史测试在现有解释器运行；Stage2已另建项目内`.venv`并安装界面依赖，见下方说明。
-尚未在新`.venv`重跑Stage1全量测试。
+项目内`.venv`已安装界面依赖，并在 Python3.13.9 下完成 **210项完整回归测试，无跳过**，覆盖编码核心、CLI、渲染、PNG保存及GUI。
+实际输出、源码哈希、编译和依赖检查见[整合前完整验证](docs/validation/pre_merge_full_20261112.json)。仅运行CLI时可只安装 `requirements.txt`。
 测试使用标准库 `unittest`，不需要额外安装 pytest。
 
 ## Stage2界面环境
