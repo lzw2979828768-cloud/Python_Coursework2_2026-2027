@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
 from ..errors import ArtifactSaveError
 from .image_export import save_figure
+from .gui_messages import PNG_SAVE_ERROR
 
 
 def save_png_dialog(parent, figure):
@@ -29,8 +30,8 @@ def save_png_dialog(parent, figure):
         overwrite = True
     try:
         artifact = save_figure(figure, target, overwrite=overwrite)
-    except ArtifactSaveError as error:
-        QMessageBox.warning(parent, "PNG save failed", error.message)
+    except ArtifactSaveError:
+        QMessageBox.warning(parent, "PNG save failed", PNG_SAVE_ERROR)
         return None
     QMessageBox.information(parent, "PNG saved", "PNG image saved successfully.")
     return artifact

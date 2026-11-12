@@ -12,10 +12,11 @@ from PyQt5.QtWidgets import (
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 
-from ..models import LogState, QRRequest, QRResult, Source
+from ..models import QRRequest, QRResult, Source
 from ..service import QRService
 from .png_dialog import save_png_dialog
 from .renderer import draw_matrix
+from .gui_messages import generation_error_text, generation_warning_texts
 
 _LOGGER = logging.getLogger(__name__)
 _COLORS = {"muted": "#53667d", "success": "#176449", "warning": "#8a5500", "error": "#b42318"}
@@ -218,7 +219,7 @@ class GenerationPanel(QWidget):
         result = self.last_result
         if not result.generation_success:
             self.state = GenerationState.FAILURE
-            self._status(f"{result.error_code}: {result.error_message}", "Could not generate", "error")
+            self._status(generation_error_text(result), "Could not generate", "error")
         elif self.display_error:
             self.state = GenerationState.DISPLAY_ERROR
             self._status("QR generation succeeded, but the image could not be displayed. Please try again.",
@@ -240,9 +241,7 @@ class GenerationPanel(QWidget):
         lines.insert(1 if result.plan else 0, f"Bytes: {byte_length}  |  Completed steps: {len(result.trace_steps)}")
         lines.append(f"Usage log: {result.logging_status.state}")
         self.details_label.setText("\n".join(lines))
-        warnings = list(result.warnings)
-        if result.logging_status.state == LogState.FAILED:
-            warnings.append("Usage log could not be written. " + (result.logging_status.message or ""))
+        warnings = generation_warning_texts(result)
         self.warning_label.setText("\n".join(warnings))
         self.warning_label.setVisible(bool(warnings))
 
