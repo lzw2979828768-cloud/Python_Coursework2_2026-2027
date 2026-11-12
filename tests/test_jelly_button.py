@@ -66,6 +66,8 @@ class JellyButtonTests(unittest.TestCase):
         button = self.panel.generate_button
         geometry = button.geometry()
         neighbor = self.panel.clear_button.geometry()
+        button.setFocus(Qt.MouseFocusReason)
+        self.app.processEvents()
         idle_width = self.painted_width(button)
         QTest.mousePress(button, Qt.LeftButton)
         QTest.qWait(90)
@@ -116,6 +118,66 @@ class JellyButtonTests(unittest.TestCase):
         self.assertGreater(max(y for x, y in samples), 1.03)
         self.service.generate_qr.assert_called_once()
         self.assertEqual(button.visualScale, QPointF(1, 1))
+
+    def test_generation_does_not_focus_rules_and_keeps_keyboard_on_the_action(self):
+        from PyQt5.QtCore import Qt
+        from PyQt5.QtTest import QTest
+        button = self.panel.generate_button
+        self.window.activateWindow()
+        button.setFocus(Qt.TabFocusReason)
+        self.app.processEvents()
+        seen = []
+        def focus_changed(old, new):
+            seen.append(new)
+        self.app.focusChanged.connect(focus_changed)
+        try:
+            for text in ("known", ""):
+                self.panel.text_input.setPlainText(text)
+                QTest.mouseClick(button, Qt.LeftButton)
+                self.app.processEvents()
+                self.assertTrue(button.hasFocus())
+                self.assertNotIn(self.panel.input_rules_button, seen)
+            # Space must generate again, rather than opening the rules page.
+            QTest.keyClick(button, Qt.Key_Space)
+            self.app.processEvents()
+            self.assertEqual(self.service.generate_qr.call_count, 3)
+            self.assertIs(self.window.tabs.currentWidget(), self.window.generation_scroll)
+            # Rules can still receive legitimate keyboard focus.
+            QTest.keyClick(button, Qt.Key_Tab)
+            self.app.processEvents()
+            self.assertTrue(self.panel.input_rules_button.hasFocus())
+        finally:
+            self.app.focusChanged.disconnect(focus_changed)
+
+    def test_save_restores_focus_and_clear_returns_focus_to_the_editor(self):
+        from PyQt5.QtCore import QEventLoop, QTimer, Qt
+        from PyQt5.QtTest import QTest
+        self.panel.generate_button.click()
+        button = self.panel.save_button
+        self.window.activateWindow()
+        button.setFocus(Qt.TabFocusReason)
+        self.app.processEvents()
+        seen = []
+        def focus_changed(old, new):
+            seen.append(new)
+        def modal_save(*args):
+            loop = QEventLoop()
+            QTimer.singleShot(40, loop.quit)
+            loop.exec()
+            return None
+        self.app.focusChanged.connect(focus_changed)
+        try:
+            with patch("qr_app.presentation.generation_panel.save_png_dialog", side_effect=modal_save):
+                QTest.mouseClick(button, Qt.LeftButton)
+            self.app.processEvents()
+            self.assertTrue(button.hasFocus())
+            QTest.mouseClick(self.panel.clear_button, Qt.LeftButton)
+            self.app.processEvents()
+            self.assertTrue(self.panel.text_input.hasFocus())
+            self.assertNotIn(self.panel.input_rules_button, seen)
+            self.service.generate_qr.assert_called_once()
+        finally:
+            self.app.focusChanged.disconnect(focus_changed)
 
     def test_releasing_outside_the_original_hit_area_cancels_without_a_request(self):
         from PyQt5.QtCore import QPoint, QPointF, Qt

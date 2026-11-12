@@ -6,7 +6,7 @@ import logging
 
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import (
-    QBoxLayout, QFrame, QHBoxLayout, QLabel, QPlainTextEdit, QPushButton, QSizePolicy,
+    QApplication, QBoxLayout, QFrame, QHBoxLayout, QLabel, QPlainTextEdit, QPushButton, QSizePolicy,
     QSplitter, QStackedWidget, QVBoxLayout, QWidget,
 )
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
@@ -62,7 +62,11 @@ class GenerationPanel(QWidget):
         self.saving = False
         self.display_error = False
         self._disposed = False
+        self._controls_locked = False
+        self._focus_before_busy = None
         self.setObjectName("generationPanel")
+        # A neutral, non-Tab-stop focus target while action buttons are locked.
+        self.setFocusPolicy(Qt.ClickFocus)
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setMinimumSize(316, 520)
         outer = QVBoxLayout(self)
@@ -213,12 +217,27 @@ class GenerationPanel(QWidget):
 
     def _update_controls(self):
         locked = self.busy or self.saving
-        for button in (self.generate_button, self.clear_button, self.save_button):
+        enabled = {self.generate_button: not locked,
+                   self.clear_button: not locked and bool(self.input_text()),
+                   self.save_button: not locked and self.state == GenerationState.SUCCESS}
+        focus = QApplication.focusWidget()
+        if locked and not self._controls_locked:
+            self._focus_before_busy = focus if focus in enabled else None
+        self._controls_locked = locked
+        for button in enabled:
             button.set_busy(locked)
-        self.generate_button.setEnabled(not locked)
-        self.clear_button.setEnabled(not locked and bool(self.input_text()))
+        if focus in enabled and not enabled[focus] and focus.hasFocus():
+            # Otherwise Qt walks through disabled actions onto Input rules.
+            target = self if locked else self.text_input
+            target.setFocus(Qt.OtherFocusReason)
+        for button, available in enabled.items():
+            button.setEnabled(available)
         self.text_input.setReadOnly(locked)
-        self.save_button.setEnabled(not locked and self.state == GenerationState.SUCCESS)
+        if not locked:
+            previous = self._focus_before_busy
+            self._focus_before_busy = None
+            if previous is not None and previous.isEnabled() and self.isVisible() and self.hasFocus():
+                previous.setFocus(Qt.OtherFocusReason)
 
     def _input_changed(self):
         text = self.input_text()

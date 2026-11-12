@@ -17,6 +17,7 @@ Generate、Save PNG、Clear input 使用同一个 `JellyButton` 组件。按下�
 - Generate 与 Save PNG 在业务处理期间暂停并复位，处理完且恢复可用后回弹。同步生成期间不承诺动画持续刷新。
 - Clear input 清空后会禁用，因此直接复位，不在禁用状态下继续回弹；之后输入新文字不会补播旧动画。
 - 移出原点击区域后松开，取消提交并恢复正常外观；焦点离开、隐藏页面或关闭窗口时复位。
+- 生成、保存期间暂时将焦点停放在没有焦点边框的容器上，完成后恢复到原操作按钮；Clear input 清空后焦点回到输入框。避免 Qt 自动将焦点转到 Input rules，同时保留正常 Tab 导航的蓝色焦点提示。
 - 弹窗、侧栏和二维码画布没有加入动画，PNG 导出沿用原实现。
 
 关闭按钮动效：
@@ -36,3 +37,5 @@ Generate、Save PNG、Clear input 使用同一个 `JellyButton` 组件。按下�
 Windows 原生隐藏窗口另外验证了实际压缩/回弹、固定几何尺寸、Save PNG 的较轻回弹、Clear input 禁用时复位、关闭动画及二维码像素不变。动图由真实控件逐帧采集；配置 `QT_SCALE_FACTOR=1.6`，本机叠加系统缩放后的实际像素比约 3.2。它用于展示控件行为，不替代不同显示器上的人工体验。
 
 [验证记录](validation/jelly_buttons_20261112.json) · [测试输出](validation/jelly_buttons_tests_20261112.txt) · [静态状态对比：正常、压缩、回弹峰值](validation/jelly_button_states_20261112.png)
+
+后续焦点修复另通过 40 项相关测试，新增生成成功/失败后的焦点恢复、空格键重复生成、Tab 到规则入口、保存恢复焦点和清空后继续输入检查。动画像素比较在相同焦点状态下进行，以排除焦点边框宽度变化。[焦点修复记录](validation/action_focus_20261112.json)保留修复前后的实际焦点事件和本轮测试结果。
