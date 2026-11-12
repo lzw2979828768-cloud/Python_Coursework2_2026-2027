@@ -65,6 +65,7 @@ QPushButton { min-height: 30px; background: $subtle; color: $text; border: 1px s
 QPushButton:hover { background: $hover; }
 QPushButton:pressed { background: #DDE0E5; }
 QPushButton:focus { border: 2px solid $focus; }
+QMessageBox QPushButton { min-width: 44px; min-height: 22px; padding: 2px 12px; border-radius: 8px; }
 QPushButton#generateButton { background: $action; color: white; border-color: $action; font-weight: 600; }
 QPushButton#generateButton:hover { background: $action_hover; }
 QPushButton#generateButton:pressed { background: #101113; }

@@ -34,6 +34,8 @@ PNG 保存失败也显示英文，提示检查现有目录、`.png` 文件名、
 
 自动隐藏窗口检查不替代不同显示器的人工体验和手机扫码验收。
 
+消息框的 OK / Yes / No 按钮另使用紧凑样式，避免继承主页面的大圆角与高度。Windows 隐藏窗口测得按钮为 70×28 逻辑像素，主页面 Generate 仍为 220×42；Enter、Esc 和覆盖确认交互通过，32 项相关既有测试通过。[验证记录](validation/compact_message_buttons_20261112.json)包含实际尺寸、截图及测试输出；本次没有实现动画。
+
 后续针对下拉列表外缘的直角问题，额外处理了 Qt 原生弹层：关闭系统阴影和外框，设置透明背景，并阻止容器继续绘制矩形菜单底板。保留列表自己的浅色圆角边框与 Qt.Popup 交互。12 项相关回归测试通过；真实 Windows 桌面截图对比确认弹层右侧、底部没有额外阴影像素，四个角为透明。测试中将弹层居中以完整采集外缘，并固定焦点排除背景控件的正常焦点反馈。详见[弹层修复记录](validation/dropdown_shell_20261112.json)和[真实屏幕截图](validation/dropdown_shell_windows_screen_checked_160_desktop_20261112.png)。
 
 [验证记录](validation/ui_control_polish_20261112.json) · [新版测试](validation/ui_polish_new_tests_20261112.txt) · [旧版测试](validation/ui_polish_previous_tests_20261112.txt)
