@@ -1,7 +1,9 @@
 """Read-only guidance for the features actually provided by this application."""
 
-from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QComboBox, QHBoxLayout, QLabel, QPushButton, QTextBrowser, QVBoxLayout, QWidget
+from PyQt5.QtCore import QSize, Qt, pyqtSignal
+from PyQt5.QtWidgets import QBoxLayout, QComboBox, QHBoxLayout, QLabel, QPushButton, QTextBrowser, QVBoxLayout, QWidget
+
+from .theme import TOKENS, information_stylesheet
 
 
 SECTIONS = (
@@ -129,12 +131,17 @@ class InformationPanel(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setObjectName("informationPanel")
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setMinimumSize(260, 340)
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(24, 22, 24, 22)
-        layout.setSpacing(12)
-        header = QHBoxLayout()
+        margin = TOKENS["space_page"]
+        layout.setContentsMargins(margin, margin, margin, 24)
+        layout.setSpacing(16)
+        header = QBoxLayout(QBoxLayout.LeftToRight)
+        self._header = header
         title = QLabel("Information")
         title.setObjectName("pageTitle")
+        title.setWordWrap(True)
         header.addWidget(title, stretch=1)
         self.back_button = QPushButton("Back to Generate")
         self.back_button.setObjectName("backToGenerateButton")
@@ -150,6 +157,9 @@ class InformationPanel(QWidget):
         self.section_selector = QComboBox()
         self.section_selector.setObjectName("informationSection")
         self.section_selector.setAccessibleName("Information section")
+        self.section_selector.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon)
+        self.section_selector.setMinimumContentsLength(10)
+        self.section_selector.setToolTip("Choose a section to read")
         for anchor, text in SECTIONS:
             self.section_selector.addItem(text, anchor)
         navigation.addWidget(self.section_selector, stretch=1)
@@ -161,18 +171,19 @@ class InformationPanel(QWidget):
         self.browser.setAcceptDrops(False)
         self.browser.setOpenLinks(False)
         self.browser.setOpenExternalLinks(False)
-        self.browser.document().setDefaultStyleSheet("""
-            body { color: #172c43; font-family: 'Segoe UI'; font-size: 13px; }
-            h2 { color: #19558f; font-size: 19px; margin-top: 22px; margin-bottom: 10px; }
-            p, li { margin-top: 7px; margin-bottom: 7px; }
-            th { background-color: #eaf1f9; color: #173e65; }
-            td, th { border-color: #dbe4ed; }
-            a { color: #19558f; }
-        """)
+        self.browser.document().setDefaultStyleSheet(information_stylesheet())
         self.browser.setHtml(_CONTENT)
         layout.addWidget(self.browser, stretch=1)
         self.section_selector.currentIndexChanged.connect(self._jump_to_section)
         self.browser.anchorClicked.connect(self._follow_internal_link)
+
+    def minimumSizeHint(self):
+        return QSize(260, 340)
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        if hasattr(self, "_header"):
+            self._header.setDirection(QBoxLayout.TopToBottom if self.width() < 600 else QBoxLayout.LeftToRight)
 
     def _jump_to_section(self, index):
         anchor = self.section_selector.itemData(index)

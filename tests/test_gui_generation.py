@@ -252,12 +252,14 @@ class GUIGenerationTests(unittest.TestCase):
         self.assertFalse(self.panel.save_button.isEnabled())
         self.assertEqual(len(self.panel.axes.images), 0)
 
-    def test_small_windows_scroll_instead_of_cutting_off_controls(self):
+    def test_small_windows_stack_cards_and_scroll_instead_of_cutting_off_controls(self):
+        from PyQt5.QtCore import Qt
         self.window.resize(480, 400)
         self.window.show()
         self.app.processEvents()
         scroll = self.window.generation_scroll
-        self.assertGreater(scroll.horizontalScrollBar().maximum(), 0)
+        self.assertEqual(self.panel.splitter.orientation(), Qt.Vertical)
+        self.assertEqual(scroll.horizontalScrollBar().maximum(), 0)
         self.assertGreater(scroll.verticalScrollBar().maximum(), 0)
         self.assertTrue(self.panel.generate_button.isVisible())
         self.assertTrue(self.panel.save_button.isVisible())

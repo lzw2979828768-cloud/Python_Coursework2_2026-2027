@@ -27,6 +27,10 @@ def main(argv=None):
     app.setFont(QFont("Segoe UI", 10))
     from .main_window import MainWindow
     window = MainWindow()
+    if not args.offscreen:
+        available = app.primaryScreen().availableGeometry()
+        window.resize(max(480, min(window.width(), available.width() - 40)),
+                      max(400, min(window.height(), available.height() - 80)))
     if args.text is not None:
         window.generation_panel.text_input.setPlainText(args.text)
     if args.offscreen:

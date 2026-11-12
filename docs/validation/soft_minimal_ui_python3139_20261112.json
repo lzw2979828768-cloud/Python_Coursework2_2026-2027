@@ -1,0 +1,222 @@
+{
+  "date": "2026-11-12",
+  "branch": "feature/soft-minimal-ui",
+  "baseline_branch": "feature/stage2-gui-environment",
+  "baseline_commit": "c7bae6ab1c3e2531504f36fe335e893cd257ca97",
+  "old_checkout_clean": true,
+  "design_reference": {
+    "path": "F:\\文件\\收藏\\视觉语言\\Soft_Minimalism_UI_Design_Language.md",
+    "sha256": "883a8cc825381f0c0f11cf23ecad93ed05f105393063d29f1aac26406c936bbd"
+  },
+  "tests": {
+    "command": ".venv/Scripts/python.exe -X utf8 -m unittest tests.test_soft_ui tests.test_information tests.test_gui_generation tests.test_image_export tests.test_png_dialog tests.test_renderer -v",
+    "count": 62,
+    "exit_code": 0,
+    "skipped": 0,
+    "passed": true,
+    "output_file": "docs\\validation\\soft_ui_tests_20261112.txt"
+  },
+  "environment": {
+    "application_python": "3.13.9",
+    "PyQt5": "5.15.11",
+    "Qt": "5.15.2",
+    "matplotlib": "3.10.7",
+    "capture_platform": "Qt offscreen"
+  },
+  "captures": [
+    {
+      "checkout": "F:\\文件\\python\\2026-2027大三上\\Coursework2",
+      "page": "error",
+      "errors": [],
+      "screenshot": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\soft_ui_new_error_20261112.png",
+      "window_size": [
+        1240,
+        820
+      ],
+      "generation_calls": 1,
+      "state": "failure",
+      "save_enabled": false,
+      "horizontal_scroll": 0,
+      "vertical_scroll": 0,
+      "input": "Sugarplum_Fairy_Nightmare",
+      "compact_sidebar": false,
+      "sidebar_width": 216,
+      "exit_code": 0,
+      "all_passed": true
+    },
+    {
+      "checkout": "F:\\文件\\python\\2026-2027大三上\\Coursework2",
+      "page": "generate",
+      "errors": [],
+      "screenshot": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\soft_ui_new_generate_20261112.png",
+      "window_size": [
+        1240,
+        820
+      ],
+      "generation_calls": 1,
+      "state": "success",
+      "save_enabled": true,
+      "horizontal_scroll": 0,
+      "vertical_scroll": 0,
+      "input": "known",
+      "compact_sidebar": false,
+      "sidebar_width": 216,
+      "saved_png": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\soft_ui_new_generate_saved_20261112.png",
+      "exit_code": 0,
+      "all_passed": true
+    },
+    {
+      "checkout": "F:\\文件\\python\\2026-2027大三上\\Coursework2",
+      "page": "information",
+      "errors": [],
+      "screenshot": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\soft_ui_new_information_20261112.png",
+      "window_size": [
+        1240,
+        820
+      ],
+      "generation_calls": 0,
+      "state": "empty",
+      "save_enabled": false,
+      "horizontal_scroll": 0,
+      "vertical_scroll": 0,
+      "input": "",
+      "compact_sidebar": false,
+      "sidebar_width": 216,
+      "exit_code": 0,
+      "all_passed": true
+    },
+    {
+      "checkout": "F:\\文件\\python\\2026-2027大三上\\Coursework2",
+      "page": "generate",
+      "errors": [],
+      "screenshot": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\soft_ui_new_narrow_bottom_20261112.png",
+      "window_size": [
+        480,
+        720
+      ],
+      "generation_calls": 1,
+      "state": "success",
+      "save_enabled": true,
+      "horizontal_scroll": 0,
+      "vertical_scroll": 688,
+      "input": "known",
+      "compact_sidebar": true,
+      "sidebar_width": 72,
+      "exit_code": 0,
+      "all_passed": true
+    },
+    {
+      "checkout": "F:\\文件\\python\\2026-2027大三上\\Coursework2",
+      "page": "generate",
+      "errors": [],
+      "screenshot": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\soft_ui_new_narrow_20261112.png",
+      "window_size": [
+        480,
+        720
+      ],
+      "generation_calls": 1,
+      "state": "success",
+      "save_enabled": true,
+      "horizontal_scroll": 0,
+      "vertical_scroll": 688,
+      "input": "known",
+      "compact_sidebar": true,
+      "sidebar_width": 72,
+      "exit_code": 0,
+      "all_passed": true
+    },
+    {
+      "checkout": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\ui_previous",
+      "page": "generate",
+      "errors": [],
+      "screenshot": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\soft_ui_previous_generate_20261112.png",
+      "window_size": [
+        1240,
+        820
+      ],
+      "generation_calls": 1,
+      "state": "success",
+      "save_enabled": true,
+      "horizontal_scroll": 0,
+      "vertical_scroll": 0,
+      "input": "known",
+      "saved_png": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\soft_ui_previous_generate_saved_20261112.png",
+      "exit_code": 0,
+      "all_passed": true
+    }
+  ],
+  "independent_decode": {
+    "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+    "opencv": "4.12.0",
+    "results": [
+      {
+        "file": "docs\\validation\\soft_ui_previous_generate_20261112.png",
+        "text": "known",
+        "passed": true
+      },
+      {
+        "file": "docs\\validation\\soft_ui_previous_generate_saved_20261112.png",
+        "text": "known",
+        "passed": true
+      },
+      {
+        "file": "docs\\validation\\soft_ui_new_generate_20261112.png",
+        "text": "known",
+        "passed": true
+      },
+      {
+        "file": "docs\\validation\\soft_ui_new_generate_saved_20261112.png",
+        "text": "known",
+        "passed": true
+      }
+    ]
+  },
+  "core_and_export_unchanged": {
+    "paths": [
+      "qr_app/core",
+      "qr_app/models.py",
+      "qr_app/service.py",
+      "qr_app/resources",
+      "qr_app/presentation/renderer.py",
+      "qr_app/presentation/image_export.py",
+      "qr_app/presentation/png_dialog.py"
+    ],
+    "diff_exit_code": 0
+  },
+  "source_sha256": {
+    "main_gui.py": "4e6cb95ebe2edcca910d84fab6d10cd3b39e83e094ce9871c5246e60caa80065",
+    "qr_app\\presentation\\__init__.py": "5d7143ec1d8bf4df922446913e6af5009e955547b746388b0d060da788b1f105",
+    "qr_app\\presentation\\cli.py": "102a2dd9190286bc9292d2bb34f99f139d089a51919e86defe55608ee95a61fb",
+    "qr_app\\presentation\\generation_panel.py": "2e81b2cbd27c71f675022f6fa8c42ab0a512a5a240378d3704a5cc40affa5034",
+    "qr_app\\presentation\\gui.py": "dc172e28235b8c15671596aa609bcbb0cf3d08f9cf4f1fb513ed0725c13bec27",
+    "qr_app\\presentation\\icons.py": "f94fea4fcaf77be3514907819694294edd1558c3f4dfe93b9a254ae16e82af4a",
+    "qr_app\\presentation\\image_export.py": "ea91294210764176f462222558dd7462a48560b7786f4a08cebfdecca311046d",
+    "qr_app\\presentation\\information.py": "2718d9fff3b98a3f629e1f291265f898e082d9f52da67b25cfaa575ddb3c2286",
+    "qr_app\\presentation\\main_window.py": "4d1177e45d83131650b22dd8265b79863a11a259472946bcbdd32c9c1d6ccbf7",
+    "qr_app\\presentation\\navigation.py": "96642dddf03a58cfe66d8dce857b512762818428624ec1ede9466ccfc254caf5",
+    "qr_app\\presentation\\png_dialog.py": "bb5d8ff558e4dfd87cffef1fcc1d72a98c93a1564b6824a62c8b69bc1f717f3c",
+    "qr_app\\presentation\\qt_environment.py": "6ee2e23540855484f826e45ff6983427c1dd69c6ac87d02701a704d95b3efaf6",
+    "qr_app\\presentation\\renderer.py": "48d71f339b3d4f77b72888619b040099e281cf75cbea27370d1a18441eb31934",
+    "qr_app\\presentation\\theme.py": "5aec00931ceb5d04cc2a4bff4719b331d5c8f728daad9b3492ba9a6f1c1be72a",
+    "qr_app\\presentation\\trace_export.py": "95a6079f0b0f58fff2b8b1e25c454b96ee08ab32782c1f9229a1514387c1038a",
+    "tests\\test_gui_generation.py": "128e6da69a4b5d56f7172176ff5a614f179e6a505c052c35728c5811e8583b1b",
+    "tests\\test_soft_ui.py": "4cbdb3aa14db4c7773ff236987db1e38d1577a98a2a19e32c7a6eb84107bab60"
+  },
+  "artifact_sha256": {
+    "docs\\validation\\soft_ui_comparison_20261112.png": "ab61365cd588b6768fb6a3a9ec5bc1bd502bf245f3ed5da3fa200344379f92d3",
+    "docs\\validation\\soft_ui_new_error_20261112.png": "43695a37a2b21c92b99df284516440cc0e6cdf74a62281ef0400e0209328cc91",
+    "docs\\validation\\soft_ui_new_generate_20261112.png": "a27c05f6512325f6680e3d843e76e0264c463b268f0046e848aede3c3f514b96",
+    "docs\\validation\\soft_ui_new_generate_saved_20261112.png": "ebd032bd207b3d1c5751d19d2472b35bc2f6e5f27197e1f3f11f6e53da7686f4",
+    "docs\\validation\\soft_ui_new_information_20261112.png": "24496602ad45ea3dad46487203844c8a5b7f2450fa159845fef97c373604b9c2",
+    "docs\\validation\\soft_ui_new_narrow_20261112.png": "81d0007e94bebd2c120b99cec0a6052ee109b9c278a360167f4d01b67e84080e",
+    "docs\\validation\\soft_ui_new_narrow_bottom_20261112.png": "be309d60fc3e63bad51328a6c135646747fa8c5b5d1d1c952e9cd348a2fac7af",
+    "docs\\validation\\soft_ui_previous_generate_20261112.png": "5c2f204b24d3f3c709f765f3af06cbf69f8ef4dc10b916abc5a585946eac7762",
+    "docs\\validation\\soft_ui_previous_generate_saved_20261112.png": "38f5b85cdb11da8502927229229359a7dd5e33b86707f53d4ec49effbf0433dd",
+    "docs\\validation\\soft_ui_tests_20261112.txt": "3e918fab3768aad9614782248560e492a8f83c7a4dd13fadd38100d11db8c08b"
+  },
+  "limits": [
+    "No phone-scan or laboratory acceptance claimed.",
+    "No native Windows screen-scaling acceptance claimed for the redesigned UI.",
+    "Multi-layer inner shadows, backdrop blur and animated transitions deferred."
+  ]
+}

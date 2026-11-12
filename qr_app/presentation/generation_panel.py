@@ -4,9 +4,10 @@ from enum import StrEnum
 import json
 import logging
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import (
-    QFrame, QHBoxLayout, QLabel, QPlainTextEdit, QPushButton, QSizePolicy,
+    QBoxLayout, QFrame, QGraphicsDropShadowEffect, QHBoxLayout, QLabel, QPlainTextEdit, QPushButton, QSizePolicy,
     QSplitter, QStackedWidget, QVBoxLayout, QWidget,
 )
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
@@ -16,9 +17,9 @@ from ..models import LogState, QRRequest, QRResult, Source
 from ..service import QRService
 from .png_dialog import save_png_dialog
 from .renderer import draw_matrix
+from .theme import TOKENS, tone_stylesheet
 
 _LOGGER = logging.getLogger(__name__)
-_COLORS = {"muted": "#53667d", "success": "#176449", "warning": "#8a5500", "error": "#b42318"}
 
 
 class GenerationState(StrEnum):
@@ -40,13 +41,14 @@ def _label(text="", *, name=None):
 
 
 def _tone(label, tone):
-    label.setStyleSheet(f"color: {_COLORS[tone]}; background: transparent; border: none;")
+    label.setStyleSheet(tone_stylesheet(tone, badge=label.objectName() == "stateLabel"))
 
 
 class GenerationPanel(QWidget):
     """One submission per Generate action; editing and saving never generate."""
 
     CAPACITY_BYTES = 17
+    information_requested = pyqtSignal(str)
 
     def __init__(self, service=None, parent=None):
         super().__init__(parent)
@@ -61,32 +63,49 @@ class GenerationPanel(QWidget):
         self._disposed = False
         self.setObjectName("generationPanel")
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.setMinimumSize(580, 560)
+        self.setMinimumSize(316, 520)
         outer = QVBoxLayout(self)
-        outer.setContentsMargins(24, 22, 24, 22)
-        outer.setSpacing(14)
-        outer.addWidget(_label("QR Generator", name="pageTitle"))
-        outer.addWidget(_label("Turn a short message or URL into a black-and-white QR code.", name="subtitle"))
-        outer.addWidget(_label("BASELINE  /  VERSION 1  /  LEVEL L  /  MASK 0", name="modeBadge"))
+        margin = TOKENS["space_page"]
+        outer.setContentsMargins(margin, margin, margin, 24)
+        outer.setSpacing(TOKENS["space_card"])
+        heading = QVBoxLayout()
+        heading.setSpacing(8)
+        self.header_row = QBoxLayout(QBoxLayout.LeftToRight)
+        self.header_row.addWidget(_label("Generate QR", name="pageTitle"), stretch=1)
+        mode_badge = _label("Baseline   ·   V1 / L / Mask 0", name="modeBadge")
+        mode_badge.setWordWrap(False)
+        mode_badge.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
+        self.header_row.addWidget(mode_badge)
+        heading.addLayout(self.header_row)
+        heading.addWidget(_label("Create and save a QR code from a short message or URL.", name="subtitle"))
+        outer.addLayout(heading)
 
         splitter = QSplitter(Qt.Horizontal)
+        self.splitter = splitter
         splitter.setChildrenCollapsible(False)
-        splitter.setHandleWidth(12)
+        splitter.setHandleWidth(20)
         outer.addWidget(splitter, stretch=1)
         input_card = QFrame()
+        self.input_card = input_card
         input_card.setObjectName("inputCard")
         input_card.setMinimumWidth(230)
+        shadow = QGraphicsDropShadowEffect(input_card)
+        shadow.setBlurRadius(22)
+        shadow.setOffset(0, 3)
+        shadow.setColor(QColor(28, 36, 48, 13))
+        input_card.setGraphicsEffect(shadow)
         left = QVBoxLayout(input_card)
-        left.setContentsMargins(18, 18, 18, 18)
-        left.setSpacing(12)
-        left.addWidget(_label("Text to encode", name="sectionTitle"))
-        left.addWidget(_label("ISO-8859-1, up to 17 bytes. Spaces and line breaks count."))
+        left.setContentsMargins(24, 24, 24, 24)
+        left.setSpacing(16)
+        left.addWidget(_label("Your text", name="sectionTitle"))
+        left.addWidget(_label("ISO-8859-1 · 17 bytes maximum\nSpaces and line breaks count.", name="fieldHint"))
         self.text_input = QPlainTextEdit()
         self.text_input.setObjectName("textInput")
         self.text_input.setAccessibleName("Text to encode")
         self.text_input.setPlaceholderText("Enter a short message or URL...")
-        self.text_input.setMinimumHeight(150)
-        left.addWidget(self.text_input, stretch=1)
+        self.text_input.setMinimumHeight(128)
+        self.text_input.setMaximumHeight(216)
+        left.addWidget(self.text_input)
         self.byte_hint = _label(name="byteHint")
         left.addWidget(self.byte_hint)
         buttons = QHBoxLayout()
@@ -97,26 +116,42 @@ class GenerationPanel(QWidget):
         buttons.addWidget(self.generate_button, stretch=1)
         buttons.addWidget(self.clear_button)
         left.addLayout(buttons)
-        left.addWidget(_label("Text is submitted only when you click Generate.\n"
-                              "English letters, numbers and Latin-1 characters are supported."))
+        left.addStretch(1)
+        guide = QFrame()
+        guide.setObjectName("inputGuide")
+        guidance = QVBoxLayout(guide)
+        guidance.setContentsMargins(16, 14, 16, 14)
+        guidance.setSpacing(8)
+        guidance.addWidget(_label("Good to know", name="guideTitle"))
+        guidance.addWidget(_label("Spaces and line breaks are kept.\n"
+                                 "Only Generate submits your text.", name="fieldHint"))
+        self.input_rules_button = QPushButton("Input rules  →")
+        self.input_rules_button.setObjectName("inputRulesButton")
+        self.input_rules_button.setAccessibleName("Read input rules")
+        self.input_rules_button.clicked.connect(lambda: self.information_requested.emit("input"))
+        guidance.addWidget(self.input_rules_button, alignment=Qt.AlignLeft)
+        left.addWidget(guide)
         splitter.addWidget(input_card)
 
         result_card = QFrame()
+        self.result_card = result_card
         result_card.setObjectName("resultCard")
-        result_card.setMinimumWidth(280)
+        result_card.setMinimumWidth(240)
         right = QVBoxLayout(result_card)
-        right.setContentsMargins(18, 18, 18, 18)
-        right.setSpacing(10)
+        right.setContentsMargins(24, 24, 24, 24)
+        right.setSpacing(12)
         top = QHBoxLayout()
-        top.addWidget(_label("Result", name="sectionTitle"))
+        top.addWidget(_label("Preview", name="sectionTitle"), stretch=1)
         self.state_label = _label("Ready", name="stateLabel")
-        self.state_label.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+        self.state_label.setAlignment(Qt.AlignCenter)
+        self.state_label.setWordWrap(False)
+        self.state_label.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
         top.addWidget(self.state_label)
         right.addLayout(top)
         self.status_label = _label(name="statusLabel")
         right.addWidget(self.status_label)
         self.result_stack = QStackedWidget()
-        self.result_stack.setMinimumSize(240, 240)
+        self.result_stack.setMinimumSize(200, 220)
         self.placeholder = _label("Your QR will appear here\nafter you click Generate.", name="placeholder")
         self.placeholder.setAlignment(Qt.AlignCenter)
         self.result_stack.addWidget(self.placeholder)
@@ -146,7 +181,7 @@ class GenerationPanel(QWidget):
         splitter.addWidget(result_card)
         splitter.setStretchFactor(0, 4)
         splitter.setStretchFactor(1, 5)
-        splitter.setSizes([400, 500])
+        splitter.setSizes([380, 500])
         outer.addWidget(_label("Processed locally. Saving a PNG stores its encoded content. "
                                "Check links before opening them.", name="privacyNote"))
 
@@ -155,6 +190,14 @@ class GenerationPanel(QWidget):
         self.clear_button.clicked.connect(self.clear_input)
         self.save_button.clicked.connect(self.save_current)
         self._input_changed()
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        if hasattr(self, "splitter"):
+            orientation = Qt.Vertical if self.width() < 740 else Qt.Horizontal
+            if self.splitter.orientation() != orientation:
+                self.splitter.setOrientation(orientation)
+            self.header_row.setDirection(QBoxLayout.TopToBottom if self.width() < 520 else QBoxLayout.LeftToRight)
 
     def input_text(self):
         # QTextDocument.toPlainText replaces non-breaking spaces with ordinary
@@ -238,7 +281,9 @@ class GenerationPanel(QWidget):
                          f"{result.plan.matrix_size} × {result.plan.matrix_size}")
         byte_length = result.byte_length if result.byte_length is not None else "unresolved"
         lines.insert(1 if result.plan else 0, f"Bytes: {byte_length}  |  Completed steps: {len(result.trace_steps)}")
-        lines.append(f"Usage log: {result.logging_status.state}")
+        log_labels = {"not_enabled": "not recorded", "written": "recorded",
+                      "already_recorded": "already recorded", "failed": "could not be recorded"}
+        lines.append(f"Usage log: {log_labels[result.logging_status.state]}")
         self.details_label.setText("\n".join(lines))
         warnings = list(result.warnings)
         if result.logging_status.state == LogState.FAILED:
