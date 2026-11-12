@@ -1,6 +1,6 @@
 # PyQt5 正式文本输入与生成页面
 
-日期：2026-11-12。状态：Stage 2 基础生成页面已实现，复用现有生成服务、matplotlib 渲染及 PNG 保存。Information、个人扩展页面、手机扫码与教学机房验收仍待完成。
+日期：2026-11-12。状态：Stage2基础生成页面、渲染和PNG保存已实现，[Information](information.md)也已接入。个人扩展页面、手机扫码与教学机房验收仍待完成。
 
 ## 1. 启动与操作
 
@@ -56,7 +56,7 @@ Qt 的普通 `toPlainText()` 会把不间断空格转换成普通空格。本页
 
 GUI 使用 `QRService.generate_qr(QRRequest(..., source="gui"))`，没有另一套编码算法。生成页面持有一个 Figure、Axes 和 Qt 画布，后续请求更新原画布；窗口关闭时释放这些对象。
 
-界面当前仅提供已实现的基础生成页面，没有显示尚未接入的扩展选项或空白功能页签。
+界面当前提供Generate QR和Information两个实际页签，没有显示尚未接入的扩展选项或空白页签。Information可用F1打开，返回后保留输入及结果状态。
 
 ## 4. 状态与旧结果保护
 
@@ -130,9 +130,10 @@ GUI 场景涵盖首次打开、预填不提交、输入提示、空格/换行/TA
 
 ![超容量后清除旧图并禁用保存](validation/gui_generation_error_final_20261112.png)
 
-## 8. 尚待完成
+## 8. 后续验收
 
-- Information 页面及作业要求的信息模型、完整性、安全说明。
+Information及信息模型、完整性、安全说明现已实现，详情及58项前端回归见[Information说明](information.md)；原生成阶段的50项记录保留为历史。
+
 - Windows 原生窗口、文件对话框、不同系统缩放比例的人工操作验收。
 - 手机扫描屏幕和保存 PNG、教学机房复现。
 - Stage 2 文档化验收之后的四项个人扩展。

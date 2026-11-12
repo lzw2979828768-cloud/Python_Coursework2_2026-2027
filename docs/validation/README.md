@@ -1,5 +1,9 @@
 # 共享骨架与编码验证记录
 
+Information已完成：[58项前端测试、Qt说明导航/返回/保存及图像解码](information_python3139_20261112.json)。
+新增8项Information测试，原生成/保存/渲染50项回归；原记录及截图按其对应源码保留。
+窗口说明、输入规则与隐私安全截图见[Information说明](../information.md)。
+
 正式生成页已完成：[50项前端测试、Qt窗口交互与截图/PNG解码](gui_generation_python3139_20261112.json)。
 上传前的[GUI发布复验](gui_generation_pre_publish_python3139_20261112.json)再次全部通过，并核对真实GUI输入的换行0A和空格20。
 其中新增19项GUI测试，保存/渲染回归31项；不代表Stage1的139项历史测试已重新执行。

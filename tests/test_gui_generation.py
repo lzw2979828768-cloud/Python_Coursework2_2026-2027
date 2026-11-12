@@ -256,7 +256,7 @@ class GUIGenerationTests(unittest.TestCase):
         self.window.resize(480, 400)
         self.window.show()
         self.app.processEvents()
-        scroll = self.window.centralWidget()
+        scroll = self.window.generation_scroll
         self.assertGreater(scroll.horizontalScrollBar().maximum(), 0)
         self.assertGreater(scroll.verticalScrollBar().maximum(), 0)
         self.assertTrue(self.panel.generate_button.isVisible())
@@ -267,7 +267,7 @@ class GUIGenerationTests(unittest.TestCase):
         self.app.processEvents()
         self.generate()
         self.app.processEvents()
-        scroll = self.window.centralWidget()
+        scroll = self.window.generation_scroll
         self.assertEqual(scroll.horizontalScrollBar().maximum(), 0)
         self.assertEqual(scroll.verticalScrollBar().maximum(), 0)
         self.assertTrue(self.panel.generate_button.isVisible())

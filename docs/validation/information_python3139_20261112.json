@@ -1,0 +1,169 @@
+{
+  "checked_at": "2026-11-12T02:28:23.842517+00:00",
+  "scope": "Information page, read-only help navigation and frontend regression; offscreen Qt and local image decoding",
+  "code_base_commit": "5b79ada126c9741777b9647606d5e7d4074528bf",
+  "branch": "feature/stage2-gui-environment",
+  "source_dirty": true,
+  "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+  "focused_tests": {
+    "command": ".\\.venv\\Scripts\\python.exe -X utf8 -m unittest tests.test_information tests.test_gui_generation tests.test_image_export tests.test_png_dialog tests.test_renderer -v",
+    "exit_code": 0,
+    "output": "test_external_links_files_and_embedded_resources_are_not_opened (tests.test_information.InformationTests.test_external_links_files_and_embedded_resources_are_not_opened) ... ok\r\ntest_f1_opens_information_from_the_generation_page (tests.test_information.InformationTests.test_f1_opens_information_from_the_generation_page) ... ok\r\ntest_help_does_not_turn_a_stale_draft_or_failed_result_into_success (tests.test_information.InformationTests.test_help_does_not_turn_a_stale_draft_or_failed_result_into_success) ... ok\r\ntest_internal_sections_scroll_and_back_link_returns_to_start (tests.test_information.InformationTests.test_internal_sections_scroll_and_back_link_returns_to_start) ... ok\r\ntest_navigation_preserves_success_request_image_and_save_ability (tests.test_information.InformationTests.test_navigation_preserves_success_request_image_and_save_ability) ... ok\r\ntest_opening_and_leaving_help_never_submits_a_request (tests.test_information.InformationTests.test_opening_and_leaving_help_never_submits_a_request) ... ok\r\ntest_save_after_help_still_exports_current_qr_without_regenerating (tests.test_information.InformationTests.test_save_after_help_still_exports_current_qr_without_regenerating) ... ok\r\ntest_user_html_does_not_enter_help_and_help_is_read_only (tests.test_information.InformationTests.test_user_html_does_not_enter_help_and_help_is_read_only) ... ok\r\ntest_importing_entry_does_not_load_qt_or_matplotlib (tests.test_gui_generation.GUIEntryTests.test_importing_entry_does_not_load_qt_or_matplotlib) ... ok\r\ntest_offscreen_startup_prefills_without_automatically_generating (tests.test_gui_generation.GUIEntryTests.test_offscreen_startup_prefills_without_automatically_generating) ... ok\r\ntest_busy_guard_prevents_reentrant_requests_and_edit_actions (tests.test_gui_generation.GUIGenerationTests.test_busy_guard_prevents_reentrant_requests_and_edit_actions) ... ok\r\ntest_default_window_keeps_generate_and_save_controls_in_view_after_success (tests.test_gui_generation.GUIGenerationTests.test_default_window_keeps_generate_and_save_controls_in_view_after_success) ... ok\r\ntest_display_failure_keeps_generation_truth_but_disables_save (tests.test_gui_generation.GUIGenerationTests.test_display_failure_keeps_generation_truth_but_disables_save) ... ok\r\ntest_draft_changes_clear_and_revert_do_not_regenerate_or_save_old_input (tests.test_gui_generation.GUIGenerationTests.test_draft_changes_clear_and_revert_do_not_regenerate_or_save_old_input) ... ok\r\ntest_editing_updates_byte_hint_without_generating_or_truncating (tests.test_gui_generation.GUIGenerationTests.test_editing_updates_byte_hint_without_generating_or_truncating) ... ok\r\ntest_failed_requests_remove_old_image_and_preserve_real_partial_steps (tests.test_gui_generation.GUIGenerationTests.test_failed_requests_remove_old_image_and_preserve_real_partial_steps) ... ok\r\ntest_generate_uses_gui_request_and_displays_the_actual_result (tests.test_gui_generation.GUIGenerationTests.test_generate_uses_gui_request_and_displays_the_actual_result) ... ok\r\ntest_initial_state_has_no_request_or_saveable_image (tests.test_gui_generation.GUIGenerationTests.test_initial_state_has_no_request_or_saveable_image) ... ok\r\ntest_log_failure_does_not_break_generation_or_duplicate_logging (tests.test_gui_generation.GUIGenerationTests.test_log_failure_does_not_break_generation_or_duplicate_logging) ... ok\r\ntest_real_save_button_exports_without_regenerating_or_replacing_canvas (tests.test_gui_generation.GUIGenerationTests.test_real_save_button_exports_without_regenerating_or_replacing_canvas) ... ok\r\ntest_repeated_submissions_keep_one_canvas_and_distinct_request_ids (tests.test_gui_generation.GUIGenerationTests.test_repeated_submissions_keep_one_canvas_and_distinct_request_ids) ... ok\r\ntest_results_from_a_previous_request_are_rejected (tests.test_gui_generation.GUIGenerationTests.test_results_from_a_previous_request_are_rejected) ... ok\r\ntest_save_cancel_and_unexpected_error_leave_qr_and_controls_usable (tests.test_gui_generation.GUIGenerationTests.test_save_cancel_and_unexpected_error_leave_qr_and_controls_usable) ... ok\r\ntest_service_exception_is_safe_and_controls_recover (tests.test_gui_generation.GUIGenerationTests.test_service_exception_is_safe_and_controls_recover) ... ok\r\ntest_small_windows_scroll_instead_of_cutting_off_controls (tests.test_gui_generation.GUIGenerationTests.test_small_windows_scroll_instead_of_cutting_off_controls) ... ok\r\ntest_spaces_newlines_tabs_and_latin1_nonbreaking_space_are_preserved (tests.test_gui_generation.GUIGenerationTests.test_spaces_newlines_tabs_and_latin1_nonbreaking_space_are_preserved) ... ok\r\ntest_whitespace_warning_remains_visible_with_a_successful_qr (tests.test_gui_generation.GUIGenerationTests.test_whitespace_warning_remains_visible_with_a_successful_qr) ... ok\r\ntest_bad_paths_are_safe_and_parent_directories_are_not_created (tests.test_image_export.ImageExportTests.test_bad_paths_are_safe_and_parent_directories_are_not_created) ... ok\r\ntest_caller_type_errors_are_distinct_from_save_failures (tests.test_image_export.ImageExportTests.test_caller_type_errors_are_distinct_from_save_failures) ... ok\r\ntest_existing_file_is_protected_then_explicitly_replaced (tests.test_image_export.ImageExportTests.test_existing_file_is_protected_then_explicitly_replaced) ... ok\r\ntest_file_created_during_save_is_not_overwritten (tests.test_image_export.ImageExportTests.test_file_created_during_save_is_not_overwritten) ... ok\r\ntest_generation_result_is_unchanged_by_a_save_failure (tests.test_image_export.ImageExportTests.test_generation_result_is_unchanged_by_a_save_failure) ... ok\r\ntest_partial_encode_failure_never_publishes_or_damages_old_file (tests.test_image_export.ImageExportTests.test_partial_encode_failure_never_publishes_or_damages_old_file) ... ok\r\ntest_publication_failure_preserves_destination_and_cleans_temporary (tests.test_image_export.ImageExportTests.test_publication_failure_preserves_destination_and_cleans_temporary) ... ok\r\ntest_real_png_pixels_and_actual_artifact_path (tests.test_image_export.ImageExportTests.test_real_png_pixels_and_actual_artifact_path) ... ok\r\ntest_save_styles_do_not_crop_white_border_or_change_canvas (tests.test_image_export.ImageExportTests.test_save_styles_do_not_crop_white_border_or_change_canvas) ... ok\r\ntest_command_refuses_overwrite_and_then_accepts_explicit_flag (tests.test_image_export.PNGCommandTests.test_command_refuses_overwrite_and_then_accepts_explicit_flag) ... ok\r\ntest_failure_paths_do_not_leave_images_or_regenerate (tests.test_image_export.PNGCommandTests.test_failure_paths_do_not_leave_images_or_regenerate) ... ok\r\ntest_headless_command_saves_without_importing_qt (tests.test_image_export.PNGCommandTests.test_headless_command_saves_without_importing_qt) ... ok\r\ntest_invalid_input_never_exports_and_flag_misuse_is_clear (tests.test_image_export.PNGCommandTests.test_invalid_input_never_exports_and_flag_misuse_is_clear) ... ok\r\ntest_cancel_does_not_save_or_show_a_confirmation (tests.test_png_dialog.PNGDialogTests.test_cancel_does_not_save_or_show_a_confirmation) ... ok\r\ntest_confirmed_replacement_writes_a_complete_png (tests.test_png_dialog.PNGDialogTests.test_confirmed_replacement_writes_a_complete_png) ... ok\r\ntest_declining_replacement_keeps_the_original (tests.test_png_dialog.PNGDialogTests.test_declining_replacement_keeps_the_original) ... ok\r\ntest_missing_extension_is_added_before_saving (tests.test_png_dialog.PNGDialogTests.test_missing_extension_is_added_before_saving) ... ok\r\ntest_save_failure_reports_error_and_keeps_the_canvas_usable (tests.test_png_dialog.PNGDialogTests.test_save_failure_reports_error_and_keeps_the_canvas_usable) ... ok\r\ntest_asymmetric_pattern_has_exact_orientation_colors_and_border (tests.test_renderer.RendererTests.test_asymmetric_pattern_has_exact_orientation_colors_and_border) ... ok\r\ntest_bad_matrix_types_are_rejected_without_coercion (tests.test_renderer.RendererTests.test_bad_matrix_types_are_rejected_without_coercion) ... ok\r\ntest_bad_shapes_and_nonbinary_values_are_rejected (tests.test_renderer.RendererTests.test_bad_shapes_and_nonbinary_values_are_rejected) ... ok\r\ntest_bool_integer_and_noncontiguous_matrices_are_supported (tests.test_renderer.RendererTests.test_bool_integer_and_noncontiguous_matrices_are_supported) ... ok\r\ntest_draw_invalid_input_keeps_previous_picture (tests.test_renderer.RendererTests.test_draw_invalid_input_keeps_previous_picture) ... ok\r\ntest_draw_replaces_one_axes_and_keeps_the_other_axes_and_size (tests.test_renderer.RendererTests.test_draw_replaces_one_axes_and_keeps_the_other_axes_and_size) ... ok\r\ntest_import_does_not_load_qt_pyplot_or_a_reference_generator (tests.test_renderer.RendererTests.test_import_does_not_load_qt_pyplot_or_a_reference_generator) ... ok\r\ntest_input_and_earlier_render_are_independent (tests.test_renderer.RendererTests.test_input_and_earlier_render_are_independent) ... ok\r\ntest_integer_scaling_and_larger_quiet_zone (tests.test_renderer.RendererTests.test_integer_scaling_and_larger_quiet_zone) ... ok\r\ntest_known_service_result_matches_independent_reference_pixels (tests.test_renderer.RendererTests.test_known_service_result_matches_independent_reference_pixels) ... ok\r\ntest_options_enforce_minimum_border_and_positive_integer_scale (tests.test_renderer.RendererTests.test_options_enforce_minimum_border_and_positive_integer_scale) ... ok\r\ntest_rectangular_view_centers_square_modules_without_cropping_border (tests.test_renderer.RendererTests.test_rectangular_view_centers_square_modules_without_cropping_border) ... ok\r\ntest_styles_cannot_invert_smooth_or_crop_the_symbol (tests.test_renderer.RendererTests.test_styles_cannot_invert_smooth_or_crop_the_symbol) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 58 tests in 26.090s\r\n\r\nOK\r\n"
+  },
+  "qt_interaction": {
+    "checks": {
+      "starts_on_generate": true,
+      "help_without_generation": true,
+      "section_navigation": true,
+      "back_preserves_empty": true,
+      "generated_known": true,
+      "result_preserved": true,
+      "saved_without_regeneration": true,
+      "same_canvas_after_save": true,
+      "draft_preserved": true,
+      "complete": true
+    },
+    "errors": [],
+    "artifacts": {
+      "overview": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\information_overview_20261112.png",
+      "input": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\information_input_20261112.png",
+      "privacy": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\information_privacy_20261112.png",
+      "generation": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\information_generation_20261112.png",
+      "saved_png": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\information_saved_known_20261112.png"
+    },
+    "sections": [
+      "Quick start",
+      "How information is represented",
+      "Input rules and capacity",
+      "Data integrity and error handling",
+      "Privacy and security",
+      "Saving and scanning"
+    ],
+    "known_request_id": "d778e0fb-7925-4d9e-8690-d3219b7032a2",
+    "exit_code": 0,
+    "generation_calls": 1,
+    "all_passed": true
+  },
+  "checks": {
+    "58_frontend_tests": true,
+    "qt_interaction": true,
+    "generation_screenshot_and_saved_png_decode": true,
+    "compile": true
+  },
+  "source_sha256": {
+    "qr_app/presentation/information.py": "29463ce9c8f4025c404ced4edb4f0ce713d81f7a86a7673a7e6b7b83c9b2b2c9",
+    "qr_app/presentation/main_window.py": "264d19fc3485833b179555a1a41e0b34817ad2538f78e5fde9b3f9636079a659",
+    "tests/test_information.py": "4ef026f4d7b45e12fb862fde4845ddd301a3e4f4e67a4496f61cdc1f5679226c",
+    "tests/test_gui_generation.py": "748a35b6f33eec8168de59824f71ab670f1809c5761ed399a808b5df206c1ff3",
+    "main_gui.py": "4e6cb95ebe2edcca910d84fab6d10cd3b39e83e094ce9871c5246e60caa80065",
+    "qr_app/presentation/gui.py": "47e3bdd693447f29a7e419f7bfb27d42196142d8b9bcc288bdd9639e090a6ed2",
+    "qr_app/presentation/generation_panel.py": "1c450755c4e6a464ec90159310294893c8f295490996136f864add284c48c7d2",
+    "qr_app/presentation/qt_environment.py": "6ee2e23540855484f826e45ff6983427c1dd69c6ac87d02701a704d95b3efaf6",
+    "qr_app/presentation/renderer.py": "48d71f339b3d4f77b72888619b040099e281cf75cbea27370d1a18441eb31934",
+    "qr_app/presentation/image_export.py": "ea91294210764176f462222558dd7462a48560b7786f4a08cebfdecca311046d",
+    "qr_app/presentation/png_dialog.py": "bb5d8ff558e4dfd87cffef1fcc1d72a98c93a1564b6824a62c8b69bc1f717f3c",
+    "qr_app/service.py": "cf9e0fe71924e90ba34e439ff6b99972470bd3bbcd3e03d983400e93bbed1f21"
+  },
+  "artifacts": [
+    {
+      "kind": "overview",
+      "path": "docs/validation/information_overview_20261112.png",
+      "pixel_size": [
+        1080,
+        780
+      ],
+      "sha256": "46c236a53916d72457b553403612f251360a4d6cf815ec57f8929cd61b7a4948"
+    },
+    {
+      "kind": "input",
+      "path": "docs/validation/information_input_20261112.png",
+      "pixel_size": [
+        1080,
+        780
+      ],
+      "sha256": "714e0ae8ee9e48aa5a6b06a34d49072cf0c46ed0b8916d49984c4aadff8ff67b"
+    },
+    {
+      "kind": "privacy",
+      "path": "docs/validation/information_privacy_20261112.png",
+      "pixel_size": [
+        1080,
+        780
+      ],
+      "sha256": "2145e15358e872be0e823fc739672f819808997cceba84ca33299a01506b3c47"
+    },
+    {
+      "kind": "generation",
+      "path": "docs/validation/information_generation_20261112.png",
+      "pixel_size": [
+        1080,
+        780
+      ],
+      "sha256": "f99d76caeda7707d9625796a292f81c92a95dc927e34e7c76b6d3e8d63544117"
+    },
+    {
+      "kind": "saved_png",
+      "path": "docs/validation/information_saved_known_20261112.png",
+      "pixel_size": [
+        529,
+        288
+      ],
+      "sha256": "ef51f4140b7badc15d098abca8a6dcdf739b8e05deae0b843dbf4a1136dd3601"
+    }
+  ],
+  "local_decoder": {
+    "command": [
+      "D:\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-c",
+      "import cv2,json,sys,numpy as np\nout=[]\nfor path in json.load(sys.stdin):\n    image=cv2.imdecode(np.fromfile(path,dtype=np.uint8),cv2.IMREAD_GRAYSCALE)\n    text,points,_=cv2.QRCodeDetector().detectAndDecode(image)\n    out.append({'path':path,'decoded_text':text,'passed':points is not None and text=='known'})\nprint(json.dumps({'opencv':cv2.__version__,'cases':out},ensure_ascii=False))"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"opencv\": \"4.12.0\", \"cases\": [{\"path\": \"F:\\\\文件\\\\python\\\\2026-2027大三上\\\\Coursework2\\\\docs\\\\validation\\\\information_generation_20261112.png\", \"decoded_text\": \"known\", \"passed\": true}, {\"path\": \"F:\\\\文件\\\\python\\\\2026-2027大三上\\\\Coursework2\\\\docs\\\\validation\\\\information_saved_known_20261112.png\", \"decoded_text\": \"known\", \"passed\": true}]}\r\n",
+    "stderr": ""
+  },
+  "decoded_images": {
+    "opencv": "4.12.0",
+    "cases": [
+      {
+        "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\information_generation_20261112.png",
+        "decoded_text": "known",
+        "passed": true
+      },
+      {
+        "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\information_saved_known_20261112.png",
+        "decoded_text": "known",
+        "passed": true
+      }
+    ]
+  },
+  "compile": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "compileall",
+      "-q",
+      "qr_app/presentation/information.py",
+      "qr_app/presentation/main_window.py",
+      "tests/test_information.py",
+      "tests/test_gui_generation.py",
+      "main_gui.py",
+      "qr_app/presentation/gui.py",
+      "qr_app/presentation/generation_panel.py",
+      "qr_app/presentation/qt_environment.py",
+      "qr_app/presentation/renderer.py",
+      "qr_app/presentation/image_export.py",
+      "qr_app/presentation/png_dialog.py",
+      "qr_app/service.py"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "all_passed": true,
+  "completed_at": "2026-11-12T02:28:28.370512+00:00"
+}
