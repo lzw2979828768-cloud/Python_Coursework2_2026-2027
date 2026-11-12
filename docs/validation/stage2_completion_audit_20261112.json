@@ -1,0 +1,344 @@
+{
+  "checked_at": "2026-11-12T16:17:41.502553+08:00",
+  "completed_at": "2026-11-12T16:18:42.680614+08:00",
+  "scope": "Current merged Stage 2 source, full local automated regression, startup, dependencies, source and existing artifact integrity; no phone, lab or human desktop acceptance performed",
+  "source_commit": "20f563a1309cb232e4326b7d8ee945218a165bdf",
+  "branch": "main",
+  "worktree_before_audit": "",
+  "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+  "packages": {
+    "numpy": "2.2.6",
+    "reedsolo": "1.7.0",
+    "matplotlib": "3.10.7",
+    "PyQt5": "5.15.11",
+    "PyQt5-Qt5": "5.15.2"
+  },
+  "tests": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "count": 210,
+    "seconds": 46.603,
+    "skipped": 0,
+    "passed": true,
+    "frontend_count": 71,
+    "core_cli_count": 139,
+    "counts_by_module": {
+      "test_byte_encoder": 10,
+      "test_cli": 42,
+      "test_error_correction": 13,
+      "test_fixed_mask": 13,
+      "test_format_info": 8,
+      "test_gui_generation": 19,
+      "test_image_export": 13,
+      "test_information": 8,
+      "test_jelly_button": 9,
+      "test_matrix_builder": 16,
+      "test_models": 12,
+      "test_png_dialog": 5,
+      "test_renderer": 13,
+      "test_service": 21,
+      "test_soft_ui": 4,
+      "test_tracing": 4
+    },
+    "output_file": "docs/validation/stage2_completion_tests_20261112.txt",
+    "output_sha256": "dc144d12d1127d370cc33e76b9b1a31504c86543e7d9491af33fb25a33316101"
+  },
+  "dependencies_check": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "exit_code": 0,
+    "output": "No broken requirements found.\n"
+  },
+  "compile_check": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "compileall",
+      "-q",
+      "qr_app",
+      "main_gui.py",
+      "main_cli.py",
+      "scripts"
+    ],
+    "exit_code": 0,
+    "output": ""
+  },
+  "offscreen_startup": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "main_gui.py",
+      "--offscreen",
+      "--text",
+      "known",
+      "--close-after-ms",
+      "500"
+    ],
+    "exit_code": 0,
+    "output": ""
+  },
+  "pre_merge_record_source_comparison": {
+    "record": "docs/validation/pre_merge_full_20261112.json",
+    "checked_files": 47,
+    "mismatches": []
+  },
+  "protected_source_diff_from_stage1": {
+    "command": [
+      "git",
+      "diff",
+      "--name-only",
+      "d672374",
+      "HEAD",
+      "--",
+      "qr_app/core",
+      "qr_app/models.py",
+      "qr_app/service.py",
+      "qr_app/resources"
+    ],
+    "exit_code": 0,
+    "output": ""
+  },
+  "historical_artifact_integrity": [
+    {
+      "record": "renderer_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\renderer_known_preview_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "renderer_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\renderer_validation\\case_2.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": false
+    },
+    {
+      "record": "renderer_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\renderer_validation\\case_3.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": false
+    },
+    {
+      "record": "renderer_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\renderer_validation\\case_4.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": false
+    },
+    {
+      "record": "renderer_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\renderer_validation\\case_5.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": false
+    },
+    {
+      "record": "renderer_python3139_20261112.json",
+      "path": "docs/validation/renderer_known_preview_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "png_export_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\png_saved_known_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "png_export_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\export_case_2.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": false
+    },
+    {
+      "record": "png_export_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\export_case_3.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": false
+    },
+    {
+      "record": "png_export_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\export_case_4.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": false
+    },
+    {
+      "record": "png_export_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\export_case_5.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": false
+    },
+    {
+      "record": "png_export_python3139_20261112.json",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\png_validation\\window_saved.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": false
+    },
+    {
+      "record": "png_export_python3139_20261112.json",
+      "path": "docs/validation/png_saved_known_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "gui_generation_python3139_20261112.json",
+      "path": "docs/validation/gui_generation_known_final_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "gui_generation_python3139_20261112.json",
+      "path": "docs/validation/gui_generation_error_final_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "gui_generation_python3139_20261112.json",
+      "path": "docs/validation/gui_saved_known_final_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "information_python3139_20261112.json",
+      "path": "docs/validation/information_overview_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "information_python3139_20261112.json",
+      "path": "docs/validation/information_input_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "information_python3139_20261112.json",
+      "path": "docs/validation/information_privacy_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "information_python3139_20261112.json",
+      "path": "docs/validation/information_generation_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "information_python3139_20261112.json",
+      "path": "docs/validation/information_saved_known_20261112.png",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    },
+    {
+      "record": "soft_minimal_ui_python3139_20261112.json",
+      "path": "F:\\文件\\收藏\\视觉语言\\Soft_Minimalism_UI_Design_Language.md",
+      "exists": true,
+      "sha256_matches": true,
+      "tracked": true
+    }
+  ],
+  "formal_stage2_rows_in_existing_manifest": 0,
+  "source_sha256": {
+    "main_cli.py": "361507c838e04fa373db1e0cc11b7837b42060f5ab179669393185f49d02b567",
+    "main_gui.py": "4e6cb95ebe2edcca910d84fab6d10cd3b39e83e094ce9871c5246e60caa80065",
+    "qr_app/__init__.py": "15ebd84a25fe5dfc3c8d34e2c863a90a9f669c65a20ec349005809ab0ae053ce",
+    "qr_app/core/__init__.py": "0801831e7b50383f3c97831f687016aee6479bde7d81a96e1e52405ddeed817f",
+    "qr_app/core/byte_encoder.py": "aa855829477e93884389c0f37efe0662eadd1d29a982d5a44349c9eaaf8ea394",
+    "qr_app/core/error_correction.py": "e1b313d032fbc304621c96f5f9433f87901039813775561377d388586a6db804",
+    "qr_app/core/fixed_mask.py": "3cf0157766df84c309f0c71003b239f4719279a33d82fed3e84c6b42adadd6f2",
+    "qr_app/core/format_info.py": "761ffec685d1b50007cb0d0550bc9a4dfc8bad65b96ea95e76bf40c1e89b76d4",
+    "qr_app/core/matrix_builder.py": "1f83e1197d1be718fbe886d15a20b3dff8ad381476fd3d488bd76cd19a2a8fbf",
+    "qr_app/errors.py": "9854e5b3b8b101a49cdd6d6856ff029a9c92d7454f06535c704f437ce6c89e16",
+    "qr_app/extensions/__init__.py": "6211bd36dcc7e76bfe4a734a86d70571f505d479e5b1d11ee3fdc649a8a9722b",
+    "qr_app/models.py": "02aef25cdc39b40e707dd2fc5f4baf6a5ab8fb91437d9fde51819b362bb75147",
+    "qr_app/presentation/__init__.py": "5d7143ec1d8bf4df922446913e6af5009e955547b746388b0d060da788b1f105",
+    "qr_app/presentation/cli.py": "102a2dd9190286bc9292d2bb34f99f139d089a51919e86defe55608ee95a61fb",
+    "qr_app/presentation/generation_panel.py": "007fd70505e91e23bbdf1ec14b659803714c1693fa42d2d0f2615e42bf2f6dcc",
+    "qr_app/presentation/gui.py": "5fafb71e7bc6e7f5c11cf18dc4b11cda8d5c542a60eb1875be75972cbb5fa24e",
+    "qr_app/presentation/gui_messages.py": "cad8c94022a7fc6b4f04a6ee0e3b424fd2292afe537dc65eeb3ce578e3cb180c",
+    "qr_app/presentation/icons.py": "f94fea4fcaf77be3514907819694294edd1558c3f4dfe93b9a254ae16e82af4a",
+    "qr_app/presentation/image_export.py": "ea91294210764176f462222558dd7462a48560b7786f4a08cebfdecca311046d",
+    "qr_app/presentation/information.py": "a046e6cd896dbf579c27b2a9b33f68d8e7d989fd1e3e0f95aef4847bbfeaeb28",
+    "qr_app/presentation/jelly_button.py": "f5a07e639eab8921959b20e3bbdca783c5591e7a572437acf9a6a7f065e774a7",
+    "qr_app/presentation/main_window.py": "4d1177e45d83131650b22dd8265b79863a11a259472946bcbdd32c9c1d6ccbf7",
+    "qr_app/presentation/navigation.py": "96642dddf03a58cfe66d8dce857b512762818428624ec1ede9466ccfc254caf5",
+    "qr_app/presentation/png_dialog.py": "3d89ad4ef950373585292dcfc819ec9ec6e7b28d9255fb4141a89462ded2c5f1",
+    "qr_app/presentation/qt_environment.py": "6ee2e23540855484f826e45ff6983427c1dd69c6ac87d02701a704d95b3efaf6",
+    "qr_app/presentation/renderer.py": "48d71f339b3d4f77b72888619b040099e281cf75cbea27370d1a18441eb31934",
+    "qr_app/presentation/theme.py": "f9d0da8afdca8526b42b2a435a85818bf235f79bdc892b76277816456b447b29",
+    "qr_app/presentation/trace_export.py": "95a6079f0b0f58fff2b8b1e25c454b96ee08ab32782c1f9229a1514387c1038a",
+    "qr_app/resources/__init__.py": "2dbecbde64fc5471766f27fa8a6939b89f2754592b8e2182e3278aa16e5bc072",
+    "qr_app/service.py": "cf9e0fe71924e90ba34e439ff6b99972470bd3bbcd3e03d983400e93bbed1f21",
+    "qr_app/tracing.py": "7d274d2643665081e2c7f322207d85acf0091cee2953217d47c07bfcfb754ce4",
+    "requirements-gui-lock.txt": "065131ae04c431e52ed58c8ff6c21f4e610b1d6c733d7f0cadbc0f98b97ad6f4",
+    "requirements-gui.txt": "0e36c2f2f2f0aa720574980bcb6816ed4310f911bb3493f248e638ec66773499",
+    "requirements.txt": "b6830764fd36d3d475768d153354d01520885e4ebf66807520bf67416056c6de",
+    "scripts/check_gui_environment.py": "5ffb2f0e871ef4328d55696ed6efbe6bed14a837147275ab197696ff66ac6a4a",
+    "scripts/preview_qr.py": "0da1f546f385483211311b2daf700d19b0c595bdf9974aeb816a91539b96c1c4",
+    "scripts/stage1_evidence.py": "30894f1425773263ba25cbc8dd00959724af32e9c3d74bb06935e6749d75cef7",
+    "tests/__init__.py": "8312e6fcb24c087eb6f1e02fcdcf0b5dbec993324106e1bb0f19fe3107b04f2a",
+    "tests/rs_reference.py": "c5ebabaa3e7ce5aed25febff840a0658e45119d4d6ff602818ac6fa42c9ec3ff",
+    "tests/test_byte_encoder.py": "9ff6869ab3f5123c893a308f4a396fd2925fb22877c555249eae7cdd8106c4e9",
+    "tests/test_cli.py": "0a5fe97df3c9cbfe9a8ef2267c7aaf44a75c50846654446a9111de66068416fd",
+    "tests/test_error_correction.py": "a4dae745d4dcab063e131001f43f00269c31c108801147b1afd24d729ccc83dd",
+    "tests/test_fixed_mask.py": "701913efcb247b241430e55de59d3a4a369823f28abcdae12aa0b526173f78d1",
+    "tests/test_format_info.py": "9078306473123715ee0a865c32d69e01ae5d9aaf386c5cc6dca1d43f57e28aa7",
+    "tests/test_gui_generation.py": "f1f3b113712bf33d88ce45bf734344994cf46e7177e99a40fa569b3aa1ce3856",
+    "tests/test_image_export.py": "d831ff59ede423e892492613585b760b879e1675737350200c6e13435cd01bcf",
+    "tests/test_information.py": "4ef026f4d7b45e12fb862fde4845ddd301a3e4f4e67a4496f61cdc1f5679226c",
+    "tests/test_jelly_button.py": "f2366bc8f3342b05f66a88ded4b8bfc8c2dee8b97bc1b3e22581afb6518d2b30",
+    "tests/test_matrix_builder.py": "489ac420509d23823d632c2f850ed1644004e19b1d4765d4c387117a0a255fa6",
+    "tests/test_models.py": "80c00b2fd0f42c7a9659011b1b7d2acd8c8c3dfc8c3af4701aef01180553e284",
+    "tests/test_png_dialog.py": "765ac1cea7124c5e910bc2d085073b272f7fa36a70a599021c3a42141418d5fc",
+    "tests/test_renderer.py": "916ec931344181b611bdb98a7d83e46fa7044acc101266f82e14d08191a0d432",
+    "tests/test_service.py": "0577ca7c8825f2601521caeac268768e71183eeeda2b3128b018e2435746ea54",
+    "tests/test_soft_ui.py": "4cbdb3aa14db4c7773ff236987db1e38d1577a98a2a19e32c7a6eb84107bab60",
+    "tests/test_tracing.py": "6db1f986218438ee1425a21f6568b5a307eb2281335f86d91e9247886540d1dc"
+  },
+  "source_unchanged_during_audit": true,
+  "manual_acceptance": {
+    "phone_screen_scan": "PENDING",
+    "phone_saved_png_scan": "PENDING",
+    "native_file_dialog_human_use": "PENDING",
+    "multiple_monitors_and_scaling_human_use": "PENDING",
+    "teaching_lab_reproduction": "PENDING",
+    "team_stage1_stage2_rehearsal": "PENDING"
+  },
+  "overall_stage2_acceptance_complete": false,
+  "local_automated_checks_passed": true
+}

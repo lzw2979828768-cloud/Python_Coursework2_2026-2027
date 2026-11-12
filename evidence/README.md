@@ -32,4 +32,4 @@ Stage1 本机功能、五份正式 demo 和阶段文档已完成。证据于2026
 采集由本机脚本执行，标签为 `automated_local_capture`；学生个人贡献、组内非作者评审和教师验收分别记录。
 分支与采集标签的调整见 `capture.json.metadata_revision`，原始CLI输出和五份demo保持原样。
 本次仅使用五个公开作业字符串，没有真实用户日志；清单记录必要的本机路径/环境元数据。
-GUI、PNG、手机扫码、教学机房和学校 CI 证据仍待后续完成。
+GUI与PNG现已实现，真实自动化记录及截图见[Stage2开发流程与完成情况梳理](../docs/stage2_development_review.md)和[本次合并后检测](../docs/validation/stage2_completion_audit_20261112.json)。当前manifest仍只索引Stage1；Stage2手机扫码、教学机房、人工验收及正式证据归档待完成，学校CI另行推进。

@@ -4,6 +4,7 @@
 当前已完成 Stage1：共享接口、Byte/RS/矩阵/格式信息/固定 Mask0、CLI、五份正式 demo 与本机验收文档。
 真实文件及逐项说明见[Stage1证据入口](evidence/README.md)。
 完整开发顺序、模块交接、25步轨迹与历史验证版本见[Stage1开发流程梳理](docs/stage1_development_review.md)。
+Stage2的逐项要求、开发顺序、本次210项复验及待验收事项见[Stage2开发流程与完成情况梳理](docs/stage2_development_review.md)。当前功能已实现，完整阶段验收尚未关闭。
 本文件是开发使用说明，最终评分用 README 和反思仍需团队根据真实实现自行撰写。
 
 ## 正式桌面应用
@@ -144,7 +145,7 @@ penalty_scores为空。详见[Byte](docs/byte_encoding.md)、[RS](docs/error_cor
 输入原文不会 trim 或截断。空输入、字符不支持、容量超限分别有明确错误。
 
 调用类型/ID/时间错误抛 `QRContractError`；结构有效的业务失败返回 `QRResult`。
-CLI 已调用这个实例方法，未来 GUI 也复用同一流程。
+CLI 与当前 GUI 均调用这个实例方法，复用同一流程。
 
 ## 主要文件
 
@@ -183,6 +184,6 @@ Python 3.13.9 下当前菜单版本通过 **139 项测试**（含42项 CLI/导�
 qrcode/OpenCV仅作离线验证，应用和常规测试没有新增依赖。
 团队非作者评审、正式 CI 和完整二维码功能仍待完成。
 
-Stage1本机交付已完成；Stage2环境、渲染、PNG保存、正式生成页面及Information均已实现，下一步完成原生界面、显示缩放、手机扫码、机房复现和完整阶段验收。
+Stage1本机交付已完成；Stage2环境、渲染、PNG保存、正式生成页面及Information均已实现，下一步完成原生窗口/文件选择器和显示缩放的人工验收、手机扫码、机房复现、演示彩排及证据归档。逐项结论见[Stage2完成情况梳理](docs/stage2_development_review.md)。
 main_cli.py继续输出数值矩阵和步骤报告；图像预览与保存使用scripts/preview_qr.py。
 测试中的模拟矩阵仅用于检查编排与故障隔离；Stage1正确性另有独立参考和真实demo支撑。
