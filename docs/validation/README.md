@@ -1,5 +1,11 @@
 # 共享骨架与编码验证记录
 
+Stage2渲染已完成：[13项专项测试、5个本机图像解码及Qt离屏预览](renderer_python3139_20261112.json)。
+GitHub上传前另有[发布前复验](renderer_pre_publish_python3139_20261112.json)，全部通过；保留原始记录，并增加仓库LF文本哈希供提交后核对。
+本次没有重跑Stage1全量测试；独立渲染像素核对与真实服务接入均通过。
+[known验证图](renderer_known_preview_20261112.png)是显式写出的验证制品，应用PNG保存接口仍待实现。
+环境准备另见[离屏记录](gui_environment_offscreen_python3139_20261112.json)与[Windows原生记录](gui_environment_windows_python3139_20261112.json)。
+
 当前菜单版本：[Python3.13.9，139项测试](interactive_input_python3139_20261112_000620.json)。
 包含42项CLI/报告测试、编译与依赖检查，真实子进程覆盖单行、多行、非法菜单选项、空输入、
 退出与EOF、原始stdin，以及五个作业样例。新菜单采用1/2/0选择，单独一行:end结束多行。

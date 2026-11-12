@@ -1,0 +1,261 @@
+{
+  "checked_at": "2026-11-12T00:32:43.505009+00:00",
+  "scope": "Stage2 matrix rendering, focused tests and local decoder; no phone scan",
+  "code_base_commit": "6ab93b2d0b38bb12ce0c3eb25f56301b8ea0df46",
+  "branch": "feature/stage2-gui-environment",
+  "source_dirty": true,
+  "python": "3.13.9",
+  "executable": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+  "packages": {
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.7",
+    "PyQt5": "5.15.11"
+  },
+  "checks": {
+    "renderer_tests": true,
+    "five_binary_images": true,
+    "offline_decoder": true,
+    "qt_offscreen_preview": true,
+    "preview_errors": true,
+    "compile": true,
+    "published_preview_matches_new_render": true
+  },
+  "source_sha256": {
+    "qr_app/presentation/renderer.py": "48d71f339b3d4f77b72888619b040099e281cf75cbea27370d1a18441eb31934",
+    "qr_app/presentation/qt_environment.py": "0581aaf005e81e5f86e8e8e41fe31ad9e85602b6a9a2e98c289152506f15d929",
+    "tests/test_renderer.py": "916ec931344181b611bdb98a7d83e46fa7044acc101266f82e14d08191a0d432",
+    "scripts/preview_qr.py": "8e18889f63dbefc9d76a106243f436fda9ec2b94da8c04ae2f6db75cfd9998e9",
+    "qr_app/service.py": "cf9e0fe71924e90ba34e439ff6b99972470bd3bbcd3e03d983400e93bbed1f21",
+    "tests/fixtures/format_mask0_reference_vectors.json": "c051b4af8f3822e7b0d029452b968b1c4779566cd21770d82d7e177b509bc2f0",
+    "requirements-gui-lock.txt": "dd19e44490c30ef637b6fa8ff3b90edc2fd1f9854332839c1fef55d4ada5d4e7"
+  },
+  "renderer_tests": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "tests.test_renderer",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_asymmetric_pattern_has_exact_orientation_colors_and_border (tests.test_renderer.RendererTests.test_asymmetric_pattern_has_exact_orientation_colors_and_border) ... ok\r\ntest_bad_matrix_types_are_rejected_without_coercion (tests.test_renderer.RendererTests.test_bad_matrix_types_are_rejected_without_coercion) ... ok\r\ntest_bad_shapes_and_nonbinary_values_are_rejected (tests.test_renderer.RendererTests.test_bad_shapes_and_nonbinary_values_are_rejected) ... ok\r\ntest_bool_integer_and_noncontiguous_matrices_are_supported (tests.test_renderer.RendererTests.test_bool_integer_and_noncontiguous_matrices_are_supported) ... ok\r\ntest_draw_invalid_input_keeps_previous_picture (tests.test_renderer.RendererTests.test_draw_invalid_input_keeps_previous_picture) ... ok\r\ntest_draw_replaces_one_axes_and_keeps_the_other_axes_and_size (tests.test_renderer.RendererTests.test_draw_replaces_one_axes_and_keeps_the_other_axes_and_size) ... ok\r\ntest_import_does_not_load_qt_pyplot_or_a_reference_generator (tests.test_renderer.RendererTests.test_import_does_not_load_qt_pyplot_or_a_reference_generator) ... ok\r\ntest_input_and_earlier_render_are_independent (tests.test_renderer.RendererTests.test_input_and_earlier_render_are_independent) ... ok\r\ntest_integer_scaling_and_larger_quiet_zone (tests.test_renderer.RendererTests.test_integer_scaling_and_larger_quiet_zone) ... ok\r\ntest_known_service_result_matches_independent_reference_pixels (tests.test_renderer.RendererTests.test_known_service_result_matches_independent_reference_pixels) ... ok\r\ntest_options_enforce_minimum_border_and_positive_integer_scale (tests.test_renderer.RendererTests.test_options_enforce_minimum_border_and_positive_integer_scale) ... ok\r\ntest_rectangular_view_centers_square_modules_without_cropping_border (tests.test_renderer.RendererTests.test_rectangular_view_centers_square_modules_without_cropping_border) ... ok\r\ntest_styles_cannot_invert_smooth_or_crop_the_symbol (tests.test_renderer.RendererTests.test_styles_cannot_invert_smooth_or_crop_the_symbol) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 13 tests in 3.307s\r\n\r\nOK\r\n"
+  },
+  "rendered_cases": [
+    {
+      "input": "known",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\renderer_validation\\pre_publish_known.png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "sha256": "abc4d0ed32e5400bf9bb8a17903a7e2a9ba62241d31020dafada57441e9b4f2b",
+      "only_black_white": true,
+      "opaque": true
+    },
+    {
+      "input": "We've succeeded!",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\renderer_validation\\case_2.png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "sha256": "61695e07fd2ff88f84dac0fcba6b6b2bcb007e9b7919949587744aed45a6af31",
+      "only_black_white": true,
+      "opaque": true
+    },
+    {
+      "input": "~¡256_-_aA&ñ",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\renderer_validation\\case_3.png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "sha256": "5d3e01274b3b78cd20011ce0143d2bc99d93617a705454fd90600b4f0a76be9c",
+      "only_black_white": true,
+      "opaque": true
+    },
+    {
+      "input": "AAAAAAAAAAAAAAAAA",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\renderer_validation\\case_4.png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "sha256": "6faec2192d0b1b7f3826ea8c3aaac19ee4ea7a36cf7e858bbd76cb710a1f8ce2",
+      "only_black_white": true,
+      "opaque": true
+    },
+    {
+      "input": " ",
+      "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\renderer_validation\\case_5.png",
+      "pixel_shape": [
+        290,
+        290,
+        4
+      ],
+      "sha256": "be156e5e60c4f25454df7772acb7ece405e800a9ba5051ca640640203bb96034",
+      "only_black_white": true,
+      "opaque": true
+    }
+  ],
+  "preview_artifact": {
+    "path": "tmp/renderer_validation/pre_publish_known.png",
+    "sha256": "abc4d0ed32e5400bf9bb8a17903a7e2a9ba62241d31020dafada57441e9b4f2b",
+    "input": "known",
+    "note": "Explicit validation output; renderer does not save files"
+  },
+  "offline_decoder": {
+    "command": [
+      "D:\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-c",
+      "\nimport json,sys,cv2,numpy as np\ncases=json.load(sys.stdin)\nout=[]\ndetector=cv2.QRCodeDetector()\nfor case in cases:\n    image=cv2.imdecode(np.fromfile(case['path'],dtype=np.uint8),cv2.IMREAD_GRAYSCALE)\n    raw,points,straight=detector.detectAndDecodeBytes(image)\n    text=raw.decode('utf-8')\n    out.append({'input':case['input'],'decoded_text':text,'detected':points is not None,\n                'decoded_utf8_hex':raw.hex(),'passed':text==case['input']})\nprint(json.dumps({'opencv':cv2.__version__,'cases':out},ensure_ascii=False))\n"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"opencv\": \"4.12.0\", \"cases\": [{\"input\": \"known\", \"decoded_text\": \"known\", \"detected\": true, \"decoded_utf8_hex\": \"6b6e6f776e\", \"passed\": true}, {\"input\": \"We've succeeded!\", \"decoded_text\": \"We've succeeded!\", \"detected\": true, \"decoded_utf8_hex\": \"57652776652073756363656564656421\", \"passed\": true}, {\"input\": \"~¡256_-_aA&ñ\", \"decoded_text\": \"~¡256_-_aA&ñ\", \"detected\": true, \"decoded_utf8_hex\": \"7ec2a13235365f2d5f614126c3b1\", \"passed\": true}, {\"input\": \"AAAAAAAAAAAAAAAAA\", \"decoded_text\": \"AAAAAAAAAAAAAAAAA\", \"detected\": true, \"decoded_utf8_hex\": \"4141414141414141414141414141414141\", \"passed\": true}, {\"input\": \" \", \"decoded_text\": \" \", \"detected\": true, \"decoded_utf8_hex\": \"20\", \"passed\": true}]}\r\n",
+    "stderr": ""
+  },
+  "decoded_cases": {
+    "opencv": "4.12.0",
+    "cases": [
+      {
+        "input": "known",
+        "decoded_text": "known",
+        "detected": true,
+        "decoded_utf8_hex": "6b6e6f776e",
+        "passed": true
+      },
+      {
+        "input": "We've succeeded!",
+        "decoded_text": "We've succeeded!",
+        "detected": true,
+        "decoded_utf8_hex": "57652776652073756363656564656421",
+        "passed": true
+      },
+      {
+        "input": "~¡256_-_aA&ñ",
+        "decoded_text": "~¡256_-_aA&ñ",
+        "detected": true,
+        "decoded_utf8_hex": "7ec2a13235365f2d5f614126c3b1",
+        "passed": true
+      },
+      {
+        "input": "AAAAAAAAAAAAAAAAA",
+        "decoded_text": "AAAAAAAAAAAAAAAAA",
+        "detected": true,
+        "decoded_utf8_hex": "4141414141414141414141414141414141",
+        "passed": true
+      },
+      {
+        "input": " ",
+        "decoded_text": " ",
+        "detected": true,
+        "decoded_utf8_hex": "20",
+        "passed": true
+      }
+    ]
+  },
+  "qt_offscreen_preview": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "scripts/preview_qr.py",
+      "--offscreen",
+      "--text",
+      "known",
+      "--close-after-ms",
+      "300"
+    ],
+    "exit_code": 0,
+    "stdout": "Preview closed: V1/L/Mask0\r\n",
+    "stderr": ""
+  },
+  "preview_errors": [
+    {
+      "command": [
+        "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/preview_qr.py",
+        "--text",
+        "From α to ɷ..."
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "UNSUPPORTED_CHARACTER: 输入包含 ISO-8859-1 不支持的字符。\r\nCompleted steps: 0\r\n",
+      "passed": true
+    },
+    {
+      "command": [
+        "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/preview_qr.py",
+        "--text",
+        "Sugarplum_Fairy_Nightmare"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "CAPACITY_EXCEEDED: 输入字节数超过所选版本和纠错等级的容量。\r\nCompleted steps: 1\r\n",
+      "passed": true
+    },
+    {
+      "command": [
+        "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/preview_qr.py",
+        "--text",
+        "known",
+        "--quiet-zone",
+        "3"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "usage: preview_qr.py [-h] [--text TEXT] [--quiet-zone QUIET_ZONE]\r\n                     [--module-pixels MODULE_PIXELS] [--offscreen]\r\n                     [--close-after-ms CLOSE_AFTER_MS]\r\npreview_qr.py: error: quiet_zone_modules must be at least 4\r\n",
+      "passed": true
+    }
+  ],
+  "compile": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "compileall",
+      "-q",
+      "qr_app/presentation/renderer.py",
+      "scripts/preview_qr.py",
+      "tests/test_renderer.py"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "repository_source_sha256": {
+    "qr_app/presentation/renderer.py": "48d71f339b3d4f77b72888619b040099e281cf75cbea27370d1a18441eb31934",
+    "qr_app/presentation/qt_environment.py": "0581aaf005e81e5f86e8e8e41fe31ad9e85602b6a9a2e98c289152506f15d929",
+    "tests/test_renderer.py": "916ec931344181b611bdb98a7d83e46fa7044acc101266f82e14d08191a0d432",
+    "scripts/preview_qr.py": "8e18889f63dbefc9d76a106243f436fda9ec2b94da8c04ae2f6db75cfd9998e9",
+    "qr_app/service.py": "cf9e0fe71924e90ba34e439ff6b99972470bd3bbcd3e03d983400e93bbed1f21",
+    "tests/fixtures/format_mask0_reference_vectors.json": "c051b4af8f3822e7b0d029452b968b1c4779566cd21770d82d7e177b509bc2f0",
+    "requirements-gui-lock.txt": "065131ae04c431e52ed58c8ff6c21f4e610b1d6c733d7f0cadbc0f98b97ad6f4"
+  },
+  "repository_hash_policy": "LF-normalized text, matching repository attributes; source_sha256 retains actual working files",
+  "previous_validation": "docs/validation/renderer_python3139_20261112.json",
+  "published_preview": {
+    "path": "docs/validation/renderer_known_preview_20261112.png",
+    "sha256": "abc4d0ed32e5400bf9bb8a17903a7e2a9ba62241d31020dafada57441e9b4f2b"
+  },
+  "all_passed": true,
+  "completed_at": "2026-11-12T00:32:59.235838+00:00"
+}
