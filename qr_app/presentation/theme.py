@@ -80,6 +80,7 @@ QComboBox:hover { border-color: #C6CAD0; }
 QComboBox:focus { border: 2px solid $focus; }
 QComboBox::drop-down { subcontrol-origin: padding; subcontrol-position: top right; width: 36px; background: transparent; border: none; }
 QComboBox::down-arrow { image: url("$dropdown_arrow"); width: 18px; height: 18px; }
+QFrame#informationPopup { background: transparent; border: none; }
 QComboBox QAbstractItemView { background: $surface; color: $text; selection-color: $text; selection-background-color: $hover; border: 1px solid $border; border-radius: 12px; padding: 6px; outline: 0; }
 QComboBox QAbstractItemView::item { min-height: 30px; padding: 4px 10px; border: none; border-radius: 7px; }
 QComboBox QAbstractItemView::item:selected { background: $hover; color: $text; }

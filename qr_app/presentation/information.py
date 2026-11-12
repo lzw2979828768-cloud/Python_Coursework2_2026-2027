@@ -1,7 +1,7 @@
 """Read-only guidance for the features actually provided by this application."""
 
-from PyQt5.QtCore import QSize, Qt, pyqtSignal
-from PyQt5.QtWidgets import QBoxLayout, QComboBox, QHBoxLayout, QLabel, QListView, QPushButton, QTextBrowser, QVBoxLayout, QWidget
+from PyQt5.QtCore import QEvent, QSize, Qt, pyqtSignal
+from PyQt5.QtWidgets import QBoxLayout, QComboBox, QFrame, QHBoxLayout, QLabel, QListView, QPushButton, QTextBrowser, QVBoxLayout, QWidget
 
 from .theme import TOKENS, information_stylesheet
 
@@ -118,6 +118,29 @@ Small images, poor contrast or altered borders can reduce scan reliability.</li>
 """
 
 
+class _SectionSelector(QComboBox):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setView(QListView())
+        # The list's rounded QSS does not change the native popup window.
+        # Remove its rectangular frame/shadow and let the rounded list draw
+        # against a transparent shell; keep Qt.Popup dismissal and focus.
+        popup = self.view().window()
+        popup.setObjectName("informationPopup")
+        popup.setWindowFlags(popup.windowFlags() | Qt.FramelessWindowHint | Qt.NoDropShadowWindowHint)
+        popup.setAttribute(Qt.WA_TranslucentBackground, True)
+        popup.setFrameShape(QFrame.NoFrame)
+        self._popup = popup
+        popup.installEventFilter(self)
+
+    def eventFilter(self, watched, event):
+        if watched is self._popup and event.type() == QEvent.Paint:
+            # Qt's combo container paints PE_PanelMenu even with NoFrame.
+            # Suppress that square surface; the list paints its own border.
+            return True
+        return super().eventFilter(watched, event)
+
+
 class _InformationBrowser(QTextBrowser):
     def loadResource(self, resource_type, name):
         # This document uses inline text/styles only. Never fetch URL or file
@@ -154,8 +177,7 @@ class InformationPanel(QWidget):
         layout.addWidget(subtitle)
         navigation = QHBoxLayout()
         navigation.addWidget(QLabel("Jump to section"))
-        self.section_selector = QComboBox()
-        self.section_selector.setView(QListView())
+        self.section_selector = _SectionSelector()
         self.section_selector.setObjectName("informationSection")
         self.section_selector.setAccessibleName("Information section")
         self.section_selector.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon)
