@@ -6,7 +6,7 @@
 
 | 版本 | 分支 | 基准 |
 |---|---|---|
-| 旧界面 | `feature/stage2-gui-environment` | `c7bae6ab1c3e2531504f36fe335e893cd257ca97` |
+| 旧界面 | `feature/stage2-gui-environment` | 旧布局基于 `c7bae6a`，另包含英文提示修复 |
 | 新界面 | `feature/soft-minimal-ui` | 从上述提交建立，包含本次界面重排 |
 
 相同输入 `known`、相同 1240×820 窗口、同一项目解释器的对比，左旧右新：
@@ -18,7 +18,7 @@
 - 冷灰底色、近白工作区、白色卡片，统一圆角、间距、字号与状态配色。
 - 左侧 Generate QR / Information 导航，支持手动折叠；窗口宽度小于 1000 时自动压缩为图标导航，提供提示和可访问名称。
 - 输入与预览两张卡片；深灰 Generate、次级 Save PNG、轻量 Clear input 和 Input rules。
-- 输入卡片单层轻投影；自绘矢量线性图标，不使用外部图标资源。
+- 输入与预览卡片使用细边框和留白，不加投影；自绘矢量线性图标和本地 SVG 下拉箭头，不使用外部图标资源。
 - 页面宽度小于 740 时输入与结果上下排列，小窗口纵向滚动；默认窗口生成后直接显示生成与保存按钮。
 - Information 使用相同主题，保留分节跳转、返回和 F1；Input rules 可直接跳到输入规则。
 - 键盘焦点、悬停、按下、禁用、选中态以及成功、错误、草稿状态仍有清晰反馈。
@@ -38,7 +38,7 @@
 & '.\.venv\Scripts\python.exe' -X utf8 main_gui.py
 ```
 
-本机已在 `tmp/ui_previous` 创建旧提交的独立工作目录，处于 detached HEAD，可以从另一个终端启动旧版，同时与新版对比：
+本机已在 `tmp/ui_previous` 保留旧版（包含英文提示修复）的独立工作目录，处于 detached HEAD，可以从另一个终端启动旧版，同时与新版对比：
 
 ```powershell
 & '.\.venv\Scripts\python.exe' -X utf8 '.\tmp\ui_previous\main_gui.py'
@@ -47,7 +47,7 @@
 `tmp/ui_previous` 不纳入仓库提交。其他电脑或此目录被清理后，可以在目录不存在时重建：
 
 ```powershell
-git worktree add --detach tmp/ui_previous c7bae6ab1c3e2531504f36fe335e893cd257ca97
+git worktree add --detach tmp/ui_previous feature/stage2-gui-environment
 ```
 
 ## 切回旧版
@@ -91,6 +91,8 @@ git switch feature/soft-minimal-ui
 - 旧工作目录干净；保留源码、设计规范和制品 SHA-256 及原始测试输出。
 
 本次未重跑 Stage1 历史全量测试；离屏检查不等于新版原生显示缩放、手机扫码或教学机房人工验收。
+
+后续针对实际运行截图修复了投影、系统灰色分隔条、滚动条、下拉框和中英混用的问题，并完成 Windows 隐藏窗口的 160% 缩放检查。见[控件与英文提示修复](ui_control_polish.md)。本页此前的对比图片和首轮验证记录继续作为历史证据保留。
 
 运行回归测试：
 

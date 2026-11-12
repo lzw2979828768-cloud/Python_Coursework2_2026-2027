@@ -1,7 +1,7 @@
 """Read-only guidance for the features actually provided by this application."""
 
 from PyQt5.QtCore import QSize, Qt, pyqtSignal
-from PyQt5.QtWidgets import QBoxLayout, QComboBox, QHBoxLayout, QLabel, QPushButton, QTextBrowser, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QBoxLayout, QComboBox, QHBoxLayout, QLabel, QListView, QPushButton, QTextBrowser, QVBoxLayout, QWidget
 
 from .theme import TOKENS, information_stylesheet
 
@@ -155,6 +155,7 @@ class InformationPanel(QWidget):
         navigation = QHBoxLayout()
         navigation.addWidget(QLabel("Jump to section"))
         self.section_selector = QComboBox()
+        self.section_selector.setView(QListView())
         self.section_selector.setObjectName("informationSection")
         self.section_selector.setAccessibleName("Information section")
         self.section_selector.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon)

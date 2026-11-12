@@ -2,6 +2,7 @@
 
 from string import Template
 from types import MappingProxyType
+from pathlib import Path
 
 TOKENS = MappingProxyType({
     "page": "#F5F6F8", "surface": "#FFFFFF", "surface_soft": "#FAFAFB",
@@ -47,6 +48,19 @@ QFrame#inputGuide { background: $surface_soft; border: none; border-radius: 14px
 QLabel#guideTitle { font-weight: 600; }
 QPlainTextEdit { background: $surface_soft; color: $text; border: 1px solid $border; border-radius: ${radius_control}px; padding: 12px; selection-background-color: #DCE8F8; }
 QPlainTextEdit:focus { border: 2px solid $focus; }
+QSplitter, QSplitter::handle { background: transparent; border: none; }
+QScrollBar:vertical { background: transparent; width: 12px; margin: 4px 2px; border: none; }
+QScrollBar::handle:vertical { background: #C6CAD0; min-height: 36px; border-radius: 4px; }
+QScrollBar::handle:vertical:hover { background: #A8AEB7; }
+QScrollBar::handle:vertical:pressed { background: $secondary; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0px; border: none; background: transparent; }
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: transparent; }
+QScrollBar:horizontal { background: transparent; height: 12px; margin: 2px 4px; border: none; }
+QScrollBar::handle:horizontal { background: #C6CAD0; min-width: 36px; border-radius: 4px; }
+QScrollBar::handle:horizontal:hover { background: #A8AEB7; }
+QScrollBar::handle:horizontal:pressed { background: $secondary; }
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0px; border: none; background: transparent; }
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: transparent; }
 QPushButton { min-height: 30px; background: $subtle; color: $text; border: 1px solid $border; border-radius: 18px; padding: 5px 14px; font-weight: 500; }
 QPushButton:hover { background: $hover; }
 QPushButton:pressed { background: #DDE0E5; }
@@ -61,13 +75,18 @@ QPushButton#clearButton:focus, QPushButton#inputRulesButton:focus { border: 2px 
 QPushButton#saveButton { background: $subtle; color: $text; font-weight: 600; }
 QPushButton:disabled, QPushButton#generateButton:disabled, QPushButton#saveButton:disabled {
     color: $disabled; background: $subtle; border-color: $border; }
-QComboBox { min-height: 28px; background: $surface; border: 1px solid $border; border-radius: ${radius_control}px; padding: 5px 10px; }
+QComboBox { min-height: 28px; background: $surface; border: 1px solid $border; border-radius: ${radius_control}px; padding: 5px 40px 5px 12px; }
+QComboBox:hover { border-color: #C6CAD0; }
 QComboBox:focus { border: 2px solid $focus; }
-QComboBox QAbstractItemView { background: $surface; color: $text; selection-color: $text; selection-background-color: $hover; border: 1px solid $border; }
+QComboBox::drop-down { subcontrol-origin: padding; subcontrol-position: top right; width: 36px; background: transparent; border: none; }
+QComboBox::down-arrow { image: url("$dropdown_arrow"); width: 18px; height: 18px; }
+QComboBox QAbstractItemView { background: $surface; color: $text; selection-color: $text; selection-background-color: $hover; border: 1px solid $border; border-radius: 12px; padding: 6px; outline: 0; }
+QComboBox QAbstractItemView::item { min-height: 30px; padding: 4px 10px; border: none; border-radius: 7px; }
+QComboBox QAbstractItemView::item:selected { background: $hover; color: $text; }
 QTextBrowser#informationContent { background: $surface; color: $text; border: 1px solid $border; border-radius: ${radius_card}px; padding: 18px; }
 QTextBrowser#informationContent:focus { border-color: $focus; }
 QToolTip { background: $surface; color: $text; border: 1px solid $border; padding: 6px; }
-""").substitute(TOKENS)
+""").substitute(TOKENS, dropdown_arrow=(Path(__file__).parent / "assets/chevron-down.svg").as_posix())
 
 
 def information_stylesheet():

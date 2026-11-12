@@ -86,6 +86,8 @@ class PNGDialogTests(unittest.TestCase):
             canvas = FigureCanvasAgg(self.figure)
             self.assertIsNone(save_png_dialog(None, self.figure))
             warning.assert_called_once()
+            self.assertTrue(warning.call_args.args[2].isascii())
+            self.assertIn("write permissions", warning.call_args.args[2])
             info.assert_not_called()
             self.assertIs(self.figure.canvas, canvas)
             canvas.draw()
