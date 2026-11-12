@@ -60,7 +60,21 @@ matplotlib渲染已完成：0白1黑、默认4模块白边、最近邻绘制、�
 
 13项渲染专项测试、5个真实图像的本机OpenCV解码及Qt离屏预览通过。
 用法、接口、验证图与边界见[渲染说明](docs/renderer.md)和[本次验证记录](docs/validation/renderer_python3139_20261112.json)。
-预览窗口尚无文本输入或保存按钮；PNG保存、正式GUI、Information与手机扫码仍待实施。
+预览窗口现已提供Save PNG按钮；窗口内文本输入、正式生成页面、Information与手机扫码仍待实施。
+
+## Stage2 PNG保存
+
+PNG保存已实现：在预览窗口点击`Save PNG`选择路径，已有文件确认后才覆盖；取消或失败保留当前二维码。
+也可以在终端直接保存：
+
+```powershell
+New-Item -ItemType Directory -Force outputs
+& '.\.venv\Scripts\python.exe' -X utf8 scripts/preview_qr.py --text "Hello QR" --png-out outputs/hello.png --no-preview
+```
+
+再次保存到同名文件需明确加`--overwrite`。父目录必须存在；保存前完整编码到临时文件，失败不会破坏旧文件。
+31项保存/对话框/渲染测试、实际Qt按钮保存以及五张导出图的本机解码通过。
+接口、覆盖规则和退出码见[PNG保存说明](docs/png_export.md)，实际结果见[验证记录](docs/validation/png_export_python3139_20261112.json)。
 
 ## 运行 CLI
 
@@ -122,7 +136,8 @@ CLI 已调用这个实例方法，未来 GUI 也复用同一流程。
 | `qr_app/extensions/` | 预留四项个人扩展位置，当前不自动导入或启用 |
 | `main_cli.py` | CLI 启动脚本，UTF-8 标准输入输出 |
 | `qr_app/presentation/` | CLI、显式步骤报告、matplotlib渲染及Qt环境准备；正式GUI待实现 |
-| `scripts/preview_qr.py` | 用真实基础服务结果打开Qt二维码预览，不保存文件 |
+| `qr_app/presentation/image_export.py` | 独立PNG保存、覆盖保护、实际制品返回 |
+| `scripts/preview_qr.py` | Qt二维码预览、Save PNG按钮与终端显式PNG导出 |
 | `tests/` | 公共模型、编码/纠错/矩阵与编排测试 |
 | `docs/shared_skeleton.md` | 接口接入、实际环境、测试范围及合并前事项 |
 | `evidence/` | 五份正式Stage1 demo、运行记录、制品哈希与本机验收说明；扫码证据待Stage2 |
@@ -144,6 +159,6 @@ Python 3.13.9 下当前菜单版本通过 **139 项测试**（含42项 CLI/导�
 qrcode/OpenCV仅作离线验证，应用和常规测试没有新增依赖。
 团队非作者评审、正式 CI 和完整二维码功能仍待完成。
 
-Stage1本机交付已完成；Stage2环境与matplotlib渲染已完成，下一步实现PNG保存、正式PyQt5 GUI和真实手机扫码。
-当前CLI输出数值矩阵和步骤报告，尚不显示或保存二维码图片。
+Stage1本机交付已完成；Stage2环境、matplotlib渲染和PNG保存已完成，下一步实现正式PyQt5输入/生成页面、Information和真实手机扫码。
+main_cli.py继续输出数值矩阵和步骤报告；图像预览与保存使用scripts/preview_qr.py。
 测试中的模拟矩阵仅用于检查编排与故障隔离；Stage1正确性另有独立参考和真实demo支撑。

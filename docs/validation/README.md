@@ -1,9 +1,13 @@
 # 共享骨架与编码验证记录
 
+Stage2 PNG保存已完成：[31项保存/对话框/渲染测试、Qt按钮保存与五张图解码](png_export_python3139_20261112.json)。
+GitHub上传前的[PNG保存复验记录](png_export_pre_publish_python3139_20261112.json)另含真实测试及Qt操作输出，全部通过。
+[known保存样例](png_saved_known_20261112.png)由实际保存接口生成，保存失败与生成失败分别处理。
+
 Stage2渲染已完成：[13项专项测试、5个本机图像解码及Qt离屏预览](renderer_python3139_20261112.json)。
 GitHub上传前另有[发布前复验](renderer_pre_publish_python3139_20261112.json)，全部通过；保留原始记录，并增加仓库LF文本哈希供提交后核对。
 本次没有重跑Stage1全量测试；独立渲染像素核对与真实服务接入均通过。
-[known验证图](renderer_known_preview_20261112.png)是显式写出的验证制品，应用PNG保存接口仍待实现。
+[known验证图](renderer_known_preview_20261112.png)是渲染阶段显式写出的验证制品；当前PNG保存接口及预览脚本版本见上方保存记录。
 环境准备另见[离屏记录](gui_environment_offscreen_python3139_20261112.json)与[Windows原生记录](gui_environment_windows_python3139_20261112.json)。
 
 当前菜单版本：[Python3.13.9，139项测试](interactive_input_python3139_20261112_000620.json)。
