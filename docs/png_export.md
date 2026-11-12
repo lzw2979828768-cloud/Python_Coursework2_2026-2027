@@ -2,6 +2,8 @@
 
 日期：2026-11-12。状态：保存接口、预览窗口 Save PNG 按钮及终端保存参数已实现。
 
+正式[输入与生成页面](gui_generation.md)也已接入同一保存功能，可在`main_gui.py`中直接输入、生成、保存。
+
 ## 1. 使用方式
 
 在项目根目录使用 `.venv` 的 Python。二维码内容仍按基础 V1/L/Mask0、严格 ISO-8859-1 和 17 字节上限处理。
@@ -9,10 +11,10 @@
 ### 1.1 在窗口中保存
 
 ```powershell
-& '.\.venv\Scripts\python.exe' -X utf8 scripts/preview_qr.py --text "Hello QR"
+& '.\.venv\Scripts\python.exe' -X utf8 main_gui.py
 ```
 
-1. 在打开的二维码预览窗口中点击 **Save PNG**。
+1. 在窗口中输入文字并点击 **Generate**，成功后点击 **Save PNG**。
 2. 选择保存位置，输入文件名。
 3. 没有扩展名时补上 `.png`；其他扩展名会提示错误。
 4. 目标文件已存在时，确认后才覆盖，默认选项为不覆盖。
@@ -99,6 +101,8 @@ save_figure(figure, target_path, *, overwrite=False) -> SavedArtifact
 
 [png_dialog.py](../qr_app/presentation/png_dialog.py) 负责文件选择、一次覆盖确认和成功/失败提示；[preview_qr.py](../scripts/preview_qr.py) 将其接到 Save PNG 按钮。
 
+正式[GenerationPanel](../qr_app/presentation/generation_panel.py)也调用此对话框；输入修改后保存禁用，重新提交成功才保存当前结果。
+
 取消文件对话框不会调用保存函数。保存操作复用当前 Figure，不再次调用 QRService。覆盖确认的默认选择为 No；文件在选择后才被其他进程创建时，保存器仍会保护新文件。
 
 ## 5. 本次验证
@@ -141,4 +145,4 @@ GitHub上传前另有[发布前复验记录](validation/png_export_pre_publish_p
 
 ## 6. 后续工作
 
-本次没有重跑 Stage 1 的历史全量测试，也没有进行手机扫码、教学机房或原生文件对话框的人工验收。下一步可以在当前服务、渲染和保存功能之上实现正式文本输入/生成页面与 Information 页面。
+本次没有重跑Stage1的历史全量测试，也没有进行手机扫码、教学机房或原生文件对话框的人工验收。正式文本输入/生成页面现已实现，接下来补充Information并完成人工验收。

@@ -1,5 +1,10 @@
 # 共享骨架与编码验证记录
 
+正式生成页已完成：[50项前端测试、Qt窗口交互与截图/PNG解码](gui_generation_python3139_20261112.json)。
+上传前的[GUI发布复验](gui_generation_pre_publish_python3139_20261112.json)再次全部通过，并核对真实GUI输入的换行0A和空格20。
+其中新增19项GUI测试，保存/渲染回归31项；不代表Stage1的139项历史测试已重新执行。
+本轮修复离屏字体和画布尺寸反馈问题，窗口截图见[正式GUI说明](../gui_generation.md)；旧环境/预览记录仍按其当时源码哈希理解。
+
 Stage2 PNG保存已完成：[31项保存/对话框/渲染测试、Qt按钮保存与五张图解码](png_export_python3139_20261112.json)。
 GitHub上传前的[PNG保存复验记录](png_export_pre_publish_python3139_20261112.json)另含真实测试及Qt操作输出，全部通过。
 [known保存样例](png_saved_known_20261112.png)由实际保存接口生成，保存失败与生成失败分别处理。

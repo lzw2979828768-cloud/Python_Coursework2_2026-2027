@@ -1,6 +1,6 @@
 # matplotlib 二维码渲染
 
-日期：2026-11-12。状态：Stage 2 矩阵渲染与PNG保存已实现，预览入口提供Save PNG按钮；正式输入窗口、Information和手机扫码仍待后续实施。
+日期：2026-11-12。状态：Stage2矩阵渲染、PNG保存及[正式输入窗口](gui_generation.md)已实现；Information和手机扫码仍待后续实施。
 
 ## 1. 本次实现
 

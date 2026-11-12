@@ -6,6 +6,19 @@
 完整开发顺序、模块交接、25步轨迹与历史验证版本见[Stage1开发流程梳理](docs/stage1_development_review.md)。
 本文件是开发使用说明，最终评分用 README 和反思仍需团队根据真实实现自行撰写。
 
+## 正式桌面应用
+
+PyQt5文本输入与生成页面已实现。在项目根目录使用已准备的`.venv`启动：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 main_gui.py
+```
+
+在窗口中输入文字 → 点击`Generate` → 查看二维码 → 点击`Save PNG`。
+字节数实时显示，基础限制仍为ISO-8859-1、17字节、V1/L/Mask0。编辑草稿不会自动生成；旧结果明确标记，生成失败清除旧图并禁用保存。
+默认窗口可直接看到生成和保存按钮，小窗口可滚动。50项GUI/渲染/保存测试及窗口交互验证通过。
+操作、状态和截图见[正式生成页面](docs/gui_generation.md)，Information与手机扫码验收仍待完成。
+
 ## 安装与检查
 
 本次实际验证：Windows、CPython **3.13.9**、numpy **2.2.6**、reedsolo **1.7.0**。
@@ -60,7 +73,7 @@ matplotlib渲染已完成：0白1黑、默认4模块白边、最近邻绘制、�
 
 13项渲染专项测试、5个真实图像的本机OpenCV解码及Qt离屏预览通过。
 用法、接口、验证图与边界见[渲染说明](docs/renderer.md)和[本次验证记录](docs/validation/renderer_python3139_20261112.json)。
-预览窗口现已提供Save PNG按钮；窗口内文本输入、正式生成页面、Information与手机扫码仍待实施。
+轻量预览窗口提供Save PNG按钮；正式窗口内输入和生成使用`main_gui.py`。Information与手机扫码仍待实施。
 
 ## Stage2 PNG保存
 
@@ -135,7 +148,8 @@ CLI 已调用这个实例方法，未来 GUI 也复用同一流程。
 | `qr_app/resources/qr_capacity_v1_v2.json` | 当前仅有 V1/L 规格，附来源和待复核状态 |
 | `qr_app/extensions/` | 预留四项个人扩展位置，当前不自动导入或启用 |
 | `main_cli.py` | CLI 启动脚本，UTF-8 标准输入输出 |
-| `qr_app/presentation/` | CLI、显式步骤报告、matplotlib渲染及Qt环境准备；正式GUI待实现 |
+| `qr_app/presentation/` | CLI、步骤报告、matplotlib渲染、PNG保存、Qt环境和正式生成页面 |
+| `main_gui.py` | 正式桌面应用入口，窗口内输入、生成、错误反馈与保存 |
 | `qr_app/presentation/image_export.py` | 独立PNG保存、覆盖保护、实际制品返回 |
 | `scripts/preview_qr.py` | Qt二维码预览、Save PNG按钮与终端显式PNG导出 |
 | `tests/` | 公共模型、编码/纠错/矩阵与编排测试 |
@@ -159,6 +173,6 @@ Python 3.13.9 下当前菜单版本通过 **139 项测试**（含42项 CLI/导�
 qrcode/OpenCV仅作离线验证，应用和常规测试没有新增依赖。
 团队非作者评审、正式 CI 和完整二维码功能仍待完成。
 
-Stage1本机交付已完成；Stage2环境、matplotlib渲染和PNG保存已完成，下一步实现正式PyQt5输入/生成页面、Information和真实手机扫码。
+Stage1本机交付已完成；Stage2环境、matplotlib渲染、PNG保存和正式PyQt5输入/生成页面已完成，下一步实现Information并完成真实手机扫码与机房验收。
 main_cli.py继续输出数值矩阵和步骤报告；图像预览与保存使用scripts/preview_qr.py。
 测试中的模拟矩阵仅用于检查编排与故障隔离；Stage1正确性另有独立参考和真实demo支撑。

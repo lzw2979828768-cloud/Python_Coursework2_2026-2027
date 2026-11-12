@@ -1,0 +1,204 @@
+{
+  "checked_at": "2026-11-12T02:03:42.478570+00:00",
+  "scope": "Formal GUI publication check, including newline versus space; local decoding only",
+  "code_base_commit": "49fea40d4c8145e13b3e0d20c994a728250a2217",
+  "branch": "feature/stage2-gui-environment",
+  "source_dirty": true,
+  "executable": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+  "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+  "checks": {
+    "50_frontend_tests": true,
+    "qt_interaction": true,
+    "newline_0a_space_20": true,
+    "previous_artifact_hashes": true,
+    "published_and_new_images_decode": true,
+    "compile": true
+  },
+  "source_sha256": {
+    "main_gui.py": "4e6cb95ebe2edcca910d84fab6d10cd3b39e83e094ce9871c5246e60caa80065",
+    "qr_app/presentation/gui.py": "47e3bdd693447f29a7e419f7bfb27d42196142d8b9bcc288bdd9639e090a6ed2",
+    "qr_app/presentation/main_window.py": "ddde439db879cb70fdbe79bdecdc9de1d88a7fb10e7bd947a2daef8be55e3947",
+    "qr_app/presentation/generation_panel.py": "1c450755c4e6a464ec90159310294893c8f295490996136f864add284c48c7d2",
+    "qr_app/presentation/qt_environment.py": "6ee2e23540855484f826e45ff6983427c1dd69c6ac87d02701a704d95b3efaf6",
+    "tests/test_gui_generation.py": "928b53f01046bd837163ce7e629cb1ee676b0b650db9dfddf8e07d4dbe7ed349",
+    "qr_app/presentation/renderer.py": "48d71f339b3d4f77b72888619b040099e281cf75cbea27370d1a18441eb31934",
+    "qr_app/presentation/image_export.py": "ea91294210764176f462222558dd7462a48560b7786f4a08cebfdecca311046d",
+    "qr_app/presentation/png_dialog.py": "bb5d8ff558e4dfd87cffef1fcc1d72a98c93a1564b6824a62c8b69bc1f717f3c",
+    "qr_app/service.py": "cf9e0fe71924e90ba34e439ff6b99972470bd3bbcd3e03d983400e93bbed1f21",
+    "qr_app/models.py": "02aef25cdc39b40e707dd2fc5f4baf6a5ab8fb91437d9fde51819b362bb75147"
+  },
+  "repository_source_sha256": {
+    "main_gui.py": "4e6cb95ebe2edcca910d84fab6d10cd3b39e83e094ce9871c5246e60caa80065",
+    "qr_app/presentation/gui.py": "47e3bdd693447f29a7e419f7bfb27d42196142d8b9bcc288bdd9639e090a6ed2",
+    "qr_app/presentation/main_window.py": "ddde439db879cb70fdbe79bdecdc9de1d88a7fb10e7bd947a2daef8be55e3947",
+    "qr_app/presentation/generation_panel.py": "1c450755c4e6a464ec90159310294893c8f295490996136f864add284c48c7d2",
+    "qr_app/presentation/qt_environment.py": "6ee2e23540855484f826e45ff6983427c1dd69c6ac87d02701a704d95b3efaf6",
+    "tests/test_gui_generation.py": "928b53f01046bd837163ce7e629cb1ee676b0b650db9dfddf8e07d4dbe7ed349",
+    "qr_app/presentation/renderer.py": "48d71f339b3d4f77b72888619b040099e281cf75cbea27370d1a18441eb31934",
+    "qr_app/presentation/image_export.py": "ea91294210764176f462222558dd7462a48560b7786f4a08cebfdecca311046d",
+    "qr_app/presentation/png_dialog.py": "bb5d8ff558e4dfd87cffef1fcc1d72a98c93a1564b6824a62c8b69bc1f717f3c",
+    "qr_app/service.py": "cf9e0fe71924e90ba34e439ff6b99972470bd3bbcd3e03d983400e93bbed1f21",
+    "qr_app/models.py": "02aef25cdc39b40e707dd2fc5f4baf6a5ab8fb91437d9fde51819b362bb75147"
+  },
+  "repository_hash_policy": "LF-normalized text matching repository attributes",
+  "unit_tests": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "tests.test_gui_generation",
+      "tests.test_image_export",
+      "tests.test_png_dialog",
+      "tests.test_renderer",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_importing_entry_does_not_load_qt_or_matplotlib (tests.test_gui_generation.GUIEntryTests.test_importing_entry_does_not_load_qt_or_matplotlib) ... ok\r\ntest_offscreen_startup_prefills_without_automatically_generating (tests.test_gui_generation.GUIEntryTests.test_offscreen_startup_prefills_without_automatically_generating) ... ok\r\ntest_busy_guard_prevents_reentrant_requests_and_edit_actions (tests.test_gui_generation.GUIGenerationTests.test_busy_guard_prevents_reentrant_requests_and_edit_actions) ... ok\r\ntest_default_window_keeps_generate_and_save_controls_in_view_after_success (tests.test_gui_generation.GUIGenerationTests.test_default_window_keeps_generate_and_save_controls_in_view_after_success) ... ok\r\ntest_display_failure_keeps_generation_truth_but_disables_save (tests.test_gui_generation.GUIGenerationTests.test_display_failure_keeps_generation_truth_but_disables_save) ... ok\r\ntest_draft_changes_clear_and_revert_do_not_regenerate_or_save_old_input (tests.test_gui_generation.GUIGenerationTests.test_draft_changes_clear_and_revert_do_not_regenerate_or_save_old_input) ... ok\r\ntest_editing_updates_byte_hint_without_generating_or_truncating (tests.test_gui_generation.GUIGenerationTests.test_editing_updates_byte_hint_without_generating_or_truncating) ... ok\r\ntest_failed_requests_remove_old_image_and_preserve_real_partial_steps (tests.test_gui_generation.GUIGenerationTests.test_failed_requests_remove_old_image_and_preserve_real_partial_steps) ... ok\r\ntest_generate_uses_gui_request_and_displays_the_actual_result (tests.test_gui_generation.GUIGenerationTests.test_generate_uses_gui_request_and_displays_the_actual_result) ... ok\r\ntest_initial_state_has_no_request_or_saveable_image (tests.test_gui_generation.GUIGenerationTests.test_initial_state_has_no_request_or_saveable_image) ... ok\r\ntest_log_failure_does_not_break_generation_or_duplicate_logging (tests.test_gui_generation.GUIGenerationTests.test_log_failure_does_not_break_generation_or_duplicate_logging) ... ok\r\ntest_real_save_button_exports_without_regenerating_or_replacing_canvas (tests.test_gui_generation.GUIGenerationTests.test_real_save_button_exports_without_regenerating_or_replacing_canvas) ... ok\r\ntest_repeated_submissions_keep_one_canvas_and_distinct_request_ids (tests.test_gui_generation.GUIGenerationTests.test_repeated_submissions_keep_one_canvas_and_distinct_request_ids) ... ok\r\ntest_results_from_a_previous_request_are_rejected (tests.test_gui_generation.GUIGenerationTests.test_results_from_a_previous_request_are_rejected) ... ok\r\ntest_save_cancel_and_unexpected_error_leave_qr_and_controls_usable (tests.test_gui_generation.GUIGenerationTests.test_save_cancel_and_unexpected_error_leave_qr_and_controls_usable) ... ok\r\ntest_service_exception_is_safe_and_controls_recover (tests.test_gui_generation.GUIGenerationTests.test_service_exception_is_safe_and_controls_recover) ... ok\r\ntest_small_windows_scroll_instead_of_cutting_off_controls (tests.test_gui_generation.GUIGenerationTests.test_small_windows_scroll_instead_of_cutting_off_controls) ... ok\r\ntest_spaces_newlines_tabs_and_latin1_nonbreaking_space_are_preserved (tests.test_gui_generation.GUIGenerationTests.test_spaces_newlines_tabs_and_latin1_nonbreaking_space_are_preserved) ... ok\r\ntest_whitespace_warning_remains_visible_with_a_successful_qr (tests.test_gui_generation.GUIGenerationTests.test_whitespace_warning_remains_visible_with_a_successful_qr) ... ok\r\ntest_bad_paths_are_safe_and_parent_directories_are_not_created (tests.test_image_export.ImageExportTests.test_bad_paths_are_safe_and_parent_directories_are_not_created) ... ok\r\ntest_caller_type_errors_are_distinct_from_save_failures (tests.test_image_export.ImageExportTests.test_caller_type_errors_are_distinct_from_save_failures) ... ok\r\ntest_existing_file_is_protected_then_explicitly_replaced (tests.test_image_export.ImageExportTests.test_existing_file_is_protected_then_explicitly_replaced) ... ok\r\ntest_file_created_during_save_is_not_overwritten (tests.test_image_export.ImageExportTests.test_file_created_during_save_is_not_overwritten) ... ok\r\ntest_generation_result_is_unchanged_by_a_save_failure (tests.test_image_export.ImageExportTests.test_generation_result_is_unchanged_by_a_save_failure) ... ok\r\ntest_partial_encode_failure_never_publishes_or_damages_old_file (tests.test_image_export.ImageExportTests.test_partial_encode_failure_never_publishes_or_damages_old_file) ... ok\r\ntest_publication_failure_preserves_destination_and_cleans_temporary (tests.test_image_export.ImageExportTests.test_publication_failure_preserves_destination_and_cleans_temporary) ... ok\r\ntest_real_png_pixels_and_actual_artifact_path (tests.test_image_export.ImageExportTests.test_real_png_pixels_and_actual_artifact_path) ... ok\r\ntest_save_styles_do_not_crop_white_border_or_change_canvas (tests.test_image_export.ImageExportTests.test_save_styles_do_not_crop_white_border_or_change_canvas) ... ok\r\ntest_command_refuses_overwrite_and_then_accepts_explicit_flag (tests.test_image_export.PNGCommandTests.test_command_refuses_overwrite_and_then_accepts_explicit_flag) ... ok\r\ntest_failure_paths_do_not_leave_images_or_regenerate (tests.test_image_export.PNGCommandTests.test_failure_paths_do_not_leave_images_or_regenerate) ... ok\r\ntest_headless_command_saves_without_importing_qt (tests.test_image_export.PNGCommandTests.test_headless_command_saves_without_importing_qt) ... ok\r\ntest_invalid_input_never_exports_and_flag_misuse_is_clear (tests.test_image_export.PNGCommandTests.test_invalid_input_never_exports_and_flag_misuse_is_clear) ... ok\r\ntest_cancel_does_not_save_or_show_a_confirmation (tests.test_png_dialog.PNGDialogTests.test_cancel_does_not_save_or_show_a_confirmation) ... ok\r\ntest_confirmed_replacement_writes_a_complete_png (tests.test_png_dialog.PNGDialogTests.test_confirmed_replacement_writes_a_complete_png) ... ok\r\ntest_declining_replacement_keeps_the_original (tests.test_png_dialog.PNGDialogTests.test_declining_replacement_keeps_the_original) ... ok\r\ntest_missing_extension_is_added_before_saving (tests.test_png_dialog.PNGDialogTests.test_missing_extension_is_added_before_saving) ... ok\r\ntest_save_failure_reports_error_and_keeps_the_canvas_usable (tests.test_png_dialog.PNGDialogTests.test_save_failure_reports_error_and_keeps_the_canvas_usable) ... ok\r\ntest_asymmetric_pattern_has_exact_orientation_colors_and_border (tests.test_renderer.RendererTests.test_asymmetric_pattern_has_exact_orientation_colors_and_border) ... ok\r\ntest_bad_matrix_types_are_rejected_without_coercion (tests.test_renderer.RendererTests.test_bad_matrix_types_are_rejected_without_coercion) ... ok\r\ntest_bad_shapes_and_nonbinary_values_are_rejected (tests.test_renderer.RendererTests.test_bad_shapes_and_nonbinary_values_are_rejected) ... ok\r\ntest_bool_integer_and_noncontiguous_matrices_are_supported (tests.test_renderer.RendererTests.test_bool_integer_and_noncontiguous_matrices_are_supported) ... ok\r\ntest_draw_invalid_input_keeps_previous_picture (tests.test_renderer.RendererTests.test_draw_invalid_input_keeps_previous_picture) ... ok\r\ntest_draw_replaces_one_axes_and_keeps_the_other_axes_and_size (tests.test_renderer.RendererTests.test_draw_replaces_one_axes_and_keeps_the_other_axes_and_size) ... ok\r\ntest_import_does_not_load_qt_pyplot_or_a_reference_generator (tests.test_renderer.RendererTests.test_import_does_not_load_qt_pyplot_or_a_reference_generator) ... ok\r\ntest_input_and_earlier_render_are_independent (tests.test_renderer.RendererTests.test_input_and_earlier_render_are_independent) ... ok\r\ntest_integer_scaling_and_larger_quiet_zone (tests.test_renderer.RendererTests.test_integer_scaling_and_larger_quiet_zone) ... ok\r\ntest_known_service_result_matches_independent_reference_pixels (tests.test_renderer.RendererTests.test_known_service_result_matches_independent_reference_pixels) ... ok\r\ntest_options_enforce_minimum_border_and_positive_integer_scale (tests.test_renderer.RendererTests.test_options_enforce_minimum_border_and_positive_integer_scale) ... ok\r\ntest_rectangular_view_centers_square_modules_without_cropping_border (tests.test_renderer.RendererTests.test_rectangular_view_centers_square_modules_without_cropping_border) ... ok\r\ntest_styles_cannot_invert_smooth_or_crop_the_symbol (tests.test_renderer.RendererTests.test_styles_cannot_invert_smooth_or_crop_the_symbol) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 50 tests in 24.966s\r\n\r\nOK\r\n"
+  },
+  "qt_interaction": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tmp\\validate_gui_window_pre_publish.py"
+    ],
+    "exit_code": 0,
+    "stdout": "{\r\n  \"checks\": {\r\n    \"starts_empty\": true,\r\n    \"typing_does_not_generate\": true,\r\n    \"known_success\": true,\r\n    \"save_does_not_generate\": true,\r\n    \"save_keeps_canvas\": true,\r\n    \"draft_marked_and_save_disabled\": true,\r\n    \"clear_changes_only_draft\": true,\r\n    \"failure_clears_image\": true,\r\n    \"partial_steps_visible\": true,\r\n    \"recovers_at_capacity\": true,\r\n    \"cycle_complete\": true,\r\n    \"newline_vs_space\": true\r\n  },\r\n  \"errors\": [],\r\n  \"known_request\": {\r\n    \"id\": \"b381949b-7cbb-41ec-947c-4de12a9a0eea\",\r\n    \"text\": \"known\",\r\n    \"result_id\": \"b381949b-7cbb-41ec-947c-4de12a9a0eea\",\r\n    \"steps\": 25\r\n  },\r\n  \"newline_vs_space\": {\r\n    \"newline_input\": \"Hello\\nQR\",\r\n    \"newline_hex\": \"48 65 6c 6c 6f 0a 51 52\",\r\n    \"space_input\": \"Hello QR\",\r\n    \"space_hex\": \"48 65 6c 6c 6f 20 51 52\",\r\n    \"different_matrices\": true\r\n  },\r\n  \"exit_code\": 0,\r\n  \"generation_calls\": 5,\r\n  \"artifacts\": {\r\n    \"success_window\": \"F:\\\\文件\\\\python\\\\2026-2027大三上\\\\Coursework2\\\\tmp\\\\gui_pre_publish\\\\known.png\",\r\n    \"failure_window\": \"F:\\\\文件\\\\python\\\\2026-2027大三上\\\\Coursework2\\\\tmp\\\\gui_pre_publish\\\\error.png\",\r\n    \"saved_png\": \"F:\\\\文件\\\\python\\\\2026-2027大三上\\\\Coursework2\\\\tmp\\\\gui_pre_publish\\\\saved.png\"\r\n  },\r\n  \"all_passed\": true\r\n}\r\n",
+    "stderr": "",
+    "driver_source": "\"\"\"Drive the formal page in a real Qt event loop and capture public examples.\"\"\"\n\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nfrom unittest.mock import patch\n\nROOT = Path(__file__).resolve().parents[1]\nsys.path.insert(0, str(ROOT))\nos.environ[\"QT_QPA_PLATFORM\"] = \"offscreen\"\nfrom qr_app.presentation.qt_environment import configure_qt_environment\nconfigure_qt_environment()\nfrom PyQt5.QtCore import QTimer\nfrom PyQt5.QtWidgets import QMainWindow\nfrom qr_app.service import QRService\nfrom qr_app.presentation.gui import main\n\nsnapshot = ROOT / \"tmp/gui_pre_publish/known.png\"\nfailure_snapshot = ROOT / \"tmp/gui_pre_publish/error.png\"\npng = ROOT / \"tmp/gui_pre_publish/saved.png\"\nout = ROOT / \"tmp/gui_pre_publish/result.json\"\nassert not any(p.exists() for p in (snapshot, failure_snapshot, png, out))\nchecks = {k: False for k in (\"starts_empty\", \"typing_does_not_generate\", \"known_success\",\n    \"save_does_not_generate\", \"save_keeps_canvas\", \"draft_marked_and_save_disabled\",\n    \"clear_changes_only_draft\", \"failure_clears_image\", \"partial_steps_visible\", \"recovers_at_capacity\", \"cycle_complete\")}\nrecord = {\"checks\": checks, \"errors\": [], \"known_request\": None}\noriginal_show = QMainWindow.show\noriginal_generate = QRService.generate_qr\ngenerated = None\n\ndef protect(function, window):\n    def guarded():\n        try:\n            function()\n        except Exception as error:\n            record[\"errors\"].append({\"type\": type(error).__name__, \"message\": str(error)})\n            window.close()\n    return guarded\n\ndef shown(window):\n    original_show(window)\n    panel = window.generation_panel\n    def generate_known():\n        checks[\"starts_empty\"] = panel.input_text() == \"\" and not panel.save_button.isEnabled()\n        panel.text_input.setPlainText(\"known\")\n        checks[\"typing_does_not_generate\"] = generated.call_count == 0\n        panel.generate_button.click()\n        checks[\"known_success\"] = panel.state == \"success\" and panel.save_button.isEnabled()\n        record[\"known_request\"] = {\"id\": panel.submitted_request.request_id, \"text\": panel.submitted_request.text,\n                                   \"result_id\": panel.last_result.request_id, \"steps\": len(panel.last_result.trace_steps)}\n        QTimer.singleShot(150, protect(save_and_edit, window))\n\n    def save_and_edit():\n        assert window.grab().save(str(snapshot))\n        canvas = panel.canvas\n        result = panel.last_result\n        with patch(\"qr_app.presentation.png_dialog.QFileDialog.getSaveFileName\", return_value=(str(png), \"PNG image (*.png)\")), \\\n                patch(\"qr_app.presentation.png_dialog.QMessageBox.information\"), \\\n                patch(\"qr_app.presentation.png_dialog.QMessageBox.warning\") as warning:\n            panel.save_button.click()\n        assert not warning.called and png.exists()\n        checks[\"save_does_not_generate\"] = generated.call_count == 1\n        checks[\"save_keeps_canvas\"] = panel.canvas is canvas and panel.last_result is result\n        panel.text_input.setPlainText(\"new draft\")\n        checks[\"draft_marked_and_save_disabled\"] = panel.state == \"editing\" and not panel.save_button.isEnabled()\n        panel.clear_button.click()\n        checks[\"clear_changes_only_draft\"] = panel.input_text() == \"\" and panel.last_result is result and generated.call_count == 1\n        panel.text_input.setPlainText(\"Sugarplum_Fairy_Nightmare\")\n        panel.generate_button.click()\n        checks[\"failure_clears_image\"] = panel.state == \"failure\" and not panel.save_button.isEnabled() and len(panel.axes.images) == 0\n        checks[\"partial_steps_visible\"] = \"Completed steps: 1\" in panel.details_label.text()\n        QTimer.singleShot(150, protect(capture_failure, window))\n\n    def capture_failure():\n        assert window.grab().save(str(failure_snapshot))\n        panel.text_input.setPlainText(\"A\" * 17)\n        panel.generate_button.click()\n        checks[\"recovers_at_capacity\"] = panel.last_result.generation_success and panel.save_button.isEnabled() and generated.call_count == 3\n        import numpy as np\n        panel.text_input.setPlainText(\"Hello\\nQR\")\n        panel.generate_button.click()\n        first = panel.last_result.matrix.copy()\n        newline = next(s.payload for s in panel.last_result.trace_steps if s.step_id == \"input.iso_8859_1\")\n        newline_input = panel.submitted_request.text\n        panel.text_input.setPlainText(\"Hello QR\")\n        panel.generate_button.click()\n        space = next(s.payload for s in panel.last_result.trace_steps if s.step_id == \"input.iso_8859_1\")\n        record[\"newline_vs_space\"] = {\"newline_input\": newline_input, \"newline_hex\": newline.hex(\" \"),\n            \"space_input\": panel.submitted_request.text, \"space_hex\": space.hex(\" \"),\n            \"different_matrices\": not bool(np.array_equal(first, panel.last_result.matrix))}\n        checks[\"newline_vs_space\"] = (newline == b\"Hello\\nQR\" and space == b\"Hello QR\"\n                                      and record[\"newline_vs_space\"][\"different_matrices\"])\n        checks[\"cycle_complete\"] = True\n        QTimer.singleShot(100, window.close)\n\n    QTimer.singleShot(150, protect(generate_known, window))\n\nwith patch.object(QMainWindow, \"show\", shown), \\\n        patch.object(QRService, \"generate_qr\", autospec=True, side_effect=original_generate) as generated:\n    exit_code = main([\"--offscreen\", \"--close-after-ms\", \"6000\"])\nrecord[\"exit_code\"] = exit_code\nrecord[\"generation_calls\"] = generated.call_count\nrecord[\"artifacts\"] = {\"success_window\": str(snapshot), \"failure_window\": str(failure_snapshot), \"saved_png\": str(png)}\nrecord[\"all_passed\"] = exit_code == 0 and all(checks.values()) and not record[\"errors\"]\nout.write_text(json.dumps(record, ensure_ascii=False, indent=2) + \"\\n\", encoding=\"utf-8\")\nprint(json.dumps(record, ensure_ascii=False, indent=2))\nsys.exit(0 if record[\"all_passed\"] else 1)\n"
+  },
+  "qt_result": {
+    "checks": {
+      "starts_empty": true,
+      "typing_does_not_generate": true,
+      "known_success": true,
+      "save_does_not_generate": true,
+      "save_keeps_canvas": true,
+      "draft_marked_and_save_disabled": true,
+      "clear_changes_only_draft": true,
+      "failure_clears_image": true,
+      "partial_steps_visible": true,
+      "recovers_at_capacity": true,
+      "cycle_complete": true,
+      "newline_vs_space": true
+    },
+    "errors": [],
+    "known_request": {
+      "id": "b381949b-7cbb-41ec-947c-4de12a9a0eea",
+      "text": "known",
+      "result_id": "b381949b-7cbb-41ec-947c-4de12a9a0eea",
+      "steps": 25
+    },
+    "newline_vs_space": {
+      "newline_input": "Hello\nQR",
+      "newline_hex": "48 65 6c 6c 6f 0a 51 52",
+      "space_input": "Hello QR",
+      "space_hex": "48 65 6c 6c 6f 20 51 52",
+      "different_matrices": true
+    },
+    "exit_code": 0,
+    "generation_calls": 5,
+    "artifacts": {
+      "success_window": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\gui_pre_publish\\known.png",
+      "failure_window": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\gui_pre_publish\\error.png",
+      "saved_png": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\gui_pre_publish\\saved.png"
+    },
+    "all_passed": true
+  },
+  "published_artifacts": [
+    {
+      "kind": "success_window",
+      "path": "docs/validation/gui_generation_known_final_20261112.png",
+      "pixel_size": [
+        1080,
+        780
+      ],
+      "sha256": "4e1f66f77a6e366d46419014482db4e8bb569a7082d59780fbee49e95eab6812"
+    },
+    {
+      "kind": "failure_window",
+      "path": "docs/validation/gui_generation_error_final_20261112.png",
+      "pixel_size": [
+        1080,
+        780
+      ],
+      "sha256": "3574568b9d30292987287429d75289f8e2a15a28ebe7ecad3cae32365443512c"
+    },
+    {
+      "kind": "saved_png",
+      "path": "docs/validation/gui_saved_known_final_20261112.png",
+      "pixel_size": [
+        529,
+        329
+      ],
+      "sha256": "be5a1fc09300a99cffb5a7c906ad47b646763cf9249ae1d10b38305c8a7f9555"
+    }
+  ],
+  "decoder": {
+    "command": [
+      "D:\\python\\python.exe",
+      "-X",
+      "utf8",
+      "-c",
+      "import sys,json,cv2,numpy as np\nout=[]\nfor p in json.load(sys.stdin):\n    image=cv2.imdecode(np.fromfile(p,dtype=np.uint8),cv2.IMREAD_GRAYSCALE)\n    text,points,_=cv2.QRCodeDetector().detectAndDecode(image)\n    out.append({'path':p,'decoded_text':text,'passed':points is not None and text=='known'})\nprint(json.dumps({'opencv':cv2.__version__,'cases':out},ensure_ascii=False))"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"opencv\": \"4.12.0\", \"cases\": [{\"path\": \"F:\\\\文件\\\\python\\\\2026-2027大三上\\\\Coursework2\\\\docs\\\\validation\\\\gui_generation_known_final_20261112.png\", \"decoded_text\": \"known\", \"passed\": true}, {\"path\": \"F:\\\\文件\\\\python\\\\2026-2027大三上\\\\Coursework2\\\\docs\\\\validation\\\\gui_saved_known_final_20261112.png\", \"decoded_text\": \"known\", \"passed\": true}, {\"path\": \"F:\\\\文件\\\\python\\\\2026-2027大三上\\\\Coursework2\\\\tmp\\\\gui_pre_publish\\\\known.png\", \"decoded_text\": \"known\", \"passed\": true}, {\"path\": \"F:\\\\文件\\\\python\\\\2026-2027大三上\\\\Coursework2\\\\tmp\\\\gui_pre_publish\\\\saved.png\", \"decoded_text\": \"known\", \"passed\": true}]}\r\n",
+    "stderr": ""
+  },
+  "decoded_images": {
+    "opencv": "4.12.0",
+    "cases": [
+      {
+        "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\gui_generation_known_final_20261112.png",
+        "decoded_text": "known",
+        "passed": true
+      },
+      {
+        "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\docs\\validation\\gui_saved_known_final_20261112.png",
+        "decoded_text": "known",
+        "passed": true
+      },
+      {
+        "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\gui_pre_publish\\known.png",
+        "decoded_text": "known",
+        "passed": true
+      },
+      {
+        "path": "F:\\文件\\python\\2026-2027大三上\\Coursework2\\tmp\\gui_pre_publish\\saved.png",
+        "decoded_text": "known",
+        "passed": true
+      }
+    ]
+  },
+  "compile": {
+    "command": [
+      "F:\\文件\\python\\2026-2027大三上\\Coursework2\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "compileall",
+      "-q",
+      "main_gui.py",
+      "qr_app/presentation/gui.py",
+      "qr_app/presentation/main_window.py",
+      "qr_app/presentation/generation_panel.py",
+      "qr_app/presentation/qt_environment.py",
+      "tests/test_gui_generation.py",
+      "qr_app/presentation/renderer.py",
+      "qr_app/presentation/image_export.py",
+      "qr_app/presentation/png_dialog.py",
+      "qr_app/service.py",
+      "qr_app/models.py"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "previous_validation": "docs/validation/gui_generation_python3139_20261112.json",
+  "all_passed": true,
+  "completed_at": "2026-11-12T02:04:16.225670+00:00"
+}
